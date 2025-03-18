@@ -8,13 +8,16 @@ const ChatView = ({
   onSelectChat,
   onSendMessage,
   currentUser,
+  contacts,
 }) => {
   return (
     <div className="flex gap-4 h-screen">
       <ChatList
         chats={chats}
         activeChat={activeChat}
-        onSelectChat={onSelectChat}
+        onSelectChat={(chatId, chat) => onSelectChat(chatId, chat)}
+        contacts={contacts}
+        currentUser={currentUser}
       />
       {activeChat ? (
         <ChatDetail

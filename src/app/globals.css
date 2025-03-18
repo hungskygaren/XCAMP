@@ -9,6 +9,8 @@
   --breakpoint-2xl: 1440px;
   --breakpoint-3xl: 1920px;
   --breakpoint-4xl: 2560px;
+  --color-twdark: #141416;
+  --color-twgrey: #777e90;
 }
 html,
 body {

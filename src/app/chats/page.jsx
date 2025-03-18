@@ -3,57 +3,93 @@ import Navbar from "@/components/common/Navbar";
 import VerticalNavbar from "@/components/common/VerticalNavbar";
 import ChatView from "@/components/features/chats/ChatView";
 import * as React from "react";
-
 import { useState, useEffect } from "react";
 
 const Chat = () => {
   const [loading, setLoading] = useState(true);
   const [chats, setChats] = useState([]);
+  const [contacts, setContacts] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
+  const currentUser = {
+    id: "1",
+    name: "Sang Nguyễn",
+    email: "sang.nguyen@owls.com",
+    avatar: "/chats/avatar2.png",
+  };
 
   useEffect(() => {
-    const fetchChats = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:4000/chats");
-        const data = await response.json();
-        setChats(data);
-        if (data.length > 0) {
-          setActiveChat(data[0]);
-        }
+        const chatsResponse = await fetch("http://localhost:4000/chats");
+        const chatsData = await chatsResponse.json();
+        setChats(chatsData);
+        if (chatsData.length > 0) setActiveChat(chatsData[0]);
+
+        const contactsResponse = await fetch("http://localhost:4000/contacts");
+        const contactsData = await contactsResponse.json();
+        setContacts(contactsData);
+
         setLoading(false);
       } catch (error) {
         console.error("Lỗi khi fetch dữ liệu:", error);
         setLoading(false);
       }
     };
-
-    fetchChats();
+    fetchData();
   }, []);
 
-  const handleSelectChat = (chatId) => {
-    const selected = chats.find((chat) => chat.id === chatId);
+  const handleSelectChat = async (chatId, newChat = null) => {
+    let selected = chats.find((chat) => chat.id === chatId);
+
+    // Nếu là chat mới (không tìm thấy trong chats)
+    if (!selected && newChat) {
+      selected = newChat;
+      setChats((prevChats) => [...prevChats, selected]);
+      await saveChatToServer(selected);
+    }
+
     if (selected) {
-      // Mark messages as read when opening chat
+      // Cập nhật trạng thái "đã đọc" và "unreadCount"
       const updatedChats = chats.map((chat) => {
         if (chat.id === chatId) {
-          const updatedMessages = chat.messages.map((msg) => ({
-            ...msg,
-            isRead: true,
-          }));
-          return { ...chat, messages: updatedMessages, unreadCount: 0 };
+          const updatedMessages = chat.messages.map((msg) => {
+            if (!msg.isRead && msg.senderId !== currentUser.id) {
+              return {
+                ...msg,
+                isRead: true,
+                readBy: [...(msg.readBy || []), currentUser.id],
+              };
+            }
+            return msg;
+          });
+          const unreadCount = updatedMessages.filter(
+            (msg) => !msg.isRead
+          ).length;
+          return { ...chat, messages: updatedMessages, unreadCount };
         }
         return chat;
       });
 
-      setChats(updatedChats);
+      if (!chats.some((chat) => chat.id === chatId)) {
+        setChats([...updatedChats, selected]);
+      } else {
+        setChats(updatedChats);
+      }
       setActiveChat(selected);
+      if (!newChat) await updateChatOnServer(chatId, selected); // Chỉ cập nhật nếu không phải chat mới
+    }
+  };
 
-      // Cập nhật trạng thái đọc tin nhắn trên server
-      updateChatOnServer(chatId, {
-        ...selected,
-        messages: selected.messages.map((msg) => ({ ...msg, isRead: true })),
-        unreadCount: 0,
+  const saveChatToServer = async (chat) => {
+    try {
+      const response = await fetch("http://localhost:4000/chats", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(chat),
       });
+      if (!response.ok) throw new Error("Lỗi khi lưu chat vào server");
+    } catch (error) {
+      console.error("Lỗi khi lưu chat:", error);
     }
   };
 
@@ -61,12 +97,19 @@ const Chat = () => {
     if (!content.trim() && attachments.length === 0) return;
     if (!activeChat) return;
 
+    const participantsIds = activeChat.participants
+      .map((p) => p.id)
+      .filter((id) => id !== currentUser.id);
+
+    const readBy = activeChat.type === "group" ? participantsIds : [];
+
     const newMessage = {
-      id: Date.now(),
-      senderId: 1, // Current user ID (Sang Nguyễn)
+      id: `${Date.now()}`,
+      senderId: currentUser.id,
       content,
       timestamp: new Date().toISOString(),
       isRead: true,
+      readBy: readBy,
       attachments,
     };
 
@@ -76,17 +119,12 @@ const Chat = () => {
       lastMessageTime: newMessage.timestamp,
     };
 
-    const updatedChats = chats.map((chat) => {
-      if (chat.id === activeChat.id) {
-        return updatedChat;
-      }
-      return chat;
-    });
+    const updatedChats = chats.map((chat) =>
+      chat.id === activeChat.id ? updatedChat : chat
+    );
 
     setChats(updatedChats);
     setActiveChat(updatedChat);
-
-    // Cập nhật tin nhắn mới lên server
     updateChatOnServer(activeChat.id, updatedChat);
   };
 
@@ -94,9 +132,7 @@ const Chat = () => {
     try {
       await fetch(`http://localhost:4000/chats/${chatId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedChat),
       });
     } catch (error) {
@@ -105,16 +141,7 @@ const Chat = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-[#F4F5F6]">
-        <div className="flex flex-col items-center space-y-4">
-          <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
-          <p className="text-lg font-semibold text-gray-700">
-            Đang tải dữ liệu...
-          </p>
-        </div>
-      </div>
-    );
+    return <div>Đang tải...</div>;
   }
 
   return (
@@ -122,14 +149,15 @@ const Chat = () => {
       <VerticalNavbar />
       <div className="flex flex-col">
         <Navbar />
-        <div className="flex  bg-[#F4F5F6] min-h-screen">
-          <div className=" ml-4 mt-4">
+        <div className="flex bg-[#F4F5F6] min-h-screen">
+          <div className="ml-4 mt-4">
             <ChatView
               chats={chats}
               activeChat={activeChat}
               onSelectChat={handleSelectChat}
               onSendMessage={handleSendMessage}
-              currentUser={{ id: 1, name: "Sang Nguyễn" }}
+              currentUser={currentUser}
+              contacts={contacts}
             />
           </div>
         </div>
