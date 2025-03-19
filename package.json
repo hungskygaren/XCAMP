@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "db": "json-server --watch src/data/db.json --port 4000",
+    "db2": "json-server --watch src/data/db.json --port 4000",
+    "db": "npx json-server --watch src/data/db.json --port 4000 --host 192.168.31.231",
     "lint": "next lint"
   },
   "dependencies": {

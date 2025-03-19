@@ -20,12 +20,14 @@ const Chat = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const chatsResponse = await fetch("http://localhost:4000/chats");
+        const chatsResponse = await fetch("  http://192.168.31.231:4000/chats");
         const chatsData = await chatsResponse.json();
         setChats(chatsData);
         if (chatsData.length > 0) setActiveChat(chatsData[0]);
 
-        const contactsResponse = await fetch("http://localhost:4000/contacts");
+        const contactsResponse = await fetch(
+          "  http://192.168.31.231:4000/contacts"
+        );
         const contactsData = await contactsResponse.json();
         setContacts(contactsData);
 
@@ -82,7 +84,7 @@ const Chat = () => {
 
   const saveChatToServer = async (chat) => {
     try {
-      const response = await fetch("http://localhost:4000/chats", {
+      const response = await fetch("  http://192.168.31.231:4000/chats", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(chat),
@@ -130,7 +132,7 @@ const Chat = () => {
 
   const updateChatOnServer = async (chatId, updatedChat) => {
     try {
-      await fetch(`http://localhost:4000/chats/${chatId}`, {
+      await fetch(`  http://192.168.31.231:4000/chats/${chatId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedChat),
