@@ -24,7 +24,7 @@ export default function VerticalNavbar() {
   };
 
   return (
-    <div className="w-[4.125rem] h-[1440px] text-white flex flex-col items-center">
+    <div className="w-[4.125rem] h-[500px] text-white flex flex-col items-center">
       {/* Logo */}
       <div className="">
         <Image src="/logosm.png" alt="Logo" width={66} height={66} />

@@ -15,28 +15,48 @@ const TagManagement = ({
   const [draggingIndex, setDraggingIndex] = useState(null);
   const [dragOverIndex, setDragOverIndex] = useState(null);
   const dragRef = useRef(null);
+  const modalRef = useRef(null); // Ref để kiểm tra nhấp ngoài modal
   const colors = [
+    "#00B6FF",
+    "#4B6DF0",
     "#4A30B1",
-    "#FF0000",
-    "#800080",
-    "#FF00FF",
-    "#FFA500",
-    "#FFFF00",
-    "#00FF00",
-    "#00FFFF",
-    "#0000FF",
-    "#A8ABB8",
+    "#7F56E8",
+    "#A53FBA",
+    "#C359A1",
+    "#EE316B",
+    "#F33E3E",
+    "#FF6628",
+    "#FFA12E",
+    "#FFB800",
+    "#A8C019",
+    "#66C51B",
+    "#00C1B1",
   ];
 
-  // Fetch danh sách tag từ server
   useEffect(() => {
-    fetch("http://192.168.31.231:4000/tags?_sort=order&_order=asc") // Thêm query sắp xếp
+    fetch("http://192.168.31.231:4000/tags?_sort=order&_order=asc")
       .then((res) => res.json())
       .then((data) => setTags(data))
       .catch((err) => console.error("Error fetching tags:", err));
   }, []);
 
-  // Xử lý kéo thả thủ công
+  // Xử lý nhấp ra ngoài lớp opacity để đóng modal
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        onClose(); // Đóng modal khi nhấp ra ngoài
+        setIsAddingTag(false); // Reset trạng thái thêm/sửa thẻ
+        setEditingTag(null);
+        setNewTagName("");
+        setSelectedColor("#4A30B1");
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
+
   const handleDragStart = (e, index) => {
     setDraggingIndex(index);
     dragRef.current = e.target;
@@ -75,7 +95,6 @@ const TagManagement = ({
       )
     )
       .then(() => {
-        // Fetch lại danh sách đã sắp xếp
         fetch("http://192.168.31.231:4000/tags?_sort=order&_order=asc")
           .then((res) => res.json())
           .then((data) => setTags(data));
@@ -103,7 +122,7 @@ const TagManagement = ({
       id: Date.now().toString(),
       name: newTagName.trim(),
       color: selectedColor,
-      order: tags.length, // Đặt order cho tag mới
+      order: tags.length,
     };
 
     fetch("http://192.168.31.231:4000/tags", {
@@ -114,11 +133,9 @@ const TagManagement = ({
       .then((res) => res.json())
       .then((savedTag) => {
         setTags([...tags, savedTag]);
-        onSaveTag(savedTag.id);
         setNewTagName("");
         setSelectedColor("#4A30B1");
         setIsAddingTag(false);
-        // Fetch lại danh sách đã sắp xếp
         fetch("http://192.168.31.231:4000/tags?_sort=order&_order=asc")
           .then((res) => res.json())
           .then((data) => setTags(data));
@@ -158,7 +175,6 @@ const TagManagement = ({
         setNewTagName("");
         setSelectedColor("#4A30B1");
         setIsAddingTag(false);
-        // Gọi lại API để lấy danh sách tag mới nhất
         onUpdateTags();
       })
       .catch((err) => console.error("Error updating tag:", err));
@@ -172,17 +188,11 @@ const TagManagement = ({
         const updatedTags = tags.filter((t) => t.id !== tagId);
         setTags(updatedTags);
         onDeleteTag(tagId);
-        // Gọi lại API để lấy danh sách tag mới nhất
         onUpdateTags();
       })
       .catch((err) => console.error("Error deleting tag:", err));
   };
 
-  const handleSaveOrder = () => {
-    onClose();
-  };
-
-  // Component SVG inline để thay đổi màu
   const TagIcon = ({ color }) => (
     <svg
       width="18"
@@ -200,121 +210,97 @@ const TagManagement = ({
   );
 
   return (
-    <div className="fixed inset-0 i bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg w-[400px]">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div ref={modalRef} className="bg-white  rounded-lg w-[570px]  ">
         {!isAddingTag ? (
-          <>
+          <div className="px-[29px] pt-[23px] pb-[46px] ">
             <h2 className="text-lg font-semibold mb-4">Quản lý thẻ</h2>
-            <div className="mb-4 max-h-[300px] overflow-y-auto">
-              {tags.map((tag, index) => (
-                <div
-                  key={tag.id}
-                  className={`flex items-center justify-between mb-2 p-2 bg-gray-50 rounded-lg ${
-                    dragOverIndex === index ? "bg-gray-100" : ""
-                  }`}
-                  draggable
-                  onDragStart={(e) => handleDragStart(e, index)}
-                  onDragOver={(e) => handleDragOver(e, index)}
-                  onDrop={(e) => handleDrop(e, index)}
-                  onDragEnd={handleDragEnd}
-                >
-                  <div className="flex items-center">
-                    <div className="mr-2">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <circle cx="2" cy="2" r="2" fill="#A8ABB8" />
-                        <circle cx="8" cy="2" r="2" fill="#A8ABB8" />
-                        <circle cx="14" cy="2" r="2" fill="#A8ABB8" />
-                        <circle cx="2" cy="8" r="2" fill="#A8ABB8" />
-                        <circle cx="8" cy="8" r="2" fill="#A8ABB8" />
-                        <circle cx="14" cy="8" r="2" fill="#A8ABB8" />
-                        <circle cx="2" cy="14" r="2" fill="#A8ABB8" />
-                        <circle cx="8" cy="14" r="2" fill="#A8ABB8" />
-                        <circle cx="14" cy="14" r="2" fill="#A8ABB8" />
-                      </svg>
+            <div className="overflow-y-auto scrollbar-thin">
+              <div className="mb-4 p-2 max-h-[284px]  cursor-pointer ">
+                {tags.map((tag, index) => (
+                  <div
+                    key={tag.id}
+                    className={`flex items-center justify-between mb-2 py-[7px] pr-[7px] pl-[5px] border-[1px] border-[#E6E8EC] rounded-lg ${
+                      dragOverIndex === index ? "bg-gray-400" : ""
+                    }`}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, index)}
+                    onDragOver={(e) => handleDragOver(e, index)}
+                    onDrop={(e) => handleDrop(e, index)}
+                    onDragEnd={handleDragEnd}
+                  >
+                    <div className="flex items-center">
+                      <div className="mr-2">
+                        <img
+                          src="/chats/iconlist/Verticaldots.png"
+                          className="w-[18px] h-[18px]"
+                          alt=""
+                        />
+                      </div>
+                      <TagIcon color={tag.color} />
+                      <span className="ml-2">{tag.name}</span>
                     </div>
-                    <TagIcon color={tag.color} />
-                    <span className="ml-2">{tag.name}</span>
+                    <div className="flex items-center gap-5">
+                      <button
+                        className=" text-blue-500"
+                        onClick={() => handleEdit(tag)}
+                      >
+                        <img
+                          src="/chats/iconlist/edit.png"
+                          alt="Edit"
+                          className="w-[18px] h-[18px]"
+                        />
+                      </button>
+                      <button
+                        className="text-red-500"
+                        onClick={() => handleDelete(tag.id)}
+                      >
+                        <img
+                          src="/chats/iconlist/delete.png"
+                          alt="Delete"
+                          className="w-[18px] h-[18px]"
+                        />
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <button
-                      className="mr-2 text-blue-500"
-                      onClick={() => handleEdit(tag)}
-                    >
-                      <img
-                        src="/chats/iconlist/edit.png"
-                        alt="Edit"
-                        className="w-4 h-4"
-                      />
-                    </button>
-                    <button
-                      className="text-red-500"
-                      onClick={() => handleDelete(tag.id)}
-                    >
-                      <img
-                        src="/chats/iconlist/delete.png"
-                        alt="Delete"
-                        className="w-4 h-4"
-                      />
-                    </button>
-                  </div>
-                </div>
-              ))}
+                ))}
+                <button
+                  className="w-full bg-gray-200 text-gray-700 py-2 rounded-lg mb-4 flex items-center justify-center "
+                  onClick={() => setIsAddingTag(true)}
+                >
+                  <span className="mr-2">+</span> Thêm thẻ
+                </button>
+              </div>
             </div>
-            <button
-              className="w-full bg-gray-200 text-gray-700 py-2 rounded-lg mb-4 flex items-center justify-center"
-              onClick={() => setIsAddingTag(true)}
-            >
-              <span className="mr-2">+</span> Thêm thẻ
-            </button>
-            <div className="flex justify-end gap-4">
-              <button
-                className="px-4 py-2 bg-gray-200 rounded-lg"
-                onClick={onClose}
-              >
-                Đóng
-              </button>
-              <button
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg"
-                onClick={handleSaveOrder}
-              >
-                Lưu
-              </button>
-            </div>
-          </>
+          </div>
         ) : (
-          <>
-            <h2 className="text-lg font-semibold mb-4">
-              {editingTag ? "Chỉnh sửa thẻ" : "Thêm thẻ mới"}
+          <div className="px-[29px] pt-[23px] pb-[46px]">
+            <h2 className="text-xl font-semibold mb-7">
+              {editingTag ? "Chỉnh sửa thẻ" : "Thẻ mới"}
             </h2>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-xs font-medium text-[#777E90]">
                 Tên thẻ
               </label>
               <input
                 type="text"
                 value={newTagName}
                 onChange={(e) => setNewTagName(e.target.value)}
-                className="mt-1 p-2 w-full border rounded-lg"
+                className="mt-1 p-2 w-full border border-[#E6E8EC] placeholder:text-xs rounded-lg"
                 placeholder="Nhập tên thẻ"
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
+            <div className="mb-11">
+              <label className="block text-xs font-medium text-[#777E90]">
                 Màu sắc
               </label>
-              <div className="flex items-center gap-4 mt-2">
-                <TagIcon color={selectedColor} />
+              <div className="flex items-center gap-4 mt-3">
+                {/* <TagIcon color={selectedColor} /> */}
                 <div className="flex flex-wrap gap-2">
                   {colors.map((color) => (
                     <div
                       key={color}
-                      className="w-8 h-8 rounded-full cursor-pointer border-2"
+                      className="w-[50px] h-[50px] rounded-full cursor-pointer border-2 flex items-center justify-center" // Thêm flex để căn giữa
                       style={{
                         backgroundColor: color,
                         borderColor:
@@ -323,16 +309,20 @@ const TagManagement = ({
                       onClick={() => setSelectedColor(color)}
                     >
                       {selectedColor === color && (
-                        <span className="text-white text-xs">✓</span>
+                        <img
+                          src="/chats/iconlist/WhiteCheck.png"
+                          className="w-5 h-[15px]" // Giữ nguyên kích thước
+                          alt=""
+                        />
                       )}
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-            <div className="flex justify-end gap-4">
+            <div className="flex justify-between gap-4">
               <button
-                className="px-4 py-2 bg-gray-200 rounded-lg"
+                className="px-[30px] py-[10px] bg-[#F4F5F6] text-[#777E90] text-sm rounded-[10px] cursor-pointer"
                 onClick={() => {
                   setIsAddingTag(false);
                   setEditingTag(null);
@@ -343,13 +333,13 @@ const TagManagement = ({
                 Đóng
               </button>
               <button
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg"
+                className="px-[38.5px] py-[10px] bg-[#4A30B1] text-white text-sm rounded-[10px] cursor-pointer"
                 onClick={editingTag ? handleUpdate : handleSave}
               >
                 {editingTag ? "Cập nhật" : "Lưu"}
               </button>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

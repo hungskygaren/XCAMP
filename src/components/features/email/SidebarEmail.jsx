@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import React, { useState } from "react";
-import TextInput from "@/components/ui/inputs/TextInput";
+import TextInput from "@/components/ui/inputs/FormInput";
 import CreateEmail from "@/components/features/email/CreateEmail"; // Import CreateEmail
 
 export default function SidebarEmail({ categories }) {

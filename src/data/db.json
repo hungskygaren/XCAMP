@@ -1005,11 +1005,68 @@
           "isRead": true,
           "readBy": [],
           "attachments": []
+        },
+        {
+          "id": "1742370874517",
+          "senderId": "1",
+          "content": "hong1111111",
+          "timestamp": "2025-03-19T07:54:34.517Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1742370891129",
+          "senderId": "1",
+          "content": "hi",
+          "timestamp": "2025-03-19T07:54:51.129Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1742372673407",
+          "senderId": "1",
+          "content": "gfgfgfdfg",
+          "timestamp": "2025-03-19T08:24:33.407Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1742957466159",
+          "senderId": "1",
+          "content": "xsc",
+          "timestamp": "2025-03-26T02:51:06.159Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1742957474886",
+          "senderId": "1",
+          "content": "sdsd",
+          "timestamp": "2025-03-26T02:51:14.886Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": [
+            {
+              "id": "1742957471727po65wlk6eyh",
+              "name": "db.json",
+              "type": "application",
+              "size": "60.4 KB",
+              "url": "blob:http://localhost:3000/d03890ac-0852-486a-bbc8-3d2f154b3366",
+              "file": {}
+            }
+          ]
         }
       ],
       "unreadCount": 0,
-      "lastMessageTime": "2025-03-17T04:41:53.913Z",
-      "tag": "3"
+      "lastMessageTime": "2025-03-26T02:51:14.886Z",
+      "tag": "6",
+      "isPinned": false,
+      "isNotificationOff": true,
+      "isFlagged": true
     },
     {
       "id": "2",
@@ -1128,10 +1185,37 @@
               "file": {}
             }
           ]
+        },
+        {
+          "id": "1742372711288",
+          "senderId": "1",
+          "content": "fsfss",
+          "timestamp": "2025-03-19T08:25:11.288Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1742372718972",
+          "senderId": "1",
+          "content": "",
+          "timestamp": "2025-03-19T08:25:18.972Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": [
+            {
+              "id": "1742372716721twum9ev49y8",
+              "name": "tag.png",
+              "type": "image",
+              "size": "1.0 KB",
+              "url": "blob:http://localhost:3000/797ef775-8e52-4583-bc43-31f78bef1995",
+              "file": {}
+            }
+          ]
         }
       ],
       "unreadCount": 0,
-      "lastMessageTime": "2025-03-17T08:48:58.624Z",
+      "lastMessageTime": "2025-03-19T08:25:18.972Z",
       "tag": "1742292353436"
     },
     {
@@ -1183,7 +1267,7 @@
         },
         {
           "id": "7",
-          "name": " OOO sa",
+          "name": "OOO sa",
           "email": "ooo1@owls.com",
           "avatar": "/chats/avatar3.png",
           "phone": "+1 342 456 7290",
@@ -1299,7 +1383,8 @@
       "unreadCount": 0,
       "lastMessageTime": "2024-10-07T10:25:00Z",
       "isFlagged": false,
-      "tag": "1742368321057"
+      "tag": null,
+      "isNotificationOff": false
     },
     {
       "id": "4",
@@ -1833,6 +1918,77 @@
       "unreadCount": 0,
       "lastMessageTime": "2025-03-17T08:05:01.713Z",
       "tag": "5"
+    },
+    {
+      "id": "1742372733073",
+      "type": "direct",
+      "participants": [
+        {
+          "id": "1",
+          "name": "Sang Nguyễn"
+        },
+        {
+          "id": "7",
+          "name": " OOO sa",
+          "email": "ooo1@owls.com",
+          "avatar": "/chats/avatar3.png"
+        }
+      ],
+      "messages": [
+        {
+          "id": "1742372740340",
+          "senderId": "1",
+          "content": "hellô",
+          "timestamp": "2025-03-19T08:25:40.340Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        }
+      ],
+      "unreadCount": 0,
+      "lastMessageTime": "2025-03-19T08:25:40.340Z"
+    },
+    {
+      "id": "1742980195545",
+      "name": "a",
+      "type": "group",
+      "participants": [
+        {
+          "id": "1",
+          "name": "Sang Nguyễn",
+          "email": "sang.nguyen@owls.com",
+          "avatar": "/chats/avatar2.png"
+        },
+        {
+          "id": "5",
+          "name": "Peggy from Quire",
+          "email": "peggy@quire.com",
+          "avatar": "/chats/avatar1.png"
+        },
+        {
+          "id": "3",
+          "name": "Lưu Thị Dung",
+          "email": "dung.luuthi@nitto.com",
+          "avatar": "/chats/avatar3.png"
+        }
+      ],
+      "messages": [
+        {
+          "id": "1742980208538",
+          "senderId": "1",
+          "content": "ja ",
+          "timestamp": "2025-03-26T09:10:08.538Z",
+          "isRead": true,
+          "readBy": [
+            "5",
+            "3"
+          ],
+          "attachments": []
+        }
+      ],
+      "unreadCount": 0,
+      "lastMessageTime": "2025-03-26T09:10:08.538Z",
+      "tag": null
     }
   ],
   "contacts": [
@@ -1876,7 +2032,7 @@
       "id": "5",
       "name": "Peggy from Quire",
       "email": "peggy@quire.com",
-      "avatar": "/chats/avatar3.png",
+      "avatar": "/chats/avatar1.png",
       "phone": "+1 123 456 7890",
       "department": "Customer Success",
       "company": "Quire Inc."
@@ -1892,7 +2048,7 @@
     },
     {
       "id": "7",
-      "name": " OOO sa",
+      "name": "OOO sa",
       "email": "ooo1@owls.com",
       "avatar": "/chats/avatar3.png",
       "phone": "+1 342 456 7290",
@@ -1903,51 +2059,51 @@
   "tags": [
     {
       "id": "1",
-      "name": "Khách hàng",
-      "color": "#4A30B1",
-      "order": 5
+      "name": "Khách hàng1",
+      "color": "#C359A1",
+      "order": 6
     },
     {
       "id": "2",
       "name": "Gia đình",
       "color": "#00FF00",
-      "order": 3
+      "order": 1
     },
     {
       "id": "3",
       "name": "Công việc",
       "color": "#FF0000",
-      "order": 1
+      "order": 0
     },
     {
       "id": "4",
       "name": "Đồng nghiệp",
       "color": "#FFA500",
-      "order": 2
+      "order": 4
     },
     {
       "id": "5",
       "name": "Bạn bè",
       "color": "#FFFF00",
-      "order": 0
+      "order": 2
     },
     {
       "id": "6",
       "name": "Trả lời sau",
       "color": "#800080",
-      "order": 6
+      "order": 7
     },
     {
       "id": "1742294528630",
       "name": "Shoppe Food",
       "color": "#FFA500",
-      "order": 4
+      "order": 5
     },
     {
       "id": "1742368321057",
       "name": "Grab",
       "color": "#00FF00",
-      "order": 7
+      "order": 3
     }
   ]
 }

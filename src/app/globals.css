@@ -12,6 +12,32 @@
   --color-twdark: #141416;
   --color-twgrey: #777e90;
 }
+@layer base {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #a8abb8;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #e6e8ec;
+  }
+}
+@layer utilities {
+}
+
+@layer components {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #2000a2 inset !important;
+    -webkit-text-fill-color: white !important;
+  }
+}
 html,
 body {
   font-size: 16px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import TagManagement from "./TagManagement";
 
 const ChatItem = ({
@@ -15,8 +15,11 @@ const ChatItem = ({
   onUpdateTags,
 }) => {
   const avatars = getChatAvatar(chat);
-  const [contextMenu, setContextMenu] = useState(null);
+  const [contextMenu, setContextMenu] = useState(null); // Trạng thái menu ngữ cảnh
+  const [isTagSubmenuOpen, setIsTagSubmenuOpen] = useState(false); // Trạng thái submenu "Gắn thẻ"
   const [isTagManagementOpen, setIsTagManagementOpen] = useState(false);
+  const menuRef = useRef(null); // Ref cho menu chính
+  const tagButtonRef = useRef(null); // Ref cho nút "Gắn thẻ"
 
   // Toggle trạng thái khi nhấp vào biểu tượng
   const handleToggle = (field) => {
@@ -24,7 +27,7 @@ const ChatItem = ({
     onUpdateChat(chat.id, { [field]: newValue });
   };
 
-  // Toggle thẻ hoặc các trạng thái khác từ menu
+  // Xử lý các hành động từ menu
   const handleMenuAction = (action, value) => {
     switch (action) {
       case "togglePin":
@@ -48,30 +51,53 @@ const ChatItem = ({
       default:
         break;
     }
-    setContextMenu(null);
+    setContextMenu(null); // Đóng menu ngữ cảnh
+    setIsTagSubmenuOpen(false); // Đóng submenu
   };
 
-  // Hiển thị menu ngữ cảnh khi nhấp chuột phải
+  // Xử lý nhấp chuột phải hoặc ấn giữ trên mobile
   const handleContextMenu = (e) => {
     e.preventDefault();
-    const menuWidth = 200;
-    const menuHeight = 300;
+    const menuWidth = 250; // Chiều rộng menu (px)
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
-    let x = e.clientX;
-    let y = e.clientY;
+    let x = e.clientX || (e.touches && e.touches[0].clientX);
+    let y = e.clientY || (e.touches && e.touches[0].clientY);
 
+    // Điều chỉnh X để không vượt ra ngoài màn hình
     if (x + menuWidth > windowWidth) x = windowWidth - menuWidth;
-    if (y + menuHeight > windowHeight) y = windowHeight - menuHeight;
 
-    setContextMenu({ x, y });
+    // Lấy chiều cao thực tế của menu (nếu đã render) hoặc dùng giá trị mặc định
+    const menuHeight = menuRef.current ? menuRef.current.offsetHeight : 300;
+    // Nếu không đủ không gian phía dưới, xổ lên
+    if (y + menuHeight > windowHeight) {
+      y = y - menuHeight; // Đặt top của menu phía trên chuột
+      if (y < 0) y = 0; // Đảm bảo không vượt lên trên cùng màn hình
+    }
+
+    setContextMenu({ x, y }); // Hiển thị menu
+    setIsTagSubmenuOpen(false); // Đảm bảo submenu không mở ngay
   };
 
-  // Đóng menu khi nhấp ra ngoài
+  // Xử lý ấn giữ trên mobile
+  const handleTouchStart = (e) => {
+    h;
+    const timer = setTimeout(() => {
+      handleContextMenu(e); // Mở menu sau 500ms
+    }, 500);
+    e.target.dataset.timer = timer; // Lưu timer để hủy
+  };
+
+  const handleTouchEnd = (e) => {
+    clearTimeout(e.target.dataset.timer); // Hủy timer nếu thả sớm
+  };
+
+  // Đóng menu và submenu khi nhấp ra ngoài
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (contextMenu && !e.target.closest(".context-menu")) {
         setContextMenu(null);
+        setIsTagSubmenuOpen(false);
       }
     };
     document.addEventListener("click", handleClickOutside);
@@ -82,12 +108,18 @@ const ChatItem = ({
     };
   }, [contextMenu]);
 
+  // Toggle submenu "Gắn thẻ" khi nhấp (mobile)
+  const handleTagMenuClick = (e) => {
+    e.stopPropagation();
+    setIsTagSubmenuOpen((prev) => !prev);
+  };
+
   const handleSaveTag = (tagId) => {
     onUpdateChat(chat.id, { tag: tagId });
   };
 
   const handleUpdateTag = () => {
-    fetchTags();
+    onUpdateTags(); // Thay fetchTags bằng onUpdateTags
   };
 
   const handleDeleteTag = (tagId) => {
@@ -96,12 +128,11 @@ const ChatItem = ({
     }
   };
 
-  // Callback để cập nhật danh sách tags
   const handleUpdateTags = () => {
-    fetchTags(); // Gọi lại API để lấy danh sách tag mới nhất
+    onUpdateTags();
   };
 
-  // Component SVG inline để thay đổi màu
+  // Component SVG cho biểu tượng thẻ
   const TagIcon = ({ color }) => (
     <svg
       width="18"
@@ -118,14 +149,25 @@ const ChatItem = ({
     </svg>
   );
 
+  // Xác định xem submenu có nên sổ lên không
+  const shouldSubmenuPopUp = () => {
+    if (!contextMenu || !tagButtonRef.current) return false;
+    const tagButtonRect = tagButtonRef.current.getBoundingClientRect();
+    const submenuHeight = 320; // Ước lượng chiều cao submenu (có thể điều chỉnh)
+    const spaceBelow = window.innerHeight - tagButtonRect.bottom;
+    return spaceBelow < submenuHeight; // Không đủ không gian phía dưới "Gắn thẻ"
+  };
+
   return (
     <>
       <div
-        className={`relative flex items-start w-[370px] h-[70px] pl-[13px] pr-[17px] pt-[13px] rounded-[8px] border-[#E6E8EC] border-[1px] cursor-pointer transition-colors ${
-          activeChat && activeChat.id === chat.id ? "bg-blue-200" : ""
-        } ${chat.type === "group" ? "bg-violet-100" : ""}`}
+        className={`relative flex items-start hover:bg-violet-50 w-[370px] h-[70px] pl-[13px] pr-[17px] pt-[13px] rounded-[8px] border-[#E6E8EC] border-[1px] cursor-pointer transition-colors ${
+          activeChat && activeChat.id === chat.id ? "bg-[#E8E3FF]" : ""
+        } `}
         onClick={() => onSelectChat(chat.id)}
         onContextMenu={handleContextMenu}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         <div className="relative flex-shrink-0">
           {chat.unreadCount > 0 && (
@@ -266,81 +308,110 @@ const ChatItem = ({
             </div>
           </div>
         </div>
-        {contextMenu && (
-          <div
-            className="fixed w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-2 pointer-events-auto context-menu"
-            style={{ top: `${contextMenu.y}px`, left: `${contextMenu.x}px` }}
-            onClick={(e) => e.stopPropagation()}
+      </div>
+
+      {/* Menu ngữ cảnh */}
+      {contextMenu && (
+        <div
+          ref={menuRef}
+          className="fixed w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-2 pointer-events-auto context-menu"
+          style={{ top: `${contextMenu.y}px`, left: `${contextMenu.x}px` }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs hover:bg-[#F4F5F6]"
+            onClick={() => handleMenuAction("togglePin")}
           >
+            <img
+              src={
+                chat.isPinned
+                  ? "/chats/iconlist/verticalpin.png"
+                  : "/chats/iconlist/unpin.png"
+              }
+              alt=""
+              className="w-[18px] h-[18px]"
+            />
+            {chat.isPinned ? "Bỏ ghim" : "Ghim lên đầu"}
+          </button>
+          <button
+            className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs hover:bg-[#F4F5F6]"
+            onClick={() => handleMenuAction("clearUnread")}
+          >
+            <img
+              src="/chats/iconlist/clean.png"
+              alt=""
+              className="w-[18px] h-[18px]"
+            />
+            Bỏ qua tin nhắn chưa đọc
+          </button>
+          <button
+            className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs hover:bg-[#F4F5F6]"
+            onClick={() => handleMenuAction("toggleNotification")}
+          >
+            <img
+              src={
+                chat.isNotificationOff
+                  ? "/chats/iconlist/notificationon.png"
+                  : "/chats/iconlist/notificationoff.png"
+              }
+              alt=""
+              className="w-[18px] h-[18px]"
+            />
+            {chat.isNotificationOff ? "Bật thông báo" : "Tắt thông báo"}
+          </button>
+          <button
+            className="flex items-center gap-2 w-full text-left text-black text-xs px-2 py-2 hover:bg-[#F4F5F6]"
+            onClick={() => handleMenuAction("toggleFlag")}
+          >
+            <img
+              src={
+                chat.isFlagged
+                  ? "/chats/iconlist/flag.png"
+                  : "/chats/iconlist/flag.png"
+              }
+              alt=""
+              className="w-[18px] h-[18px]"
+            />
+            {chat.isFlagged ? "Bỏ đánh dấu" : "Đánh dấu"}
+          </button>
+
+          {/* Phần "Gắn thẻ" với submenu */}
+          <div className="relative group">
             <button
-              className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs hover:bg-[#F4F5F6]"
-              onClick={() => handleMenuAction("togglePin")}
+              ref={tagButtonRef} // Gắn ref vào nút "Gắn thẻ"
+              className="flex items-center justify-between gap-2 w-full text-left px-2 py-2 text-[#141416] text-xs hover:bg-[#F4F5F6]"
+              onClick={handleTagMenuClick}
+              onMouseEnter={() =>
+                window.innerWidth > 768 && setIsTagSubmenuOpen(true)
+              }
+              onMouseLeave={() =>
+                window.innerWidth > 768 && setIsTagSubmenuOpen(false)
+              }
             >
+              <div className="flex items-center gap-2">
+                <TagIcon color="#A8ABB8" />
+                Gắn thẻ
+              </div>
               <img
-                src={
-                  chat.isPinned
-                    ? "/chats/iconlist/verticalpin.png"
-                    : "/chats/iconlist/unpin.png"
+                src="/chats/iconlist/line.png"
+                alt=""
+                className="w-[18px] h-[18px] rotate-270"
+              />
+            </button>
+
+            {/* Submenu "Gắn thẻ" */}
+            {isTagSubmenuOpen && (
+              <div
+                className={`absolute w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50 left-full ${
+                  shouldSubmenuPopUp() ? "bottom-0" : "top-0"
+                }`}
+                onMouseEnter={() =>
+                  window.innerWidth > 768 && setIsTagSubmenuOpen(true)
                 }
-                alt=""
-                className="w-[18px] h-[18px]"
-              />
-              {chat.isPinned ? "Bỏ ghim" : "Ghim lên đầu"}
-            </button>
-            <button
-              className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs hover:bg-[#F4F5F6]"
-              onClick={() => handleMenuAction("clearUnread")}
-            >
-              <img
-                src="/chats/iconlist/clean.png"
-                alt=""
-                className="w-[18px] h-[18px]"
-              />
-              Bỏ qua tin nhắn chưa đọc
-            </button>
-            <button
-              className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs hover:bg-[#F4F5F6]"
-              onClick={() => handleMenuAction("toggleNotification")}
-            >
-              <img
-                src={
-                  chat.isNotificationOff
-                    ? "/chats/iconlist/notificationon.png"
-                    : "/chats/iconlist/notificationoff.png"
+                onMouseLeave={() =>
+                  window.innerWidth > 768 && setIsTagSubmenuOpen(false)
                 }
-                alt=""
-                className="w-[18px] h-[18px]"
-              />
-              {chat.isNotificationOff ? "Bật thông báo" : "Tắt thông báo"}
-            </button>
-            <button
-              className="flex items-center gap-2 w-full text-left text-black text-xs px-2 py-2 hover:bg-[#F4F5F6]"
-              onClick={() => handleMenuAction("toggleFlag")}
-            >
-              <img
-                src={
-                  chat.isFlagged
-                    ? "/chats/iconlist/flag.png"
-                    : "/chats/iconlist/flag.png"
-                }
-                alt=""
-                className="w-[18px] h-[18px]"
-              />
-              {chat.isFlagged ? "Bỏ đánh dấu" : "Đánh dấu"}
-            </button>
-            <div className="relative group">
-              <button className="flex items-center justify-between gap-2 w-full text-left px-2 py-2 text-[#141416] text-xs hover:bg-[#F4F5F6]">
-                <div className="flex items-center gap-2">
-                  <TagIcon color="#A8ABB8" />
-                  Gắn thẻ
-                </div>
-                <img
-                  src="/chats/iconlist/line.png"
-                  alt=""
-                  className="w-[18px] h-[18px] rotate-270"
-                />
-              </button>
-              <div className="absolute left-full top-0 hidden group-hover:block bg-white border border-gray-200 rounded-lg shadow-lg p-2 min-w-[250px] z-50">
+              >
                 {tags.map((tag) => (
                   <button
                     key={tag.id}
@@ -372,25 +443,28 @@ const ChatItem = ({
                   Quản lý thẻ
                 </button>
               </div>
-            </div>
-            <button className="flex items-center gap-2 w-full text-xs text-[#F33E3E] text-left px-2 py-1 hover:bg-[#F4F5F6]">
-              <img
-                src="/chats/iconlist/delete.png"
-                alt=""
-                className="w-[18px] h-[18px]"
-              />
-              Xóa cuộc hội thoại
-            </button>
+            )}
           </div>
-        )}
-      </div>
+
+          <button className="flex items-center gap-2 w-full text-xs text-[#F33E3E] text-left px-2 py-1 hover:bg-[#F4F5F6]">
+            <img
+              src="/chats/iconlist/delete.png"
+              alt=""
+              className="w-[18px] h-[18px]"
+            />
+            Xóa cuộc hội thoại
+          </button>
+        </div>
+      )}
+
+      {/* TagManagement */}
       {isTagManagementOpen && (
         <TagManagement
           onClose={() => setIsTagManagementOpen(false)}
           onSaveTag={handleSaveTag}
           onUpdateTag={handleUpdateTag}
           onDeleteTag={handleDeleteTag}
-          onUpdateTags={onUpdateTags} // Truyền callback để cập nhật tags
+          onUpdateTags={handleUpdateTags}
         />
       )}
     </>

@@ -11,7 +11,7 @@ const ChatView = ({
   contacts,
 }) => {
   return (
-    <div className="flex gap-4 h-screen">
+    <div className="flex gap-4 ">
       <ChatList
         chats={chats}
         activeChat={activeChat}

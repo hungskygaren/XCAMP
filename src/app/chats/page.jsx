@@ -151,7 +151,7 @@ const Chat = () => {
       <VerticalNavbar />
       <div className="flex flex-col">
         <Navbar />
-        <div className="flex bg-[#F4F5F6] min-h-screen">
+        <div className="flex bg-[#F4F5F6] ">
           <div className="ml-4 mt-4">
             <ChatView
               chats={chats}

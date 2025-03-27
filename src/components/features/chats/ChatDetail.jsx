@@ -158,7 +158,7 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
   };
 
   return (
-    <div className="w-[57.875rem] max-h-[1070px] flex flex-col bg-gray-50">
+    <div className="w-[57.875rem] flex flex-col  bg-gray-50">
       <div className="p-4 border-b border-gray-200 bg-white flex items-center">
         <div className="flex items-center">
           <div className="mr-3">
@@ -185,7 +185,7 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
 
       <div
         ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4"
+        className=" overflow-y-auto p-4 space-y-4  h-[calc(100vh-240px)]"
       >
         {chat.messages &&
           chat.messages.map((message, index) => {

@@ -1,45 +1,97 @@
-import React from "react";
+import Button from "@/components/ui/buttons/Button";
+import React, { useMemo, useState } from "react";
 
 const SearchResults = ({
-  filteredContacts,
-  filteredMessages,
   onSelectChat,
   getChatName,
   getChatAvatar,
   currentUser,
-  searchQuery,
-  setSearchQuery,
+  contacts,
   setIsSearchOpen,
   chats,
+  searchQuery, // Nhận từ khóa từ ChatList
+  onCloseSearch, // Nhận hàm đóng từ ChatList
 }) => {
-  const handleCloseSearch = () => {
-    setIsSearchOpen(false);
-    setSearchQuery("");
-  };
-  const handleSearchFocus = () => {
-    setIsSearchOpen(true);
+  const filteredContacts = useMemo(() => {
+    if (!contacts || !searchQuery.trim()) return [];
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [contacts, searchQuery]);
+
+  const filteredMessages = useMemo(() => {
+    if (!chats || !searchQuery.trim()) return [];
+    const result = [];
+    chats.forEach((chat) => {
+      const matchingMessages = chat.messages.filter((msg) =>
+        msg.content.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      if (matchingMessages.length > 0) {
+        result.push({ chat, messages: matchingMessages });
+      }
+    });
+    return result;
+  }, [chats, searchQuery]);
+
+  const renderChatAvatar = (chat) => {
+    const avatars = getChatAvatar(chat);
+    if (chat.type === "group" && Array.isArray(avatars)) {
+      if (avatars.length === 2) {
+        return (
+          <div className="flex -space-x-1">
+            {avatars.map((avatar, index) => (
+              <img
+                key={index}
+                src={avatar}
+                alt={`Group member ${index + 1}`}
+                className="w-5 h-5 rounded-full object-cover"
+              />
+            ))}
+          </div>
+        );
+      }
+      return (
+        <div className="flex flex-col items-center">
+          {avatars.length >= 1 && (
+            <img
+              src={avatars[0]}
+              alt="Group member 1"
+              className="w-5 h-5 rounded-full object-cover z-10"
+            />
+          )}
+          <div className="flex -space-x-1 -mt-1.5">
+            {avatars.length >= 2 && (
+              <img
+                src={avatars[1]}
+                alt="Group member 2"
+                className="w-5 h-5 rounded-full object-cover"
+              />
+            )}
+            {avatars.length === 3 && chat.participants.length === 3 ? (
+              <img
+                src={avatars[2]}
+                alt="Group member 3"
+                className="w-5 h-5 rounded-full object-cover"
+              />
+            ) : chat.participants.length > 3 ? (
+              <div className="w-5 h-5 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs">
+                +{chat.participants.length - 2}
+              </div>
+            ) : null}
+          </div>
+        </div>
+      );
+    }
+    return (
+      <img
+        src={avatars}
+        alt={getChatName(chat)}
+        className="w-10 h-10 rounded-full object-cover"
+      />
+    );
   };
   return (
-    <div className="absolute inset-0 bg-white z-20 p-4 overflow-y-auto">
-      <div className="flex items-center mb-4 gap-[1.375rem]">
-        <div className="relative w-[17.5rem]">
-          <input
-            type="text"
-            placeholder="Tìm kiếm liên hệ hoặc tin nhắn"
-            className="w-full pl-[15px] h-8 text-[.75rem] text-[#A8ABB8] font-semibold border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-500"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={handleSearchFocus}
-          />
-        </div>
-        <button
-          className="flex-1 h-8 text-[.75rem] font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center"
-          onClick={handleCloseSearch}
-        >
-          Đóng
-        </button>
-      </div>
-
+    <div className="absolute  bg-white z-20 p-4 overflow-y-auto">
       {filteredContacts.length > 0 && (
         <>
           <h3 className="text-sm font-semibold text-gray-700 mb-2">Liên hệ</h3>
@@ -85,11 +137,7 @@ const SearchResults = ({
                   handleCloseSearch();
                 }}
               >
-                <img
-                  src={contact.avatar || "/avatar.png"}
-                  alt={contact.name}
-                  className="w-10 h-10 rounded-full object-cover mr-3"
-                />
+                {renderChatAvatar(chat)}
                 <div>
                   <p className="text-sm font-medium">{contact.name}</p>
                   <p className="text-xs text-gray-500">{contact.email}</p>
@@ -122,11 +170,7 @@ const SearchResults = ({
                 handleCloseSearch();
               }}
             >
-              <img
-                src={getChatAvatar(chat)}
-                alt={getChatName(chat)}
-                className="w-10 h-10 rounded-full object-cover mr-3"
-              />
+              {renderChatAvatar(chat)} {/* Thay đổi ở đây */}
               <div>
                 <p className="text-sm font-medium">{getChatName(chat)}</p>
                 <p className="text-xs text-gray-500">
