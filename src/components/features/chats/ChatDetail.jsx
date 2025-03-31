@@ -270,7 +270,7 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
                                     )}
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-medium truncate">
+                                    <p className="text-sm text-black font-medium truncate">
                                       {attachment.name}
                                     </p>
                                     <p className="text-xs text-gray-500">

@@ -63,7 +63,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
         {selectedFilter === "flagged" ? (
           <>
             <Image
-              src="/chats/iconlist/flag.png"
+              src="/Chats/iconlist/flag.png"
               alt="Flagged"
               className="w-[18px] h-[18px]"
               width={18}
@@ -74,7 +74,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
         ) : selectedFilter === "mentioned" ? (
           <>
             <Image
-              src="/chats/iconlist/mention.png"
+              src="/Chats/iconlist/mention.png"
               alt="Mention"
               className="w-[18px] h-[18px]"
               width={18}
@@ -86,7 +86,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
           <Image
             width={18}
             height={18}
-            src="/chats/iconlist/3dot.png"
+            src="/Chats/iconlist/3dot.png"
             className="w-[18px] h-[18px]"
             alt="More"
           />
@@ -96,7 +96,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
             <Image
               width={16}
               height={16}
-              src="/chats/iconlist/close.png"
+              src="/Chats/iconlist/close.png"
               alt="Reset"
               className="w-4 h-4"
             />
@@ -113,7 +113,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
             <Image
               width={18}
               height={18}
-              src="/chats/iconlist/flag.png"
+              src="/Chats/iconlist/flag.png"
               alt="Flagged"
               className="w-[18px] h-[18px]"
             />
@@ -125,7 +125,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
             onClick={handleFilterMentioned}
           >
             <Image
-              src="/chats/iconlist/mention.png"
+              src="/Chats/iconlist/mention.png"
               alt="Mention"
               className="w-[18px] h-[18px]"
             />

@@ -1,4 +1,4 @@
-// src/components/features/chats/components/ChatList/SortDropdown.js
+// src/components/features/Chats/components/ChatList/SortDropdown.js
 import React, { useState, useEffect, useRef } from "react";
 import TagManagement from "./TagManagement";
 import Image from "next/image";
@@ -99,7 +99,7 @@ const SortDropdown = ({
     }
     return (
       <Image
-        src="/chats/iconlist/tag.png"
+        src="/Chats/iconlist/tag.png"
         alt="Sort"
         className="w-[1.125rem] mt-[1px] h-[1.125rem]"
         width={18}
@@ -131,7 +131,7 @@ const SortDropdown = ({
             }}
           >
             <Image
-              src="/chats/iconlist/close.png"
+              src="/Chats/iconlist/close.png"
               alt="Reset"
               className="w-4 h-4"
               width={16}
@@ -140,7 +140,7 @@ const SortDropdown = ({
           </span>
         ) : isSortOpen ? (
           <Image
-            src="/chats/iconlist/line.png"
+            src="/Chats/iconlist/line.png"
             alt="Sort"
             width={20}
             height={20}
@@ -148,7 +148,7 @@ const SortDropdown = ({
           />
         ) : (
           <Image
-            src="/chats/iconlist/line.png"
+            src="/Chats/iconlist/line.png"
             alt="Sort"
             className="w-5 h-5"
             width={20}
@@ -182,7 +182,7 @@ const SortDropdown = ({
                   <Image
                     width={12}
                     height={12}
-                    src="/chats/iconlist/WhiteCheck.png"
+                    src="/Chats/iconlist/WhiteCheck.png"
                     alt="Check"
                     className="w-3 h-3"
                   />
@@ -202,7 +202,7 @@ const SortDropdown = ({
             }}
           >
             <Image
-              src="/chats/iconlist/setting.png"
+              src="/Chats/iconlist/setting.png"
               className="w-[18px] h-[18px]"
               width={18}
               height={18}
