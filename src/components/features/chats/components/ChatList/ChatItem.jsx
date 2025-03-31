@@ -410,7 +410,7 @@ const ChatItem = ({
               <Image
                 width={18}
                 height={18}
-                src="/Chats/iconlist/line.png"
+                src="/Chats/iconlist/Line.png"
                 alt=""
                 className="w-[18px] h-[18px] rotate-270"
               />
