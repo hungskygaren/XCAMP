@@ -10,7 +10,7 @@ import AddGroup from "./components/ChatList/AddGroup";
 import Setting from "./components/ChatList/Setting";
 import Button from "@/components/ui/buttons/Button";
 import More from "./components/ChatList/More";
-import search from "../../../../public/chats/iconlist/search.png";
+import search from "/public/chats/iconlist/search.png";
 
 const ChatList = ({
   chats,
@@ -130,6 +130,7 @@ const ChatList = ({
     setSelectedTags([]);
     setFilter("all");
   };
+
   return (
     <>
       <div className="w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative">
