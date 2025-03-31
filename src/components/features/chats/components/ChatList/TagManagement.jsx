@@ -34,7 +34,7 @@ const TagManagement = ({
   ];
 
   useEffect(() => {
-    fetch("http://192.168.31.231:4000/tags?_sort=order&_order=asc")
+    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
       .then((res) => res.json())
       .then((data) => setTags(data))
       .catch((err) => console.error("Error fetching tags:", err));
@@ -87,7 +87,7 @@ const TagManagement = ({
 
     Promise.all(
       updatedTags.map((tag) =>
-        fetch(`http://192.168.31.231:4000/tags/${tag.id}`, {
+        fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags/${tag.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(tag),
@@ -95,7 +95,7 @@ const TagManagement = ({
       )
     )
       .then(() => {
-        fetch("http://192.168.31.231:4000/tags?_sort=order&_order=asc")
+        fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
           .then((res) => res.json())
           .then((data) => setTags(data));
         onUpdateTags();
@@ -125,7 +125,7 @@ const TagManagement = ({
       order: tags.length,
     };
 
-    fetch("http://192.168.31.231:4000/tags", {
+    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTag),
@@ -136,7 +136,7 @@ const TagManagement = ({
         setNewTagName("");
         setSelectedColor("#4A30B1");
         setIsAddingTag(false);
-        fetch("http://192.168.31.231:4000/tags?_sort=order&_order=asc")
+        fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
           .then((res) => res.json())
           .then((data) => setTags(data));
         onUpdateTags();
@@ -159,7 +159,7 @@ const TagManagement = ({
       name: newTagName.trim(),
       color: selectedColor,
     };
-    fetch(`http://192.168.31.231:4000/tags/${editingTag.id}`, {
+    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags/${editingTag.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedTag),
@@ -181,7 +181,7 @@ const TagManagement = ({
   };
 
   const handleDelete = (tagId) => {
-    fetch(`http://192.168.31.231:4000/tags/${tagId}`, {
+    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags/${tagId}`, {
       method: "DELETE",
     })
       .then(() => {

@@ -158,9 +158,9 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
   };
 
   return (
-    <div className="w-[57.875rem] flex flex-col  bg-gray-50">
-      <div className="p-4 border-b border-gray-200 bg-white flex items-center">
-        <div className="flex items-center">
+    <div className="w-[57.875rem] flex flex-col  bg-white rounded-[10px] mr-[16px]">
+      <div className="  flex items-center mt-5 ml-[22px]">
+        <div className="flex items-center ">
           <div className="mr-3">
             {chat.type === "direct" ? (
               <img
@@ -321,7 +321,7 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
           })}
       </div>
 
-      <div className="p-4 bg-white border-t border-gray-200 sticky bottom-0">
+      <div className="p-4 bg-white  sticky bottom-0">
         {attachments.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-3">
             {attachments.map((att) => (
@@ -358,7 +358,7 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
 
         <form
           onSubmit={handleSendMessage}
-          className="flex items-center gap-2 bg-[#F4F5F6] py-[15px] pr-[13px] pl-[21px]"
+          className="flex items-center rounded-lg gap-2 bg-[#F4F5F6] py-[15px] pr-[13px] pl-[21px]"
         >
           <button
             type="button"

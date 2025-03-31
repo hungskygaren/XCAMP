@@ -20,13 +20,15 @@ const Chat = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const chatsResponse = await fetch("  http://192.168.31.231:4000/chats");
+        const chatsResponse = await fetch(
+          ` ${process.env.NEXT_PUBLIC_API_URL}/chats`
+        );
         const chatsData = await chatsResponse.json();
         setChats(chatsData);
         if (chatsData.length > 0) setActiveChat(chatsData[0]);
 
         const contactsResponse = await fetch(
-          "  http://192.168.31.231:4000/contacts"
+          ` ${process.env.NEXT_PUBLIC_API_URL}/contacts`
         );
         const contactsData = await contactsResponse.json();
         setContacts(contactsData);
@@ -84,11 +86,14 @@ const Chat = () => {
 
   const saveChatToServer = async (chat) => {
     try {
-      const response = await fetch("  http://192.168.31.231:4000/chats", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(chat),
-      });
+      const response = await fetch(
+        ` ${process.env.NEXT_PUBLIC_API_URL}/chats`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(chat),
+        }
+      );
       if (!response.ok) throw new Error("Lỗi khi lưu chat vào server");
     } catch (error) {
       console.error("Lỗi khi lưu chat:", error);
@@ -132,7 +137,7 @@ const Chat = () => {
 
   const updateChatOnServer = async (chatId, updatedChat) => {
     try {
-      await fetch(`  http://192.168.31.231:4000/chats/${chatId}`, {
+      await fetch(` ${process.env.NEXT_PUBLIC_API_URL}/chats/${chatId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedChat),

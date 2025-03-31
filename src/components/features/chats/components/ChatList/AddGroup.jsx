@@ -24,7 +24,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
 
   // Fetch danh sách liên hệ từ JSON-server
   useEffect(() => {
-    fetch("http://192.168.31.231:4000/contacts")
+    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/contacts`)
       .then((res) => res.json())
       .then((data) => setAllContacts(data))
       .catch((err) => console.error("Error fetching contacts:", err));
@@ -106,7 +106,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
       lastMessageTime: new Date().toISOString(),
     };
 
-    fetch("http://192.168.31.231:4000/chats", {
+    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/chats`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newGroup),
