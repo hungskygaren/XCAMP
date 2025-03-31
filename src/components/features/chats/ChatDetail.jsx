@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 
 const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
@@ -163,13 +164,15 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
         <div className="flex items-center ">
           <div className="mr-3">
             {chat.type === "direct" ? (
-              <img
+              <Image
                 src={
                   chat.participants.find((p) => p.id !== currentUser.id)
                     ?.avatar || "/avatar.png"
                 }
                 alt={getChatName()}
-                className="w-10 h-10 rounded-full object-cover"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
               />
             ) : (
               <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-bold">
@@ -212,13 +215,15 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
                 >
                   <div className="flex items-start max-w-[70%]">
                     {!isCurrentUser && (
-                      <img
+                      <Image
                         src={
                           chat.participants.find(
                             (p) => p.id === message.senderId
                           )?.avatar || "/avatar.png"
                         }
                         alt={getMessageSender(message.senderId)}
+                        width={32}
+                        height={32}
                         className="w-8 h-8 rounded-full object-cover mr-2 mt-1"
                       />
                     )}
@@ -301,11 +306,13 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
                             {message.readBy && message.readBy.length > 0
                               ? getReadByAvatars(message).map(
                                   (avatar, index) => (
-                                    <img
+                                    <Image
                                       key={index}
                                       src={avatar}
+                                      width={16}
+                                      height={16}
                                       alt="Reader"
-                                      className="w-4 h-4 rounded-full inline-block"
+                                      className="rounded-full inline-block"
                                     />
                                   )
                                 )
@@ -365,9 +372,10 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
             onClick={() => fileInputRef.current?.click()}
           >
-            <img
+            <Image
               src="/chats/iconchatdetail/paperclip.png"
-              className="w-5 h-5"
+              width={20}
+              height={20}
               alt=""
             />
           </button>
@@ -384,9 +392,10 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
             onClick={() => imageInputRef.current?.click()}
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
           >
-            <img
+            <Image
               src="/chats/iconchatdetail/emotions.png"
-              className="w-5 h-5"
+              width={20}
+              height={20}
               alt=""
             />
           </button>
@@ -414,13 +423,14 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
             className="rounded-full focus:outline-none"
             disabled={!messageInput.trim() && attachments.length === 0}
           >
-            <img
+            <Image
               src={
                 messageInput.trim() || attachments.length > 0
                   ? "/chats/iconchatdetail/send.png"
                   : "/chats/iconchatdetail/NotSend.png"
               }
-              className="w-5 h-5"
+              width={20}
+              height={20}
               alt="Send"
             />
           </button>

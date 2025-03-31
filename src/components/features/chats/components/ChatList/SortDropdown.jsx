@@ -1,6 +1,7 @@
 // src/components/features/chats/components/ChatList/SortDropdown.js
 import React, { useState, useEffect, useRef } from "react";
 import TagManagement from "./TagManagement";
+import Image from "next/image";
 
 const SortDropdown = ({
   isSortOpen,
@@ -97,10 +98,12 @@ const SortDropdown = ({
       return selectedTag ? <TagIcon color={selectedTag.color} /> : null;
     }
     return (
-      <img
+      <Image
         src="/chats/iconlist/tag.png"
         alt="Sort"
         className="w-[1.125rem] mt-[1px] h-[1.125rem]"
+        width={18}
+        height={18}
       />
     );
   };
@@ -127,20 +130,30 @@ const SortDropdown = ({
               handleResetTags();
             }}
           >
-            <img
+            <Image
               src="/chats/iconlist/close.png"
               alt="Reset"
               className="w-4 h-4"
+              width={16}
+              height={16}
             />
           </span>
         ) : isSortOpen ? (
-          <img
+          <Image
             src="/chats/iconlist/line.png"
             alt="Sort"
+            width={20}
+            height={20}
             className="w-5 h-5 rotate-90"
           />
         ) : (
-          <img src="/chats/iconlist/line.png" alt="Sort" className="w-5 h-5" />
+          <Image
+            src="/chats/iconlist/line.png"
+            alt="Sort"
+            className="w-5 h-5"
+            width={20}
+            height={20}
+          />
         )}
       </button>
       {isSortOpen && (
@@ -166,7 +179,9 @@ const SortDropdown = ({
                 }`}
               >
                 {selectedTags.includes(tag.id) && (
-                  <img
+                  <Image
+                    width={12}
+                    height={12}
                     src="/chats/iconlist/WhiteCheck.png"
                     alt="Check"
                     className="w-3 h-3"
@@ -186,9 +201,11 @@ const SortDropdown = ({
               setIsSortOpen(false);
             }}
           >
-            <img
+            <Image
               src="/chats/iconlist/setting.png"
               className="w-[18px] h-[18px]"
+              width={18}
+              height={18}
               alt=""
             />
             Quản lý thẻ

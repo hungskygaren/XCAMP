@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 
 const TagManagement = ({
@@ -231,9 +232,11 @@ const TagManagement = ({
                   >
                     <div className="flex items-center">
                       <div className="mr-2">
-                        <img
+                        <Image
                           src="/chats/iconlist/Verticaldots.png"
                           className="w-[18px] h-[18px]"
+                          width={18}
+                          height={18}
                           alt=""
                         />
                       </div>
@@ -245,20 +248,24 @@ const TagManagement = ({
                         className=" text-blue-500"
                         onClick={() => handleEdit(tag)}
                       >
-                        <img
+                        <Image
                           src="/chats/iconlist/edit.png"
                           alt="Edit"
                           className="w-[18px] h-[18px]"
+                          width={18}
+                          height={18}
                         />
                       </button>
                       <button
                         className="text-red-500"
                         onClick={() => handleDelete(tag.id)}
                       >
-                        <img
+                        <Image
                           src="/chats/iconlist/delete.png"
                           alt="Delete"
                           className="w-[18px] h-[18px]"
+                          width={18}
+                          height={18}
                         />
                       </button>
                     </div>
@@ -309,9 +316,11 @@ const TagManagement = ({
                       onClick={() => setSelectedColor(color)}
                     >
                       {selectedColor === color && (
-                        <img
+                        <Image
                           src="/chats/iconlist/WhiteCheck.png"
                           className="w-5 h-[15px]" // Giữ nguyên kích thước
+                          width={15}
+                          height={15}
                           alt=""
                         />
                       )}

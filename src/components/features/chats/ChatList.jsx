@@ -13,6 +13,8 @@ import More from "./components/ChatList/More";
 import search from "#/Chats/iconlist/Search.png";
 import addgroup from "#/Chats/iconlist/addGroup.png";
 import setting from "#/Chats/iconlist/setting.png";
+import Image from "next/image";
+console.log(search);
 
 const ChatList = ({
   chats,
@@ -165,14 +167,24 @@ const ChatList = ({
                     className="p-2 rounded-lg hover:bg-gray-100"
                     onClick={handleOpenAddGroup}
                   >
-                    <img src={addgroup.src} alt="add" className="w-6 h-6" />
+                    <Image
+                      src={addgroup.src}
+                      alt="add"
+                      width={24}
+                      height={24}
+                    />
                   </button>
                   <button
                     ref={settingButtonRef}
                     className="p-2 rounded-lg hover:bg-gray-100"
                     onClick={handleOpenAddSetting}
                   >
-                    <img src={setting.src} alt="settings" className="w-6 h-6" />
+                    <Image
+                      src={setting.src}
+                      alt="settings"
+                      width={24}
+                      height={24}
+                    />
                   </button>
                 </div>
                 {isAddSettingOpen && (

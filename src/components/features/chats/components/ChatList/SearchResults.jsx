@@ -5,6 +5,7 @@ import {
   getChatName,
   getChatAvatar,
 } from "@/components/features/chats/components/ChatList/ChatUtils"; // Import từ chatUtils
+import Image from "next/image";
 
 const SearchResults = ({
   onSelectChat,
@@ -43,7 +44,9 @@ const SearchResults = ({
         return (
           <div className="flex -space-x-1">
             {avatars.map((avatar, index) => (
-              <img
+              <Image
+                width={20}
+                height={20}
                 key={index}
                 src={avatar}
                 alt={`Group member ${index + 1}`}
@@ -56,25 +59,31 @@ const SearchResults = ({
       return (
         <div className="flex flex-col items-center">
           {avatars.length >= 1 && (
-            <img
+            <Image
               src={avatars[0]}
               alt="Group member 1"
               className="w-5 h-5 rounded-full object-cover z-10"
+              width={20}
+              height={20}
             />
           )}
           <div className="flex -space-x-1 -mt-1.5">
             {avatars.length >= 2 && (
-              <img
+              <Image
                 src={avatars[1]}
                 alt="Group member 2"
                 className="w-5 h-5 rounded-full object-cover"
+                width={20}
+                height={20}
               />
             )}
             {avatars.length === 3 && chat.participants.length === 3 ? (
-              <img
+              <Image
                 src={avatars[2]}
                 alt="Group member 3"
                 className="w-5 h-5 rounded-full object-cover"
+                width={20}
+                height={20}
               />
             ) : chat.participants.length > 3 ? (
               <div className="w-5 h-5 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs">
@@ -86,10 +95,12 @@ const SearchResults = ({
       );
     }
     return (
-      <img
+      <Image
         src={avatars}
         alt={getChatName(chat, currentUser)}
         className="w-10 h-10 rounded-full object-cover"
+        width={40}
+        height={40}
       />
     );
   };

@@ -1,5 +1,6 @@
 import Button from "@/components/ui/buttons/Button";
 import TextInput from "@/components/ui/inputs/TextInput";
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 
 export default function AddGroup({ onClose, chats, contacts, currentUser }) {
@@ -127,7 +128,13 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-11 h-11 bg-[#F4F5F6] border-1 border-dashed border-[#A8ABB8] rounded-full flex items-center justify-center">
-              <img src="chats/iconlist/camera.png" className="w-6 h-6" alt="" />
+              <Image
+                width={24}
+                height={24}
+                src="chats/iconlist/camera.png"
+                className="w-6 h-6"
+                alt=""
+              />
             </div>
             <TextInput
               type="text"
@@ -138,7 +145,13 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
             />
           </div>
           <span onClick={onClose} className="cursor-pointer">
-            <img className="w-6 h-6" src="/chats/iconlist/close.png" alt="" />
+            <Image
+              width={24}
+              height={24}
+              className="w-6 h-6"
+              src="/chats/iconlist/close.png"
+              alt=""
+            />
           </span>
         </div>
         <div className="w-full h-0 border-1 border-[#E6E8EC] mt-[14px] mb-[16px]"></div>
@@ -156,7 +169,9 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                 onRightIconClick={searchQuery ? handleClearSearch : () => {}} // Chỉ reset khi có searchQuery
               />
               {searchQuery && (
-                <img
+                <Image
+                  width={16}
+                  height={16}
                   src="/chats/iconlist/close.png"
                   className="w-4 h-4 absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
                   alt="clear"
@@ -177,7 +192,9 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                       className="flex items-center border-b-1 border-[#E6E8EC] justify-between pb-4"
                     >
                       <div className="flex gap-[11px] items-center">
-                        <img
+                        <Image
+                          width={30}
+                          height={30}
                           src={contact.avatar || "/chats/avatar1.png"}
                           className="w-[30px] h-[30px]"
                           alt=""
@@ -212,7 +229,9 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                       className="flex items-center border-b-1 border-[#E6E8EC] justify-between pb-4 "
                     >
                       <div className="flex gap-[11px] items-center">
-                        <img
+                        <Image
+                          width={30}
+                          height={30}
                           src={contact.avatar || "/chats/avatar1.png"}
                           className="w-[30px] h-[30px]"
                           alt=""
@@ -250,7 +269,9 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                         className="flex items-center border-b-1 border-[#E6E8EC] justify-between pb-4"
                       >
                         <div className="flex gap-[11px] items-center">
-                          <img
+                          <Image
+                            width={30}
+                            height={30}
                             src={contact.avatar}
                             className="w-[30px] h-[30px]"
                             alt=""
@@ -286,13 +307,17 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                   key={contact.id}
                   className="flex gap-2 items-center pr-[8px] pl-[6px] py-[6px] rounded-lg bg-white w-fit"
                 >
-                  <img
+                  <Image
+                    width={22}
+                    height={22}
                     src={contact.avatar || "chats/avatar1.png"}
                     className="w-[22px] h-[22px]"
                     alt=""
                   />
                   <p className="text-xs">{contact.name}</p>
-                  <img
+                  <Image
+                    width={18}
+                    height={18}
                     src="chats/iconlist/close-bg_gray.png"
                     className="w-[18px] h-[18px] cursor-pointer"
                     alt=""

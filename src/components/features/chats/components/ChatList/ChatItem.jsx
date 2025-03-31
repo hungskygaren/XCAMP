@@ -7,6 +7,7 @@ import {
   getLastMessage,
   formatTime,
 } from "@/components/features/chats/components/ChatList/ChatUtils"; // Import từ chatUtils
+import Image from "next/image";
 
 const ChatItem = ({
   chat,
@@ -167,15 +168,19 @@ const ChatItem = ({
           )}
           {chat.type === "group" ? (
             typeof avatars === "string" ? (
-              <img
+              <Image
                 src={avatars}
                 alt="Group avatar"
                 className="w-11 h-11 rounded-full object-cover"
+                width={44}
+                height={44}
               />
             ) : avatars.length === 2 ? (
               <div className="flex -space-x-1">
                 {avatars.map((avatar, index) => (
-                  <img
+                  <Image
+                    width={24}
+                    height={24}
                     key={index}
                     src={avatar}
                     alt={`Group member ${index + 1}`}
@@ -186,7 +191,9 @@ const ChatItem = ({
             ) : (
               <div className="flex flex-col items-center">
                 {avatars.length >= 1 && (
-                  <img
+                  <Image
+                    width={24}
+                    height={24}
                     src={avatars[0]}
                     alt="Group member 1"
                     className="w-6 h-6 rounded-full object-cover z-10"
@@ -194,14 +201,18 @@ const ChatItem = ({
                 )}
                 <div className="flex -space-x-1 -mt-1.5">
                   {avatars.length >= 2 && (
-                    <img
+                    <Image
+                      width={24}
+                      height={24}
                       src={avatars[1]}
                       alt="Group member 2"
                       className="w-6 h-6 rounded-full object-cover"
                     />
                   )}
                   {avatars.length === 3 && chat.participants.length === 3 ? (
-                    <img
+                    <Image
+                      width={24}
+                      height={24}
                       src={avatars[2]}
                       alt="Group member 3"
                       className="w-6 h-6 rounded-full object-cover"
@@ -215,7 +226,9 @@ const ChatItem = ({
               </div>
             )
           ) : (
-            <img
+            <Image
+              width={44}
+              height={44}
               src={avatars}
               alt={getChatName(chat, currentUser)}
               className="w-11 h-11 rounded-full object-cover"
@@ -248,7 +261,9 @@ const ChatItem = ({
             </p>
             <div className="flex gap-2 ml-[7px]">
               {chat.isPinned && (
-                <img
+                <Image
+                  width={18}
+                  height={18}
                   src="/chats/iconlist/pin.png"
                   alt="Pinned"
                   className="w-[18px] h-[18px] cursor-pointer"
@@ -274,7 +289,9 @@ const ChatItem = ({
                 </div>
               )}
               {chat.isNotificationOff && (
-                <img
+                <Image
+                  width={18}
+                  height={18}
                   src="/chats/iconlist/notificationoff.png"
                   alt="Notification Off"
                   className="w-[18px] h-[18px] cursor-pointer"
@@ -285,7 +302,9 @@ const ChatItem = ({
                 />
               )}
               {chat.isFlagged && (
-                <img
+                <Image
+                  width={18}
+                  height={18}
                   src="/chats/iconlist/flag.png"
                   alt="Flagged"
                   className="w-[18px] h-[18px] cursor-pointer"
@@ -311,7 +330,7 @@ const ChatItem = ({
             className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs hover:bg-[#F4F5F6]"
             onClick={() => handleMenuAction("togglePin")}
           >
-            <img
+            <Image
               src={
                 chat.isPinned
                   ? "/chats/iconlist/verticalpin.png"
@@ -319,6 +338,8 @@ const ChatItem = ({
               }
               alt=""
               className="w-[18px] h-[18px]"
+              width={18}
+              height={18}
             />
             {chat.isPinned ? "Bỏ ghim" : "Ghim lên đầu"}
           </button>
@@ -326,7 +347,9 @@ const ChatItem = ({
             className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs hover:bg-[#F4F5F6]"
             onClick={() => handleMenuAction("clearUnread")}
           >
-            <img
+            <Image
+              width={18}
+              height={18}
               src="/chats/iconlist/clean.png"
               alt=""
               className="w-[18px] h-[18px]"
@@ -337,7 +360,7 @@ const ChatItem = ({
             className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs hover:bg-[#F4F5F6]"
             onClick={() => handleMenuAction("toggleNotification")}
           >
-            <img
+            <Image
               src={
                 chat.isNotificationOff
                   ? "/chats/iconlist/notificationon.png"
@@ -345,6 +368,8 @@ const ChatItem = ({
               }
               alt=""
               className="w-[18px] h-[18px]"
+              width={18}
+              height={18}
             />
             {chat.isNotificationOff ? "Bật thông báo" : "Tắt thông báo"}
           </button>
@@ -352,7 +377,9 @@ const ChatItem = ({
             className="flex items-center gap-2 w-full text-left text-black text-xs px-2 py-2 hover:bg-[#F4F5F6]"
             onClick={() => handleMenuAction("toggleFlag")}
           >
-            <img
+            <Image
+              width={18}
+              height={18}
               src={
                 chat.isFlagged
                   ? "/chats/iconlist/flag.png"
@@ -380,7 +407,9 @@ const ChatItem = ({
                 <TagIcon color="#A8ABB8" />
                 Gắn thẻ
               </div>
-              <img
+              <Image
+                width={18}
+                height={18}
                 src="/chats/iconlist/line.png"
                 alt=""
                 className="w-[18px] h-[18px] rotate-270"
@@ -410,7 +439,9 @@ const ChatItem = ({
                       {tag.name}
                     </div>
                     {chat.tag === tag.id && (
-                      <img
+                      <Image
+                        width={18}
+                        height={18}
                         src="/chats/iconlist/check.png"
                         className="w-[18px] h-[18px]"
                         alt=""
@@ -422,7 +453,9 @@ const ChatItem = ({
                   className="flex items-center gap-2 w-full text-left px-2 py-2 text-[#141416] text-xs hover:bg-[#F4F5F6]"
                   onClick={() => handleMenuAction("manageTags")}
                 >
-                  <img
+                  <Image
+                    width={18}
+                    height={18}
                     src="/chats/iconlist/setting.png"
                     className="w-[18px] h-[18px]"
                     alt=""
@@ -434,7 +467,9 @@ const ChatItem = ({
           </div>
 
           <button className="flex items-center gap-2 w-full text-xs text-[#F33E3E] text-left px-2 py-1 hover:bg-[#F4F5F6]">
-            <img
+            <Image
+              width={18}
+              height={18}
               src="/chats/iconlist/delete.png"
               alt=""
               className="w-[18px] h-[18px]"

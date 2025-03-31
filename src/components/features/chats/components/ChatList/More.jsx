@@ -1,4 +1,5 @@
 // src/components/features/chats/components/ChatList/More.js
+import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 
 const More = ({ onFilterByFlag, onResetFilters }) => {
@@ -61,24 +62,30 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
       >
         {selectedFilter === "flagged" ? (
           <>
-            <img
+            <Image
               src="/chats/iconlist/flag.png"
               alt="Flagged"
               className="w-[18px] h-[18px]"
+              width={18}
+              height={18}
             />
             <span className="text-xs font-semibold">Đã gắn cờ</span>
           </>
         ) : selectedFilter === "mentioned" ? (
           <>
-            <img
+            <Image
               src="/chats/iconlist/mention.png"
               alt="Mention"
               className="w-[18px] h-[18px]"
+              width={18}
+              height={18}
             />
             <span className="text-xs font-semibold">Nhắc đến bạn</span>
           </>
         ) : (
-          <img
+          <Image
+            width={18}
+            height={18}
             src="/chats/iconlist/3dot.png"
             className="w-[18px] h-[18px]"
             alt="More"
@@ -86,7 +93,9 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
         )}
         {selectedFilter && (
           <span className="ml-1 cursor-pointer" onClick={handleReset}>
-            <img
+            <Image
+              width={16}
+              height={16}
               src="/chats/iconlist/close.png"
               alt="Reset"
               className="w-4 h-4"
@@ -101,7 +110,9 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
             className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs text-[#141416] hover:bg-[#F4F5F6]"
             onClick={handleFilterFlagged}
           >
-            <img
+            <Image
+              width={18}
+              height={18}
               src="/chats/iconlist/flag.png"
               alt="Flagged"
               className="w-[18px] h-[18px]"
@@ -113,7 +124,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
             className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs text-[#141416] hover:bg-[#F4F5F6]"
             onClick={handleFilterMentioned}
           >
-            <img
+            <Image
               src="/chats/iconlist/mention.png"
               alt="Mention"
               className="w-[18px] h-[18px]"
