@@ -57,9 +57,7 @@ const ChatList = ({
   }, [chats]);
 
   const fetchTags = () => {
-    fetch(
-      ` ${process.env.NEXT_PUBLIC_API_URL}/chats/tags?_sort=order&_order=asc`
-    )
+    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
       .then((res) => res.json())
       .then((data) => setTags(data))
       .catch((err) => console.error("Error fetching tags:", err));
