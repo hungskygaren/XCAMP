@@ -373,7 +373,7 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
             onClick={() => fileInputRef.current?.click()}
           >
             <Image
-              src="/chats/iconchatdetail/paperclip.png"
+              src="/Chats/iconchatdetail/paperclip.png"
               width={20}
               height={20}
               alt=""
@@ -393,7 +393,7 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
           >
             <Image
-              src="/chats/iconchatdetail/emotions.png"
+              src="/Chats/iconchatdetail/emotions.png"
               width={20}
               height={20}
               alt=""
@@ -426,8 +426,8 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
             <Image
               src={
                 messageInput.trim() || attachments.length > 0
-                  ? "/chats/iconchatdetail/send.png"
-                  : "/chats/iconchatdetail/NotSend.png"
+                  ? "/Chats/iconchatdetail/Send.png"
+                  : "/Chats/iconchatdetail/NotSend.png"
               }
               width={20}
               height={20}

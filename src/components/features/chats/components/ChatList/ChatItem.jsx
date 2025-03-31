@@ -264,7 +264,7 @@ const ChatItem = ({
                 <Image
                   width={18}
                   height={18}
-                  src="/chats/iconlist/pin.png"
+                  src="/Chats/iconlist/pin.png"
                   alt="Pinned"
                   className="w-[18px] h-[18px] cursor-pointer"
                   onClick={(e) => {
@@ -292,7 +292,7 @@ const ChatItem = ({
                 <Image
                   width={18}
                   height={18}
-                  src="/chats/iconlist/notificationoff.png"
+                  src="/Chats/iconlist/notificationoff.png"
                   alt="Notification Off"
                   className="w-[18px] h-[18px] cursor-pointer"
                   onClick={(e) => {
@@ -305,7 +305,7 @@ const ChatItem = ({
                 <Image
                   width={18}
                   height={18}
-                  src="/chats/iconlist/flag.png"
+                  src="/Chats/iconlist/flag.png"
                   alt="Flagged"
                   className="w-[18px] h-[18px] cursor-pointer"
                   onClick={(e) => {
@@ -333,8 +333,8 @@ const ChatItem = ({
             <Image
               src={
                 chat.isPinned
-                  ? "/chats/iconlist/verticalpin.png"
-                  : "/chats/iconlist/unpin.png"
+                  ? "/Chats/iconlist/verticalpin.png"
+                  : "/Chats/iconlist/unpin.png"
               }
               alt=""
               className="w-[18px] h-[18px]"
@@ -350,7 +350,7 @@ const ChatItem = ({
             <Image
               width={18}
               height={18}
-              src="/chats/iconlist/clean.png"
+              src="/Chats/iconlist/clean.png"
               alt=""
               className="w-[18px] h-[18px]"
             />
@@ -363,8 +363,8 @@ const ChatItem = ({
             <Image
               src={
                 chat.isNotificationOff
-                  ? "/chats/iconlist/notificationon.png"
-                  : "/chats/iconlist/notificationoff.png"
+                  ? "/Chats/iconlist/notificationon.png"
+                  : "/Chats/iconlist/notificationoff.png"
               }
               alt=""
               className="w-[18px] h-[18px]"
@@ -382,8 +382,8 @@ const ChatItem = ({
               height={18}
               src={
                 chat.isFlagged
-                  ? "/chats/iconlist/flag.png"
-                  : "/chats/iconlist/flag.png"
+                  ? "/Chats/iconlist/flag.png"
+                  : "/Chats/iconlist/flag.png"
               }
               alt=""
               className="w-[18px] h-[18px]"
@@ -410,7 +410,7 @@ const ChatItem = ({
               <Image
                 width={18}
                 height={18}
-                src="/chats/iconlist/line.png"
+                src="/Chats/iconlist/line.png"
                 alt=""
                 className="w-[18px] h-[18px] rotate-270"
               />
@@ -442,7 +442,7 @@ const ChatItem = ({
                       <Image
                         width={18}
                         height={18}
-                        src="/chats/iconlist/check.png"
+                        src="/Chats/iconlist/check.png"
                         className="w-[18px] h-[18px]"
                         alt=""
                       />
@@ -456,7 +456,7 @@ const ChatItem = ({
                   <Image
                     width={18}
                     height={18}
-                    src="/chats/iconlist/setting.png"
+                    src="/Chats/iconlist/setting.png"
                     className="w-[18px] h-[18px]"
                     alt=""
                   />
@@ -470,7 +470,7 @@ const ChatItem = ({
             <Image
               width={18}
               height={18}
-              src="/chats/iconlist/delete.png"
+              src="/Chats/iconlist/delete.png"
               alt=""
               className="w-[18px] h-[18px]"
             />

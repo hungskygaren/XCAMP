@@ -9,17 +9,17 @@ export default function Navbar() {
         </div>
         <div className="flex gap-[1.8125rem]">
           <div className="flex gap-6">
-            <Image src="/navbar/Search.png" alt="" width={24} height={24} />
-            <Image src="/navbar/Bell.png" alt="" width={24} height={24} />
+            <Image src="/Navbar/Search.png" alt="" width={24} height={24} />
+            <Image src="/Navbar/Bell.png" alt="" width={24} height={24} />
             <Image
-              src={"/navbar/Grid Four 01.png"}
+              src={"/Navbar/Grid Four 01.png"}
               alt=""
               width={24}
               height={24}
             />
           </div>
           <div className="flex gap-[.6875rem] items-center">
-            <Image src={"/navbar/avatar.png"} alt="" width={24} height={24} />
+            <Image src={"/Navbar/avatar.png"} alt="" width={24} height={24} />
             <p>Jack Nguyen</p>
           </div>
         </div>
