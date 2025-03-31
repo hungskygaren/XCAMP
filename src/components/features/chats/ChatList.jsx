@@ -10,6 +10,7 @@ import AddGroup from "./components/ChatList/AddGroup";
 import Setting from "./components/ChatList/Setting";
 import Button from "@/components/ui/buttons/Button";
 import More from "./components/ChatList/More";
+import search from "../../../../public/chats/iconlist/search.png";
 
 const ChatList = ({
   chats,
@@ -141,7 +142,7 @@ const ChatList = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={handleSearchFocus}
-                rightIcon="/chats/iconlist/search.png"
+                rightIcon={search.src}
                 rightIconClassName="w-4 h-4"
                 inputClassName="w-full pl-[15px] h-8 text-[.75rem] text-[#A8ABB8] font-semibold border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-500"
               />
