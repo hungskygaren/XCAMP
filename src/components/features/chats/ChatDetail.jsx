@@ -159,10 +159,10 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
   };
 
   return (
-    <div className="w-[57.875rem] flex flex-col  bg-white rounded-[10px] mr-[16px]">
-      <div className="  flex items-center mt-5 ml-[22px]">
+    <div className="w-[57.875rem] flex flex-col  bg-white rounded-[10px] mr-[16px] mb-[18px]">
+      <div className="  flex items-center justify-between mt-5 ml-[22px] pb-[18px]">
         <div className="flex items-center ">
-          <div className="mr-3">
+          <div className="mr-[14px]">
             {chat.type === "direct" ? (
               <Image
                 src={
@@ -170,25 +170,56 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
                     ?.avatar || "/avatar.png"
                 }
                 alt={getChatName()}
-                width={40}
-                height={40}
+                width={44}
+                height={44}
                 className="rounded-full object-cover"
               />
             ) : (
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-bold">
+              <div className="w-11 h-11 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-bold">
                 {getChatName().substring(0, 2).toUpperCase()}
               </div>
             )}
           </div>
-          <div>
-            <h3 className="font-medium text-gray-900">{getChatName()}</h3>
+          <div className="flex flex-col gap-[6px]">
+            <h3 className=" text-black text-sm font-semibold">
+              {getChatName()}
+            </h3>
+            <div className="w-[98px] h-6 bg-[#777E90]/15 rounded-full flex items-center pl-[14px]">
+              <div className=" flex flex-row items-center gap-[5px]">
+                <Image
+                  src="/Chats/iconlist/tag.png"
+                  width={16}
+                  height={16}
+                  alt=""
+                />
+                <p className="text-xs text-[#777E90]">Gắn thẻ </p>
+              </div>
+            </div>
           </div>
+        </div>
+        <div className="flex gap-[15px] mr-6">
+          <Image
+            src="/Chats/iconchatdetail/Search.png"
+            width={24}
+            height={24}
+          />
+          <Image src="/Chats/iconchatdetail/phone.png" width={24} height={24} />
+          <Image
+            src="/Chats/iconchatdetail/videocall.png"
+            width={24}
+            height={24}
+          />
+          <Image
+            src="/Chats/iconchatdetail/chatinfor.png"
+            width={24}
+            height={24}
+          />
         </div>
       </div>
 
       <div
         ref={messagesContainerRef}
-        className=" overflow-y-auto p-4 space-y-4  h-[calc(100vh-240px)]"
+        className=" overflow-y-auto p-4 space-y-4  h-[calc(100vh-270px)]"
       >
         {chat.messages &&
           chat.messages.map((message, index) => {

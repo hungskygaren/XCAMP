@@ -14,7 +14,6 @@ import search from "#/Chats/iconlist/Search.png";
 import addgroup from "#/Chats/iconlist/addGroup.png";
 import setting from "#/Chats/iconlist/setting.png";
 import Image from "next/image";
-console.log(search);
 
 const ChatList = ({
   chats,
@@ -137,7 +136,7 @@ const ChatList = ({
 
   return (
     <>
-      <div className="w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative">
+      <div className="w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative mb-[18px]">
         <div className="w-full">
           <div className="flex w-full mt-4 gap-[1.375rem] justify-center items-center h-10">
             <div className="relative w-[17.5rem]">

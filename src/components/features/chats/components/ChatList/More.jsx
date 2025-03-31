@@ -125,6 +125,8 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
             onClick={handleFilterMentioned}
           >
             <Image
+              width={18}
+              height={18}
               src="/Chats/iconlist/mention.png"
               alt="Mention"
               className="w-[18px] h-[18px]"
