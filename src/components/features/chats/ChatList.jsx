@@ -168,7 +168,7 @@ const ChatList = ({
                     onClick={handleOpenAddGroup}
                   >
                     <Image
-                      src={addgroup.src}
+                      src="/chats/iconlist/addGroup.png"
                       alt="add"
                       width={24}
                       height={24}
