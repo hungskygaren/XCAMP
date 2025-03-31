@@ -140,7 +140,7 @@ const SortDropdown = ({
           </span>
         ) : isSortOpen ? (
           <Image
-            src="/Chats/iconlist/line.png"
+            src="/Chats/iconlist/Line.png"
             alt="Sort"
             width={20}
             height={20}
@@ -148,7 +148,7 @@ const SortDropdown = ({
           />
         ) : (
           <Image
-            src="/Chats/iconlist/line.png"
+            src="/Chats/iconlist/Line.png"
             alt="Sort"
             className="w-5 h-5"
             width={20}

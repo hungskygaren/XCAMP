@@ -86,7 +86,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
           <Image
             width={18}
             height={18}
-            src="/Chats/iconlist/3dot.png"
+            src="/Chats/iconlist/3Dot.png"
             className="w-[18px] h-[18px]"
             alt="More"
           />
