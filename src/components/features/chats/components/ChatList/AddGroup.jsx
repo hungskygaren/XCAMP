@@ -9,7 +9,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedContacts, setSelectedContacts] = useState([]);
   const [allContacts, setAllContacts] = useState([]);
-
+  //ya sssssssssss
   // Đóng modal khi click ngoài
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -117,8 +117,8 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
   };
   // Logic chọn rightIcon
   const rightIcon = searchQuery
-    ? "/chats/iconlist/close.png"
-    : "/chats/iconlist/search.png"; // Thay image1 bằng đường dẫn thực tế
+    ? "/Chats/iconlist/close.png"
+    : "/Chats/iconlist/Search.png"; // Thay image1 bằng đường dẫn thực tế
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div
@@ -131,7 +131,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
               <Image
                 width={24}
                 height={24}
-                src="chats/iconlist/camera.png"
+                src="Chats/iconlist/camera.png"
                 className="w-6 h-6"
                 alt=""
               />
@@ -149,7 +149,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
               width={24}
               height={24}
               className="w-6 h-6"
-              src="/chats/iconlist/close.png"
+              src="/Chats/iconlist/close.png"
               alt=""
             />
           </span>
@@ -172,7 +172,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                 <Image
                   width={16}
                   height={16}
-                  src="/chats/iconlist/close.png"
+                  src="/Chats/iconlist/close.png"
                   className="w-4 h-4 absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
                   alt="clear"
                   onClick={handleClearSearch}
@@ -195,7 +195,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                         <Image
                           width={30}
                           height={30}
-                          src={contact.avatar || "/chats/avatar1.png"}
+                          src={contact.avatar || "/Chats/avatar1.png"}
                           className="w-[30px] h-[30px]"
                           alt=""
                         />
@@ -310,7 +310,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                   <Image
                     width={22}
                     height={22}
-                    src={contact.avatar || "chats/avatar1.png"}
+                    src={contact.avatar || "Chats/avatar1.png"}
                     className="w-[22px] h-[22px]"
                     alt=""
                   />
@@ -318,7 +318,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                   <Image
                     width={18}
                     height={18}
-                    src="chats/iconlist/close-bg_gray.png"
+                    src="Chats/iconlist/close-bg_gray.png"
                     className="w-[18px] h-[18px] cursor-pointer"
                     alt=""
                     onClick={() => handleRemoveSelected(contact.id)}
