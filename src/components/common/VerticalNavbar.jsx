@@ -13,7 +13,7 @@ export default function VerticalNavbar() {
     { name: "Trang chủ", icon: "/VerticalBar/home.png", route: "/" },
     { name: "Kênh", icon: "/VerticalBar/network.png", route: "/channels" },
     { name: "Tin nhắn", icon: "/VerticalBar/messeage.png", route: "/chats" }, // Route cho chat
-    { name: "Email", icon: "/VerticalBar/envelope 1 red.png", route: "/email" },
+    { name: "Email", icon: "/VerticalBar/envelope 1.png", route: "/email" },
     { name: "Cuộc họp", icon: "/VerticalBar/video.png", route: "/meetings" },
     { name: "Tài liệu", icon: "/VerticalBar/folder.png", route: "/documents" },
   ];
