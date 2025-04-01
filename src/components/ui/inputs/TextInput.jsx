@@ -15,7 +15,7 @@ const TextInput = ({
   onRightIconClick = () => {}, // Sự kiện khi click vào rightIcon
 }) => {
   return (
-    <div className="relative inline-flex items-center w-full">
+    <div className="relative inline-flex items-center w-full ">
       <input
         type={type}
         value={value}
@@ -23,7 +23,7 @@ const TextInput = ({
         placeholder={placeholder}
         disabled={disabled}
         onFocus={onFocus}
-        className={`${inputClassName} pr-8`} // Thêm padding-right để tránh đè icon
+        className={`${inputClassName} pr-8 `} // Thêm padding-right để tránh đè icon
       />
       {rightIcon && (
         <div

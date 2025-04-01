@@ -868,7 +868,7 @@
           "id": "1",
           "name": "Sang Nguyễn",
           "email": "sang.nguyen@techup.vn",
-          "avatar": "/chats/avatar1.png",
+          "avatar": "/chats/avatar0.png",
           "isOnline": true,
           "lastSeen": null
         },
@@ -1059,10 +1059,154 @@
               "file": {}
             }
           ]
+        },
+        {
+          "id": "1743496000187",
+          "senderId": "1",
+          "content": "xcxzcx",
+          "timestamp": "2025-04-01T08:26:40.187Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496038938",
+          "senderId": "1",
+          "content": "cxcxc",
+          "timestamp": "2025-04-01T08:27:18.938Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496060522",
+          "senderId": "1",
+          "content": "cdcsc",
+          "timestamp": "2025-04-01T08:27:40.522Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496065319",
+          "senderId": "1",
+          "content": "sdcs",
+          "timestamp": "2025-04-01T08:27:45.319Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496073972",
+          "senderId": "1",
+          "content": "fdfsdfds",
+          "timestamp": "2025-04-01T08:27:53.972Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496086282",
+          "senderId": "1",
+          "content": "dcsdcds",
+          "timestamp": "2025-04-01T08:28:06.282Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496189109",
+          "senderId": "1",
+          "content": "fdsfdf",
+          "timestamp": "2025-04-01T08:29:49.109Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496220925",
+          "senderId": "1",
+          "content": "dfsds",
+          "timestamp": "2025-04-01T08:30:20.925Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496242059",
+          "senderId": "1",
+          "content": "dfsdfsd",
+          "timestamp": "2025-04-01T08:30:42.059Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496255398",
+          "senderId": "1",
+          "content": "xcxzcxzxc",
+          "timestamp": "2025-04-01T08:30:55.398Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496286839",
+          "senderId": "1",
+          "content": "vsdvdsvd",
+          "timestamp": "2025-04-01T08:31:26.839Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496326369",
+          "senderId": "1",
+          "content": "dfsd",
+          "timestamp": "2025-04-01T08:32:06.369Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496362962",
+          "senderId": "1",
+          "content": "dfdsfds",
+          "timestamp": "2025-04-01T08:32:42.962Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496411302",
+          "senderId": "1",
+          "content": "xcxcx",
+          "timestamp": "2025-04-01T08:33:31.302Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496451517",
+          "senderId": "1",
+          "content": "dvsdvv",
+          "timestamp": "2025-04-01T08:34:11.517Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        },
+        {
+          "id": "1743496491316",
+          "senderId": "1",
+          "content": "cxcxcx",
+          "timestamp": "2025-04-01T08:34:51.316Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
         }
       ],
       "unreadCount": 0,
-      "lastMessageTime": "2025-03-26T02:51:14.886Z",
+      "lastMessageTime": "2025-04-01T08:34:51.316Z",
       "tag": "6",
       "isPinned": false,
       "isNotificationOff": true,
@@ -1076,7 +1220,7 @@
           "id": "1",
           "name": "Sang Nguyễn",
           "email": "sang.nguyen@techup.vn",
-          "avatar": "/chats/avatar3.png",
+          "avatar": "/chats/avatar0.png",
           "isOnline": true,
           "lastSeen": null
         },
@@ -1229,7 +1373,7 @@
           "id": "1",
           "name": "Sang Nguyễn",
           "email": "sang.nguyen@techup.vn",
-          "avatar": "/chats/avatar2.png",
+          "avatar": "/chats/avatar0.png",
           "isOnline": true,
           "lastSeen": null
         },
@@ -1379,10 +1523,55 @@
             "1"
           ],
           "attachments": []
+        },
+        {
+          "id": "1743495821797",
+          "senderId": "1",
+          "content": "AAAAA",
+          "timestamp": "2025-04-01T08:23:41.797Z",
+          "isRead": true,
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
+          "attachments": []
+        },
+        {
+          "id": "1743495970882",
+          "senderId": "1",
+          "content": "cxc",
+          "timestamp": "2025-04-01T08:26:10.882Z",
+          "isRead": true,
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
+          "attachments": []
+        },
+        {
+          "id": "1743495977279",
+          "senderId": "1",
+          "content": "fdsfdf",
+          "timestamp": "2025-04-01T08:26:17.279Z",
+          "isRead": true,
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
+          "attachments": []
         }
       ],
       "unreadCount": 0,
-      "lastMessageTime": "2024-10-07T10:25:00Z",
+      "lastMessageTime": "2025-04-01T08:26:17.279Z",
       "isFlagged": true,
       "tag": "3",
       "isNotificationOff": false
@@ -1395,7 +1584,7 @@
           "id": "1",
           "name": "Sang Nguyễn",
           "email": "sang.nguyen@techup.vn",
-          "avatar": "/chats/avatar2.png",
+          "avatar": "/chats/avatar0.png",
           "isOnline": true,
           "lastSeen": null
         },
@@ -1546,7 +1735,7 @@
           "id": "1",
           "name": "Sang Nguyễn",
           "email": "sang.nguyen@techup.vn",
-          "avatar": "/chats/avatar2.png",
+          "avatar": "/chats/avatar0.png",
           "isOnline": true,
           "lastSeen": null
         },
@@ -1685,7 +1874,11 @@
       "participants": [
         {
           "id": "1",
-          "name": "Sang Nguyễn"
+          "name": "Sang Nguyễn",
+          "email": "sang.nguyen@techup.vn",
+          "avatar": "/chats/avatar0.png",
+          "isOnline": true,
+          "lastSeen": null
         },
         {
           "id": "6",
@@ -1731,7 +1924,7 @@
           "id": "1",
           "name": "Sang Nguyễn",
           "email": "sang.nguyen@techup.vn",
-          "avatar": "/chats/avatar2.png",
+          "avatar": "/chats/avatar0.png",
           "isOnline": true,
           "lastSeen": null
         },
@@ -1959,7 +2152,7 @@
           "id": "1",
           "name": "Sang Nguyễn",
           "email": "sang.nguyen@owls.com",
-          "avatar": "/chats/avatar2.png"
+          "avatar": "/chats/avatar0.png"
         },
         {
           "id": "5",
@@ -1998,7 +2191,7 @@
       "id": "1",
       "name": "Sang Nguyễn",
       "email": "sang.nguyen@techup.vn",
-      "avatar": "/chats/avatar1.png",
+      "avatar": "/chats/avatar0.png",
       "phone": "+84 987 654 321",
       "department": "Management",
       "company": "TECHUP Corporation"

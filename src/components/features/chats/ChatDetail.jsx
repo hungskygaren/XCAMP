@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
-
+import { getChatAvatar } from "./components/ChatList/ChatUtils";
 const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
   const [messageInput, setMessageInput] = useState("");
   const [attachments, setAttachments] = useState([]);
@@ -14,6 +14,7 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
 
   const scrollToBottom = () => {
     const container = messagesContainerRef.current;
+
     if (container) {
       container.scrollTo({
         top: container.scrollHeight,
@@ -157,27 +158,79 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
       return <span key={index}>{part}</span>;
     });
   };
-
+  const avatars = getChatAvatar(chat, currentUser);
   return (
     <div className="w-[57.875rem] flex flex-col  bg-white rounded-[10px] mr-[16px] mb-[18px]">
       <div className="  flex items-center justify-between mt-5 ml-[22px] pb-[18px]">
         <div className="flex items-center ">
           <div className="mr-[14px]">
-            {chat.type === "direct" ? (
+            {chat.type === "group" ? (
+              typeof avatars === "string" ? (
+                <Image
+                  src={avatars}
+                  alt={chatName}
+                  className="w-11 h-11 rounded-full object-cover"
+                  width={44}
+                  height={44}
+                />
+              ) : avatars.length === 2 ? (
+                <div className="flex -space-x-1">
+                  {avatars.map((avatar, index) => (
+                    <Image
+                      width={24}
+                      height={24}
+                      key={index}
+                      src={avatar}
+                      alt={`Group member ${index + 1}`}
+                      className="w-6 h-6 rounded-full object-cover"
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center">
+                  {avatars.length >= 1 && (
+                    <Image
+                      width={24}
+                      height={24}
+                      src={avatars[0]}
+                      alt="Group member 1"
+                      className="w-6 h-6 rounded-full object-cover z-10"
+                    />
+                  )}
+                  <div className="flex -space-x-1 -mt-1.5">
+                    {avatars.length >= 2 && (
+                      <Image
+                        width={24}
+                        height={24}
+                        src={avatars[1]}
+                        alt="Group member 2"
+                        className="w-6 h-6 rounded-full object-cover"
+                      />
+                    )}
+                    {avatars.length === 3 && chat.participants.length === 3 ? (
+                      <Image
+                        width={24}
+                        height={24}
+                        src={avatars[2]}
+                        alt="Group member 3"
+                        className="w-6 h-6 rounded-full object-cover"
+                      />
+                    ) : chat.participants.length > 3 ? (
+                      <div className="w-6 h-6 rounded-full bg-gray-400 flex items-center justify-center text-white text-sm">
+                        +{chat.participants.length - 2}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              )
+            ) : (
               <Image
-                src={
-                  chat.participants.find((p) => p.id !== currentUser.id)
-                    ?.avatar || "/avatar.png"
-                }
-                alt={getChatName()}
                 width={44}
                 height={44}
-                className="rounded-full object-cover"
+                src={avatars}
+                alt=""
+                className="w-11 h-11 rounded-full object-cover"
               />
-            ) : (
-              <div className="w-11 h-11 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-bold">
-                {getChatName().substring(0, 2).toUpperCase()}
-              </div>
             )}
           </div>
           <div className="flex flex-col gap-[6px]">
@@ -202,17 +255,25 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
             src="/Chats/iconchatdetail/Search.png"
             width={24}
             height={24}
+            alt=""
           />
-          <Image src="/Chats/iconchatdetail/phone.png" width={24} height={24} />
+          <Image
+            src="/Chats/iconchatdetail/phone.png"
+            width={24}
+            height={24}
+            alt=""
+          />
           <Image
             src="/Chats/iconchatdetail/videocall.png"
             width={24}
             height={24}
+            alt=""
           />
           <Image
             src="/Chats/iconchatdetail/chatinfor.png"
             width={24}
             height={24}
+            alt="chatinfor"
           />
         </div>
       </div>
@@ -244,8 +305,14 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
                     isCurrentUser ? "justify-end" : "justify-start"
                   }`}
                 >
-                  <div className="flex items-start max-w-[70%]">
-                    {!isCurrentUser && (
+                  <div
+                    className={`
+                      
+                     flex ${
+                       isCurrentUser ? "flex-row-reverse" : ""
+                     }  gap-[15px]  max-w-[70%]  `}
+                  >
+                    <div>
                       <Image
                         src={
                           chat.participants.find(
@@ -253,24 +320,24 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
                           )?.avatar || "/avatar.png"
                         }
                         alt={getMessageSender(message.senderId)}
-                        width={32}
-                        height={32}
-                        className="w-8 h-8 rounded-full object-cover mr-2 mt-1"
+                        width={30}
+                        height={30}
+                        className=" rounded-full object-cover "
                       />
-                    )}
-
-                    <div className="w-full">
-                      {!isCurrentUser && (
-                        <p className="text-xs text-gray-500 mb-1">
-                          {getMessageSender(message.senderId)}
-                        </p>
-                      )}
-
+                    </div>
+                    <div
+                      className={`flex w-full  flex-col gap-1 ${
+                        isCurrentUser ? "items-end" : ""
+                      }`}
+                    >
+                      <div className="text-sm  font-semibold text-[#777E90]  ">
+                        {getMessageSender(message.senderId)}
+                      </div>
                       <div
-                        className={`rounded-lg p-3 ${
+                        className={`rounded-lg px-5 py-3 ${
                           isCurrentUser
-                            ? "bg-[#4A30B1] text-white rounded-tr-none"
-                            : "bg-white text-gray-800 border border-gray-200 rounded-tl-none"
+                            ? "bg-[#4A30B1] text-white "
+                            : "bg-white text-gray-800 border border-gray-200 "
                         }`}
                       >
                         <p className="whitespace-pre-wrap">
@@ -331,7 +398,9 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
                           isCurrentUser ? "justify-end" : "justify-start"
                         }`}
                       >
-                        <span>{formatShortTime(message.timestamp)}</span>
+                        <span className=" text-xs ">
+                          {formatShortTime(message.timestamp)}
+                        </span>
                         {isCurrentUser && (
                           <span className="ml-2 flex items-center gap-1">
                             {message.readBy && message.readBy.length > 0
@@ -374,20 +443,12 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
                   className="ml-1 rounded-full p-1 hover:bg-gray-200"
                   onClick={() => removeAttachment(att.id)}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <Image
+                    src="Chats/iconlist/close-bg_gray.png"
+                    width={16}
+                    height={16}
+                    alt=""
+                  />
                 </button>
               </div>
             ))}

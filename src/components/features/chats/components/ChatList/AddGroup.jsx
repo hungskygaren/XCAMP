@@ -126,23 +126,25 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
         className="bg-white rounded-lg w-[570px] pt-[14px] px-[15px] pb-[16px]"
       >
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-[13px]">
             <div className="w-11 h-11 bg-[#F4F5F6] border-1 border-dashed border-[#A8ABB8] rounded-full flex items-center justify-center">
               <Image
                 width={24}
                 height={24}
                 src="Chats/iconlist/camera.png"
-                className="w-6 h-6"
                 alt=""
               />
             </div>
-            <TextInput
-              type="text"
-              value={groupName}
-              onChange={(e) => setGroupName(e.target.value)}
-              inputClassName="text-[#A8ABB8] text-xl font-semibold outline-none"
-              placeholder="Nhập tên nhóm chat"
-            />
+
+            <div>
+              <TextInput
+                type="text"
+                value={groupName}
+                onChange={(e) => setGroupName(e.target.value)}
+                inputClassName="text-[#A8ABB8] text-xl font-semibold outline-none"
+                placeholder="Nhập tên nhóm chat"
+              />
+            </div>
           </div>
           <span onClick={onClose} className="cursor-pointer">
             <Image
@@ -190,6 +192,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                     <div
                       key={contact.id}
                       className="flex items-center border-b-1 border-[#E6E8EC] justify-between pb-4"
+                      onClick={() => handleCheckboxChange(contact)} // Di chuyển sự kiện onClick lên div cha
                     >
                       <div className="flex gap-[11px] items-center">
                         <Image
@@ -206,13 +209,34 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                           </p>
                         </div>
                       </div>
-                      <input
-                        type="checkbox"
-                        checked={selectedContacts.some(
-                          (c) => c.id === contact.id
-                        )}
-                        onChange={() => handleCheckboxChange(contact)}
-                      />
+                      <div className="relative flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={selectedContacts.some(
+                            (c) => c.id === contact.id
+                          )}
+                          onChange={() => {}} // Để trống vì sự kiện được xử lý ở div cha
+                          className="absolute opacity-0 w-0 h-0" // Ẩn checkbox mặc định
+                        />
+                        <span
+                          className={`w-[18px] h-[18px] rounded-sm flex items-center justify-center border-1 border-gray-300 ${
+                            selectedContacts.some((c) => c.id === contact.id)
+                              ? "bg-[#4A30B1] border-[#4A30B1]"
+                              : "bg-white"
+                          }`}
+                        >
+                          {selectedContacts.some(
+                            (c) => c.id === contact.id
+                          ) && (
+                            <Image
+                              width={7.5}
+                              height={6}
+                              src="/Chats/iconlist/WhiteCheck.png"
+                              alt="Check"
+                            />
+                          )}
+                        </span>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -227,6 +251,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                     <div
                       key={contact.id}
                       className="flex items-center border-b-1 border-[#E6E8EC] justify-between pb-4 "
+                      onClick={() => handleCheckboxChange(contact)} // Di chuyển sự kiện onClick lên div cha
                     >
                       <div className="flex gap-[11px] items-center">
                         <Image
@@ -243,13 +268,34 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                           </p>
                         </div>
                       </div>
-                      <input
-                        type="checkbox"
-                        checked={selectedContacts.some(
-                          (c) => c.id === contact.id
-                        )}
-                        onChange={() => handleCheckboxChange(contact)}
-                      />
+                      <div className="relative flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={selectedContacts.some(
+                            (c) => c.id === contact.id
+                          )}
+                          onChange={() => {}} // Để trống vì sự kiện được xử lý ở div cha
+                          className="absolute opacity-0 w-0 h-0" // Ẩn checkbox mặc định
+                        />
+                        <span
+                          className={`w-[18px] h-[18px] rounded-sm flex items-center justify-center border-1 border-gray-300 ${
+                            selectedContacts.some((c) => c.id === contact.id)
+                              ? "bg-[#4A30B1] border-[#4A30B1]"
+                              : "bg-white"
+                          }`}
+                        >
+                          {selectedContacts.some(
+                            (c) => c.id === contact.id
+                          ) && (
+                            <Image
+                              width={7.5}
+                              height={6}
+                              src="/Chats/iconlist/WhiteCheck.png"
+                              alt="Check"
+                            />
+                          )}
+                        </span>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -267,6 +313,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                       <div
                         key={contact.id}
                         className="flex items-center border-b-1 border-[#E6E8EC] justify-between pb-4"
+                        onClick={() => handleCheckboxChange(contact)} // Di chuyển sự kiện onClick lên div cha
                       >
                         <div className="flex gap-[11px] items-center">
                           <Image
@@ -283,13 +330,34 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
                             </p>
                           </div>
                         </div>
-                        <input
-                          type="checkbox"
-                          checked={selectedContacts.some(
-                            (c) => c.id === contact.id
-                          )}
-                          onChange={() => handleCheckboxChange(contact)}
-                        />
+                        <div className="relative flex items-center">
+                          <input
+                            type="checkbox"
+                            checked={selectedContacts.some(
+                              (c) => c.id === contact.id
+                            )}
+                            onChange={() => {}} // Để trống vì sự kiện được xử lý ở div cha
+                            className="absolute opacity-0 w-0 h-0" // Ẩn checkbox mặc định
+                          />
+                          <span
+                            className={`w-[18px] h-[18px] rounded-sm flex items-center justify-center border-1 border-gray-300 ${
+                              selectedContacts.some((c) => c.id === contact.id)
+                                ? "bg-[#4A30B1] border-[#4A30B1]"
+                                : "bg-white"
+                            }`}
+                          >
+                            {selectedContacts.some(
+                              (c) => c.id === contact.id
+                            ) && (
+                              <Image
+                                width={7.5}
+                                height={6}
+                                src="/Chats/iconlist/WhiteCheck.png"
+                                alt="Check"
+                              />
+                            )}
+                          </span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -297,7 +365,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
               )}
             </div>
           </div>
-          <div className="w-[245px] h-[530px] bg-[#F4F5F6] flex flex-col gap-[14px] px-4 py-3">
+          <div className="w-[245px] h-[530px] bg-[#F4F5F6] flex flex-col gap-[14px] px-4 py-3 rounded-[10px]">
             <p className="text-xs text-[#777E90] font-semibold">
               Đã chọn ({selectedContacts.length})
             </p>
