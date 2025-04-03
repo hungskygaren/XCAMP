@@ -6,7 +6,7 @@ import {
   getChatAvatar,
   getLastMessage,
   formatTime,
-} from "@/components/features/chats/components/ChatList/ChatUtils"; // Import từ chatUtils
+} from "@/components/features/chats/components/Utils/ChatUtils"; // Import từ chatUtils
 import Image from "next/image";
 
 const ChatItem = ({
