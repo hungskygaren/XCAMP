@@ -9,11 +9,27 @@ const MessageInput = ({ onSendMessage }) => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    onSendMessage(messageInput, attachments);
+    if (!messageInput.trim() && attachments.length === 0) return;
+
+    const messagesToSend = [];
+
+    // Thêm tin nhắn văn bản (nếu có)
+    if (messageInput.trim()) {
+      messagesToSend.push({ content: messageInput, attachments: [] });
+    }
+
+    // Thêm từng tệp đính kèm dưới dạng tin nhắn riêng
+    attachments.forEach((attachment) => {
+      messagesToSend.push({ content: "", attachments: [attachment] });
+    });
+
+    // Gửi tất cả tin nhắn cùng lúc
+    onSendMessage(messagesToSend);
+
+    // Reset input và attachments
     setMessageInput("");
     setAttachments([]);
   };
-
   const handleFileUpload = (e) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;

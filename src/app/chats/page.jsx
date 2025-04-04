@@ -10,11 +10,12 @@ const Chat = () => {
   const [chats, setChats] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
+  const [isChatInfoOpen, setIsChatInfoOpen] = useState(false); // Thêm trạng thái mới
   const currentUser = {
     id: "1",
     name: "Sang Nguyễn",
     email: "sang.nguyen@owls.com",
-    avatar: "/chats/avatar2.png",
+    avatar: "/chats/avatar1.png",
   };
 
   useEffect(() => {
@@ -100,8 +101,8 @@ const Chat = () => {
     }
   };
 
-  const handleSendMessage = (content, attachments = []) => {
-    if (!content.trim() && attachments.length === 0) return;
+  const handleSendMessage = (messages) => {
+    if (!messages || messages.length === 0) return;
     if (!activeChat) return;
 
     const participantsIds = activeChat.participants
@@ -110,31 +111,32 @@ const Chat = () => {
 
     const readBy = activeChat.type === "group" ? participantsIds : [];
 
-    const newMessage = {
-      id: `${Date.now()}`,
+    // Tạo danh sách tin nhắn mới
+    const newMessages = messages.map((msg) => ({
+      id: `${Date.now()}${Math.random().toString(36).substring(2)}`,
       senderId: currentUser.id,
-      content,
+      content: msg.content,
       timestamp: new Date().toISOString(),
       isRead: true,
       readBy: readBy,
-      attachments,
-    };
+      attachments: msg.attachments,
+    }));
 
+    // Cập nhật state với tất cả tin nhắn mới
     const updatedChat = {
       ...activeChat,
-      messages: [...activeChat.messages, newMessage],
-      lastMessageTime: newMessage.timestamp,
+      messages: [...activeChat.messages, ...newMessages],
+      lastMessageTime: newMessages[newMessages.length - 1].timestamp,
     };
 
-    const updatedChats = chats.map((chat) =>
-      chat.id === activeChat.id ? updatedChat : chat
+    setChats((prevChats) =>
+      prevChats.map((chat) => (chat.id === activeChat.id ? updatedChat : chat))
     );
-
-    setChats(updatedChats);
     setActiveChat(updatedChat);
+
+    // Gửi toàn bộ dữ liệu lên server một lần
     updateChatOnServer(activeChat.id, updatedChat);
   };
-
   const updateChatOnServer = async (chatId, updatedChat) => {
     try {
       await fetch(` ${process.env.NEXT_PUBLIC_API_URL}/chats/${chatId}`, {
@@ -142,22 +144,29 @@ const Chat = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedChat),
       });
+      if (!response.ok) throw new Error("Lỗi khi cập nhật dữ liệu lên server");
     } catch (error) {
       console.error("Lỗi khi cập nhật dữ liệu:", error);
     }
   };
-
+  const toggleChatInfo = () => {
+    console.log(isChatInfoOpen); // Thêm để debug
+    setIsChatInfoOpen((prev) => !prev); // Toggle trạng thái
+  };
+  useEffect(() => {
+    console.log("isChatInfoOpen after render:", isChatInfoOpen); // Log sau mỗi render
+  }, [isChatInfoOpen]);
   if (loading) {
     return <div>Đang tải...</div>;
   }
 
   return (
-    <div className="flex max-w-[1440px]">
+    <div className="flex ">
       <VerticalNavbar />
       <div className="flex flex-col">
         <Navbar />
-        <div className="flex bg-[#F4F5F6] ">
-          <div className="ml-4 mt-4">
+        <div className="flex bg-[#F4F5F6] p-4 ">
+          <div className="">
             <ChatView
               chats={chats}
               activeChat={activeChat}
@@ -165,6 +174,8 @@ const Chat = () => {
               onSendMessage={handleSendMessage}
               currentUser={currentUser}
               contacts={contacts}
+              isChatInfoOpen={isChatInfoOpen} // Truyền trạng thái
+              toggleChatInfo={toggleChatInfo} // Truyền hàm toggle
             />
           </div>
         </div>

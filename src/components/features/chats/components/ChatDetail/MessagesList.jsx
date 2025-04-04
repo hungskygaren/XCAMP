@@ -122,8 +122,14 @@ const MessagesList = ({ chat, currentUser }) => {
       <div className="h-[54px]  flex items-center justify-between px-5.5 gap-2">
         <div className="border-[#E6E8EC] border-1 rounded-lg h-full flex-1  py-2.5 px-3 ">
           <div className="flex gap-[7px] items-center]">
-            <Image src="/Chats/iconlist/pin.png" width={18} height={18} />
-            <p className="text-sm text-black">{`Sang Nguyễn :Ever wondered how some graphic de... `}</p>
+            <Image
+              src="/Chats/iconlist/pin.png"
+              width={18}
+              height={18}
+              className=""
+              alt=""
+            />
+            <p className="text-sm text-[#141416]">{`Sang Nguyễn :Ever wondered how some graphic de... `}</p>
           </div>
           <div className="text-xs text-[#777E90]">
             Được ghim bởi Nguyễn Tuấn Anh

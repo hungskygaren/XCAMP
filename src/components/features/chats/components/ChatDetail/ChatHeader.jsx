@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { getChatAvatar } from "../Utils/ChatUtils";
 
-const ChatHeader = ({ chat, currentUser }) => {
+const ChatHeader = ({ chat, currentUser, toggleChatInfo, isChatInfoOpen }) => {
   const getChatName = () => {
     if (!chat) return "";
     if (chat.type === "direct") {
@@ -20,6 +20,7 @@ const ChatHeader = ({ chat, currentUser }) => {
     <div className="flex items-center justify-between mt-5 ml-[22px] pb-[18px]">
       <div className="flex items-center">
         <div className="mr-[14px]">
+          {/* Logic avatar giữ nguyên */}
           {chat.type === "group" ? (
             typeof avatars === "string" ? (
               <Image
@@ -123,12 +124,25 @@ const ChatHeader = ({ chat, currentUser }) => {
           height={24}
           alt=""
         />
-        <Image
-          src="/Chats/iconchatdetail/chatinfor.png"
-          width={24}
-          height={24}
-          alt="chatinfor"
-        />
+        <button onClick={toggleChatInfo}>
+          {isChatInfoOpen ? (
+            <Image
+              src="/Chats/iconchatdetail/chatinforviolet.png"
+              width={24}
+              height={24}
+              alt="chatinfor"
+              className="bg-gray-300 rounded-sm"
+            />
+          ) : (
+            <Image
+              src="/Chats/iconchatdetail/chatinfor.png"
+              width={24}
+              height={24}
+              alt="chatinfor"
+              className="hover:bg-violet-200 rounded-sm"
+            />
+          )}
+        </button>
       </div>
     </div>
   );

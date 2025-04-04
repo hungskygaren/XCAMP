@@ -1,6 +1,7 @@
 import React from "react";
 import ChatList from "./ChatList";
 import ChatDetail from "./ChatDetail";
+import ChatInformation from "./ChatInformation"; // Import component mới
 
 const ChatView = ({
   chats,
@@ -9,9 +10,11 @@ const ChatView = ({
   onSendMessage,
   currentUser,
   contacts,
+  isChatInfoOpen, // Nhận trạng thái
+  toggleChatInfo, // Nhận hàm toggle
 }) => {
   return (
-    <div className="flex gap-4 ">
+    <div className="flex gap-4">
       <ChatList
         chats={chats}
         activeChat={activeChat}
@@ -19,19 +22,30 @@ const ChatView = ({
         contacts={contacts}
         currentUser={currentUser}
       />
-      {activeChat ? (
-        <ChatDetail
-          chat={activeChat}
-          onSendMessage={onSendMessage}
-          currentUser={currentUser}
-        />
-      ) : (
-        <div className="w-[57.875rem] h-full bg-white flex items-center justify-center">
-          <p className="text-gray-500 text-lg">
-            Hãy chọn một cuộc trò chuyện để bắt đầu
-          </p>
-        </div>
-      )}
+      <div className="flex transition-all duration-300 gap-4 w-[926px]">
+        {activeChat ? (
+          <div className={`transition-all duration-300 flex-1 `}>
+            <ChatDetail
+              chat={activeChat}
+              onSendMessage={onSendMessage}
+              currentUser={currentUser}
+              toggleChatInfo={toggleChatInfo} // Truyền toggle xuống ChatDetail
+              isChatInfoOpen={isChatInfoOpen} // Truyền trạng thái xuống ChatDetail
+            />
+          </div>
+        ) : (
+          <div className="w-[57.875rem] h-full bg-white flex items-center justify-center">
+            <p className="text-gray-500 text-lg">
+              Hãy chọn một cuộc trò chuyện để bắt đầu
+            </p>
+          </div>
+        )}
+        {isChatInfoOpen && (
+          <div className="w-[340px] transition-all duration-300">
+            <ChatInformation />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -989,176 +989,74 @@
           "attachments": []
         },
         {
-          "id": "1743562128019",
+          "id": "1743671986478s3wjwb8tnu",
           "senderId": "1",
           "content": "",
-          "timestamp": "2025-04-02T02:48:48.019Z",
+          "timestamp": "2025-04-03T09:19:46.478Z",
           "isRead": true,
           "readBy": [],
           "attachments": [
             {
-              "id": "1743562126391jggfokodusj",
-              "name": "chuyenkhoanN4.jpg",
-              "type": "image",
-              "size": "310.3 KB",
-              "url": "blob:http://localhost:3000/00ce9b30-91e3-4dbb-a4d2-426bb0edb91c",
-              "file": {}
-            }
-          ]
-        },
-        {
-          "id": "1743582230930",
-          "senderId": "1",
-          "content": "h",
-          "timestamp": "2025-04-02T08:23:50.930Z",
-          "isRead": true,
-          "readBy": [],
-          "attachments": [
-            {
-              "id": "1743581303978l68mkqeemwi",
-              "name": "xchat-1b47c-default-rtdb-7-export.json",
+              "id": "1743671973638jwmxpbjhwlh",
+              "name": "xchat-1b47c-default-rtdb-export.json",
               "type": "application",
               "subtype": "json",
-              "size": "0.5 KB",
-              "url": "blob:http://localhost:3000/fa5b1402-fd2a-4b12-a772-b011590f87dd",
-              "file": {}
-            },
-            {
-              "id": "1743582058312u5fhmcjssri",
-              "name": "image.jpg",
-              "type": "image",
-              "subtype": "jpeg",
-              "size": "106.7 KB",
-              "url": "blob:http://localhost:3000/c4ec39cc-8dec-49c4-8e3a-919cdce3e52b",
+              "size": "57.3 KB",
+              "url": "blob:http://localhost:3000/07c8b99a-0043-4666-826c-38b24dac4648",
               "file": {}
             }
           ]
         },
         {
-          "id": "1743583423705",
+          "id": "17436723355044wpw5anvydq",
           "senderId": "1",
-          "content": "",
-          "timestamp": "2025-04-02T08:43:43.705Z",
-          "isRead": true,
-          "readBy": [],
-          "attachments": [
-            {
-              "id": "1743583422300aaym93hygc",
-              "name": "Recording 2025-03-19 152549.mp4",
-              "type": "video",
-              "subtype": "mp4",
-              "size": "34706.0 KB",
-              "url": "blob:http://localhost:3000/472dadf1-22d4-44f6-97d4-4cb66294eab8",
-              "file": {}
-            }
-          ]
-        },
-        {
-          "id": "1743583765094",
-          "senderId": "1",
-          "content": "",
-          "timestamp": "2025-04-02T08:49:25.094Z",
-          "isRead": true,
-          "readBy": [],
-          "attachments": [
-            {
-              "id": "17435837634583ln8m0wtwwm",
-              "name": "21_ĐinhViệtHùng,20810320126.pdf",
-              "type": "application",
-              "subtype": "pdf",
-              "size": "5290.7 KB",
-              "url": "blob:http://localhost:3000/1183ff6a-83cd-427e-80ef-0887dac2fee1",
-              "file": {}
-            }
-          ]
-        },
-        {
-          "id": "1743584705615",
-          "senderId": "1",
-          "content": "",
-          "timestamp": "2025-04-02T09:05:05.615Z",
-          "isRead": true,
-          "readBy": [],
-          "attachments": [
-            {
-              "id": "1743584703734yevth21c5i",
-              "name": "Recording 2025-03-19 152549.mp4",
-              "type": "video",
-              "subtype": "mp4",
-              "size": "34706.0 KB",
-              "url": "blob:http://localhost:3000/7cd1bb80-9657-4ffb-90f1-078f97a56428",
-              "file": {}
-            }
-          ]
-        },
-        {
-          "id": "1743585799378",
-          "senderId": "1",
-          "content": "",
-          "timestamp": "2025-04-02T09:23:19.378Z",
-          "isRead": true,
-          "readBy": [],
-          "attachments": [
-            {
-              "id": "1743585783365ak66hra1eys",
-              "name": "21_ĐinhViệtHùng_Xây Ds_.pdf",
-              "type": "application",
-              "subtype": "pdf",
-              "size": "12971.9 KB",
-              "url": "blob:http://localhost:3000/9fa474b0-b361-4902-9567-8f9fb5b6f5ab",
-              "file": {}
-            },
-            {
-              "id": "1743585790885x8hanbifm6p",
-              "name": "45952d6dbd860dd85497.jpg",
-              "type": "image",
-              "subtype": "jpeg",
-              "size": "136.8 KB",
-              "url": "blob:http://localhost:3000/ebd17e7e-e877-4c87-b109-25a5c66dbfa3",
-              "file": {}
-            },
-            {
-              "id": "1743585796688evw0hhscat8",
-              "name": "home_banner2.png",
-              "type": "image",
-              "subtype": "png",
-              "size": "68.2 KB",
-              "url": "blob:http://localhost:3000/14a05f2d-0d26-4d09-9b4b-dbf47adbf106",
-              "file": {}
-            }
-          ]
-        },
-        {
-          "id": "1743585862729",
-          "senderId": "1",
-          "content": "hi",
-          "timestamp": "2025-04-02T09:24:22.729Z",
+          "content": "ko đùa",
+          "timestamp": "2025-04-03T09:25:35.504Z",
           "isRead": true,
           "readBy": [],
           "attachments": []
         },
         {
-          "id": "1743586090966",
+          "id": "17436723355044762sej21l2",
           "senderId": "1",
           "content": "",
-          "timestamp": "2025-04-02T09:28:10.966Z",
+          "timestamp": "2025-04-03T09:25:35.504Z",
           "isRead": true,
           "readBy": [],
           "attachments": [
             {
-              "id": "1743586090082s1az6jpjqs",
+              "id": "17436723324056jvsyur2dul",
+              "name": "Bài 34.pptx.jpg",
+              "type": "image",
+              "subtype": "jpeg",
+              "size": "80.6 KB",
+              "url": "blob:http://localhost:3000/3162b7ed-9995-4266-97e5-de9a839259a4",
+              "file": {}
+            }
+          ]
+        },
+        {
+          "id": "1743672335504rifl535mcvh",
+          "senderId": "1",
+          "content": "",
+          "timestamp": "2025-04-03T09:25:35.504Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": [
+            {
+              "id": "174367233240852rgnb6wago",
               "name": "Recording 2025-03-19 152549.mp4",
               "type": "video",
               "subtype": "mp4",
               "size": "34706.0 KB",
-              "url": "blob:http://localhost:3000/0eb800c5-c50c-4297-97d6-d6302810e2ca",
+              "url": "blob:http://localhost:3000/03f446b8-b3c6-4b04-a5ff-613c79aaf230",
               "file": {}
             }
           ]
         }
       ],
       "unreadCount": 0,
-      "lastMessageTime": "2025-04-02T09:28:10.966Z",
+      "lastMessageTime": "2025-04-03T09:25:35.504Z",
       "tag": "6",
       "isPinned": false,
       "isNotificationOff": true,
