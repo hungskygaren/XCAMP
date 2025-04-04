@@ -136,7 +136,7 @@ const ChatList = ({
 
   return (
     <>
-      <div className="w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative mb-[18px]">
+      <div className="w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative ">
         <div className="w-full">
           <div className="flex w-full mt-4 gap-[1.375rem] justify-center items-center h-10">
             <div className="relative w-[17.5rem]">
@@ -210,7 +210,7 @@ const ChatList = ({
                 onResetFilters={handleResetFilters}
               />
             </div>
-            <div className="flex flex-col items-center gap-[15px] overflow-y-auto  h-[calc(100vh-252px)]">
+            <div className="flex flex-col items-center gap-[15px] overflow-y-auto  h-[calc(100vh-268px)]">
               {chatsToDisplay.length === 0 ? (
                 <p className="p-4 text-gray-500">
                   Không tìm thấy cuộc trò chuyện nào

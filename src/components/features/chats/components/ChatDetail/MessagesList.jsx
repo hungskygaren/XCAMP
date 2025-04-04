@@ -143,7 +143,7 @@ const MessagesList = ({ chat, currentUser }) => {
 
       <div
         ref={messagesContainerRef}
-        className="overflow-y-auto p-4 space-y-4 h-[calc(100vh-270px)]"
+        className="overflow-y-auto p-4 space-y-4 h-[calc(100vh-323px)]"
       >
         {chat.messages &&
           chat.messages.map((message, index) => {
