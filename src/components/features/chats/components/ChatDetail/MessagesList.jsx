@@ -217,8 +217,7 @@ const MessagesList = ({ chat, currentUser }) => {
                               <div className="relative w-[400px] h-[250px]">
                                 <Image
                                   src={attachment.url}
-                                  width={400}
-                                  height={250}
+                                  fill
                                   alt={attachment.name}
                                   className="object-cover rounded-lg"
                                 />
@@ -232,14 +231,16 @@ const MessagesList = ({ chat, currentUser }) => {
                                   className="object-cover rounded-lg"
                                   controls={false}
                                 />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <Image
-                                    src="/Chats/iconchatdetail/play.png"
-                                    width={60}
-                                    height={60}
-                                    alt="Play"
-                                    className="opacity-80 hover:opacity-100"
-                                  />
+                                <div className="absolute  inset-0 flex items-center justify-center">
+                                  <div className="w-[60px] h-[60px] bg-black/50 rounded-full flex items-center justify-center">
+                                    <Image
+                                      src="/Chats/iconchatdetail/play.png"
+                                      width={17}
+                                      height={21}
+                                      alt="Play"
+                                      className="opacity-80 hover:opacity-100"
+                                    />
+                                  </div>
                                 </div>
                               </div>
                             ) : (
