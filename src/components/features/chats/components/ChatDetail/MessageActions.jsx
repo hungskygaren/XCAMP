@@ -22,7 +22,7 @@ const MessageActions = ({}) => {
       key: "forward",
     },
     {
-      icon: "/Chats/iconlist/3dot.png",
+      icon: "/Chats/iconlist/3Dot.png",
       label: "Thêm",
       key: "more",
     },
