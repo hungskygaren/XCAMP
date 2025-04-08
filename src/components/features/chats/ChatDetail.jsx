@@ -13,7 +13,7 @@ const ChatDetail = ({
   if (!chat) return <div className="flex-1">No chat selected</div>;
 
   return (
-    <div className="w-full flex flex-col bg-white rounded-[10px] ">
+    <div className="w-full h-full flex flex-col bg-white rounded-[10px]  ">
       <ChatHeader
         chat={chat}
         currentUser={currentUser}

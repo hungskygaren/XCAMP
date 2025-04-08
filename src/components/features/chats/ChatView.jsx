@@ -14,7 +14,7 @@ const ChatView = ({
   toggleChatInfo, // Nhận hàm toggle
 }) => {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 h-[calc(100vh-98px)]  ">
       <ChatList
         chats={chats}
         activeChat={activeChat}
@@ -22,9 +22,9 @@ const ChatView = ({
         contacts={contacts}
         currentUser={currentUser}
       />
-      <div className="flex transition-all duration-300 gap-4 w-[926px]">
+      <div className="flex transition-all duration-300 gap-4 w-[926px] h-full">
         {activeChat ? (
-          <div className={`transition-all duration-300 flex-1 `}>
+          <div className={`transition-all duration-300 flex-1 h-full`}>
             <ChatDetail
               chat={activeChat}
               onSendMessage={onSendMessage}

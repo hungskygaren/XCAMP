@@ -136,7 +136,7 @@ const ChatList = ({
 
   return (
     <>
-      <div className="w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative ">
+      <div className="w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative h-full">
         <div className="w-full">
           <div className="flex w-full mt-4 gap-[1.375rem] justify-center items-center h-10">
             <div className="relative w-[17.5rem]">

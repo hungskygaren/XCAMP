@@ -83,7 +83,7 @@ export default function PinnedMessages() {
               />
               <p className="text-xs">Mô tả nội dung.docx</p>
             </div>
-            <div className="flex justify-between items-center mt-3">
+            <div className="flex justify-between items-center mt-3 ">
               <div className="text-[10px] text-[#A8ABB8] w-[92px]">
                 Được ghim bởi Nguyễn Tuấn Anh
               </div>

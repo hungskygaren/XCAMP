@@ -1,9 +1,16 @@
+// src/components/features/chats/components/ChatDetail/MessagesList.js
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
+import PinnedMessagesHeader from "./PinnedMessagesHeader";
+import AttachmentModal from "./AttachmentModal";
+import MessageActions from "./MessageActions"; // Import component mới
 
 const MessagesList = ({ chat, currentUser }) => {
   const messagesContainerRef = useRef(null);
   const [modalContent, setModalContent] = useState(null);
+  const [isPinnedExpanded, setIsPinnedExpanded] = useState(false);
+  const [highlightedMessageId, setHighlightedMessageId] = useState(null);
+  const [hoveredMessageId, setHoveredMessageId] = useState(null); // Thêm trạng thái hover
 
   useEffect(() => {
     scrollToBottom();
@@ -16,6 +23,15 @@ const MessagesList = ({ chat, currentUser }) => {
         top: container.scrollHeight,
         behavior: "smooth",
       });
+    }
+  };
+
+  const scrollToMessage = (messageId) => {
+    const messageElement = document.getElementById(`message-${messageId}`);
+    if (messageElement && messagesContainerRef.current) {
+      messageElement.scrollIntoView({ behavior: "smooth", block: "center" });
+      setHighlightedMessageId(messageId);
+      setTimeout(() => setHighlightedMessageId(null), 2000);
     }
   };
 
@@ -60,6 +76,12 @@ const MessagesList = ({ chat, currentUser }) => {
 
   const getMessageSender = (senderId) => {
     return chat.participants.find((p) => p.id === senderId)?.name || "Unknown";
+  };
+
+  const getPinnedByName = (pinnedById) => {
+    return (
+      chat.participants.find((p) => p.id === pinnedById)?.name || "Unknown"
+    );
   };
 
   const getReadByAvatars = (message) => {
@@ -108,42 +130,31 @@ const MessagesList = ({ chat, currentUser }) => {
     setModalContent(null);
   };
 
-  // Đóng modal khi nhấn ngoài
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
   if (!chat) return <div className="flex-1">No chat selected</div>;
 
+  const pinnedMessages =
+    chat.messages
+      ?.filter((msg) => msg.isPinned)
+      .map((msg) => ({ ...msg, participants: chat.participants }))
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) || [];
+  const messagesHeight =
+    pinnedMessages.length > 0 ? "h-[calc(100%-54px)]" : "h-[calc(100%)]";
+
   return (
-    <>
-      <div className="h-[54px]  flex items-center justify-between px-5.5 gap-2">
-        <div className="border-[#E6E8EC] border-1 rounded-lg h-full flex-1  py-2.5 px-3 ">
-          <div className="flex gap-[7px] items-center]">
-            <Image
-              src="/Chats/iconlist/pin.png"
-              width={18}
-              height={18}
-              className=""
-              alt=""
-            />
-            <p className="text-sm text-[#141416]">{`Sang Nguyễn :Ever wondered how some graphic de... `}</p>
-          </div>
-          <div className="text-xs text-[#777E90]">
-            Được ghim bởi Nguyễn Tuấn Anh
-          </div>
-        </div>
-        <div className="bg-[#F4F5F6] rounded-lg w-[54px] h-full flex flex-col items-center justify-center ">
-          <span className="text-sm text-[#777E90] font-semibold ">+2</span>
-          <span className="text-xs text-[#777E90]">Ghim</span>
-        </div>
-      </div>
+    <div className={`relative h-[calc(100%-170px)]`}>
+      {pinnedMessages.length > 0 && (
+        <PinnedMessagesHeader
+          pinnedMessages={pinnedMessages}
+          currentUser={currentUser}
+          onToggleExpand={setIsPinnedExpanded}
+          isExpanded={isPinnedExpanded}
+          onMessageClick={scrollToMessage}
+        />
+      )}
 
       <div
         ref={messagesContainerRef}
-        className="overflow-y-auto p-4 space-y-4 h-[calc(100vh-323px)]"
+        className={`overflow-y-auto p-4 space-y-4 ${messagesHeight}`}
       >
         {chat.messages &&
           chat.messages.map((message, index) => {
@@ -162,14 +173,19 @@ const MessagesList = ({ chat, currentUser }) => {
                   </div>
                 )}
                 <div
+                  id={`message-${message.id}`}
                   className={`flex ${
                     isCurrentUser ? "justify-end" : "justify-start"
+                  } transition-all duration-300 ${
+                    highlightedMessageId === message.id ? "bg-[#E8E3FF]" : ""
                   }`}
+                  onMouseEnter={() => setHoveredMessageId(message.id)}
+                  onMouseLeave={() => setHoveredMessageId(null)}
                 >
                   <div
-                    className={`flex ${
+                    className={`flex  ${
                       isCurrentUser ? "flex-row-reverse" : ""
-                    } gap-[15px] max-w-[70%]`}
+                    } gap-[15px] max-w-[70%] `}
                   >
                     <div>
                       <Image
@@ -184,8 +200,9 @@ const MessagesList = ({ chat, currentUser }) => {
                         className="rounded-full object-cover"
                       />
                     </div>
+
                     <div
-                      className={`flex w-full flex-col gap-1 ${
+                      className={`flex w-full flex-col gap-1 relative ${
                         isCurrentUser ? "items-end" : ""
                       }`}
                     >
@@ -194,12 +211,16 @@ const MessagesList = ({ chat, currentUser }) => {
                       </div>
                       {message.content && (
                         <div
-                          className={`rounded-lg px-5 py-3 ${
+                          className={`rounded-lg px-5 py-3 relative ${
                             isCurrentUser
                               ? "bg-[#4A30B1] text-white"
                               : "bg-[#F4F5F6]"
                           }`}
                         >
+                          {/* Hiển thị MessageActions khi hover */}
+                          {hoveredMessageId === message.id && (
+                            <MessageActions isCurrentUser={isCurrentUser} />
+                          )}
                           <p className="text-sm">
                             {renderMessageContent(message.content)}
                           </p>
@@ -231,7 +252,7 @@ const MessagesList = ({ chat, currentUser }) => {
                                   className="object-cover rounded-lg"
                                   controls={false}
                                 />
-                                <div className="absolute  inset-0 flex items-center justify-center">
+                                <div className="absolute inset-0 flex items-center justify-center">
                                   <div className="w-[60px] h-[60px] bg-black/50 rounded-full flex items-center justify-center">
                                     <Image
                                       src="/Chats/iconchatdetail/play.png"
@@ -245,7 +266,7 @@ const MessagesList = ({ chat, currentUser }) => {
                               </div>
                             ) : (
                               <div className="flex items-center w-[400px] h-[58px]">
-                                <div className=" mr-2">
+                                <div className="mr-2">
                                   <Image
                                     src="/Chats/iconchatdetail/icondoc.png"
                                     width={36}
@@ -253,7 +274,7 @@ const MessagesList = ({ chat, currentUser }) => {
                                     alt="Document"
                                   />
                                 </div>
-                                <div className="flex-1 flex flex-col gap-[3px] ">
+                                <div className="flex-1 flex flex-col gap-[3px]">
                                   <p className="text-sm text-black font-medium truncate">
                                     {attachment.name}
                                   </p>
@@ -280,30 +301,46 @@ const MessagesList = ({ chat, currentUser }) => {
                           </div>
                         ))}
                       <div
-                        className={`flex items-center mt-1 text-sm text-[#A8ABB8] ${
-                          isCurrentUser ? "justify-end" : "justify-start"
-                        }`}
+                        className={`flex flex-col items-${
+                          isCurrentUser ? "end" : "start"
+                        } mt-1 text-sm text-[#A8ABB8]`}
                       >
-                        <span className="text-xs">
-                          {formatShortTime(message.timestamp)}
-                        </span>
-                        {isCurrentUser && (
-                          <span className="ml-2 flex items-center gap-1">
-                            {message.readBy && message.readBy.length > 0
-                              ? getReadByAvatars(message).map(
-                                  (avatar, index) => (
-                                    <Image
-                                      key={index}
-                                      src={avatar}
-                                      width={16}
-                                      height={16}
-                                      alt="Reader"
-                                      className="rounded-full inline-block"
-                                    />
-                                  )
-                                )
-                              : "✓"}
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs">
+                            {formatShortTime(message.timestamp)}
                           </span>
+                          {isCurrentUser && (
+                            <span className="flex items-center gap-1">
+                              {message.readBy && message.readBy.length > 0
+                                ? getReadByAvatars(message).map(
+                                    (avatar, index) => (
+                                      <Image
+                                        key={index}
+                                        src={avatar}
+                                        width={16}
+                                        height={16}
+                                        alt="Reader"
+                                        className="rounded-full inline-block"
+                                      />
+                                    )
+                                  )
+                                : "✓"}
+                            </span>
+                          )}
+                        </div>
+                        {message.isPinned && (
+                          <div className="flex items-center gap-1 text-xs text-[#777E90] mt-1">
+                            <Image
+                              src="/Chats/iconlist/pin.png"
+                              width={12}
+                              height={12}
+                              alt="Pin"
+                            />
+                            <span>
+                              {getPinnedByName(message.pinnedBy)} đã ghim tin
+                              nhắn
+                            </span>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -314,55 +351,10 @@ const MessagesList = ({ chat, currentUser }) => {
           })}
       </div>
 
-      {/* Modal hiển thị nội dung */}
       {modalContent && (
-        <div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-          onClick={handleOverlayClick}
-        >
-          <div className="  p-1 max-w-[90%] max-h-[90%] relative rounded-lg">
-            <button
-              onClick={closeModal}
-              className="absolute top-2 right-2 rounded-full  p-1 hover:bg-violet-400 bg-violet-300 z-10 "
-            >
-              <Image
-                src="/Chats/iconlist/close.png"
-                width={24}
-                height={24}
-                alt="Close"
-              />
-            </button>
-            {modalContent.type === "image" ? (
-              <Image
-                src={modalContent.url}
-                width={800}
-                height={500}
-                alt={modalContent.name}
-                className="object-contain max-w-full max-h-[80vh] rounded-lg"
-              />
-            ) : modalContent.type === "video" ? (
-              <div className="relative">
-                <video
-                  src={modalContent.url}
-                  width={800}
-                  height={500}
-                  controls
-                  className="object-contain max-w-full max-h-[80vh] rounded-lg"
-                />
-              </div>
-            ) : (
-              <iframe
-                src={modalContent.url}
-                width="800"
-                height="500"
-                className="max-w-full max-h-[80vh] rounded-lg"
-                title={modalContent.name}
-              />
-            )}
-          </div>
-        </div>
+        <AttachmentModal attachment={modalContent} onClose={closeModal} />
       )}
-    </>
+    </div>
   );
 };
 

@@ -76,7 +76,7 @@ const MessageInput = ({ onSendMessage }) => {
   };
 
   return (
-    <div className="p-4 bg-white sticky bottom-0">
+    <div className="p-4 bg-white  ">
       <div className="rounded-lg bg-[#F4F5F6] py-[15px] px-[21px]">
         {attachments.length > 0 && (
           <div className="mb-3">
