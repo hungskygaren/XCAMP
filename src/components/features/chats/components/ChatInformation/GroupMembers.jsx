@@ -1,12 +1,29 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function GroupMembers({ members, onShowDetail }) {
-  const [isExpanded, setIsExpanded] = useState(true); // Trạng thái mở rộng/thu gọn
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(null); // Trạng thái dropdown cho từng member
+  const dropdownRef = useRef(null);
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
+  const handleToggleDropdown = (memberId) => {
+    setIsDropdownOpen(isDropdownOpen === memberId ? null : memberId);
+  };
+
+  // Đóng dropdown khi click ra ngoài
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className="mt-6">
@@ -29,7 +46,7 @@ export default function GroupMembers({ members, onShowDetail }) {
             {members.slice(0, 3).map((member) => (
               <div
                 key={member.id}
-                className="flex items-center justify-between py-1.5 pl-3.75"
+                className="flex items-center justify-between py-1.5 pl-3.75 relative"
               >
                 <div className="flex items-center">
                   <div className="relative">
@@ -47,19 +64,62 @@ export default function GroupMembers({ members, onShowDetail }) {
                     )}
                   </div>
                 </div>
-                <Image
-                  className="mr-2.75"
-                  src="/Chats/iconlist/3Dot.png"
-                  width={18}
-                  height={18}
-                  alt=""
-                />
+                <div className="mr-2.75 relative">
+                  <Image
+                    src="/Chats/iconlist/3Dot.png"
+                    width={18}
+                    height={18}
+                    alt=""
+                    className="cursor-pointer"
+                    onClick={() => handleToggleDropdown(member.id)}
+                  />
+                  {isDropdownOpen === member.id && (
+                    <div
+                      ref={dropdownRef}
+                      className="absolute right-0 top-6 w-[200px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                    >
+                      <button className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs text-[#141416] hover:bg-[#F4F5F6]">
+                        <Image
+                          src="/Chats/iconchatinfor/chat.png"
+                          width={18}
+                          height={18}
+                          alt=""
+                        />
+                        Nhắn tin
+                      </button>
+                      <button className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs text-[#141416] hover:bg-[#F4F5F6]">
+                        <Image
+                          src={
+                            member.role === "Quản trị viên"
+                              ? "/Chats/iconchatinfor/deleteshieldperson.png"
+                              : "/Chats/iconchatinfor/shieldperson.png"
+                          }
+                          width={18}
+                          height={18}
+                          alt=""
+                        />
+                        {member.role === "Quản trị viên"
+                          ? "Gỡ vai trò quản trị viên"
+                          : "Đặt làm quản trị viên"}
+                      </button>
+                      <button className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs text-[#F33E3E] hover:bg-[#F4F5F6]">
+                        <Image
+                          src="/Chats/iconlist/delete.png"
+                          width={18}
+                          height={18}
+                          alt=""
+                        />
+                        Xóa khỏi nhóm
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
           <div
             className="mt-4 text-xs text-[#4A30B1] font-semibold flex justify-center cursor-pointer"
-            onClick={onShowDetail} // Chuyển sang chế độ chi tiết
+            onClick={onShowDetail}
           >
             Xem tất cả thành viên
           </div>

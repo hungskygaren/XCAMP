@@ -92,15 +92,28 @@ const ChatHeader = ({ chat, currentUser, toggleChatInfo, isChatInfoOpen }) => {
         </div>
         <div className="flex flex-col gap-[6px]">
           <h3 className="text-black text-sm font-semibold">{getChatName()}</h3>
-          <div className="w-[98px] h-6 bg-[#777E90]/15 rounded-full flex items-center pl-[14px]">
-            <div className="flex flex-row items-center gap-[5px]">
-              <Image
-                src="/Chats/iconlist/tag.png"
-                width={16}
-                height={16}
-                alt=""
-              />
-              <p className="text-xs text-[#777E90]">Gắn thẻ</p>
+          <div className="flex gap-2">
+            <div className="w-[56px] h-6 bg-[#E8E3FF] rounded-full flex items-center pl-[14px]">
+              <div className="flex flex-row items-center gap-[5px]">
+                <Image
+                  src="/Chats/iconchatdetail/groupmember.png"
+                  width={16}
+                  height={16}
+                  alt=""
+                />
+                <p className="text-xs text-[#4A30B1]">3</p>
+              </div>
+            </div>
+            <div className="w-[98px] h-6 bg-[#777E90]/15 rounded-full flex items-center pl-[14px]">
+              <div className="flex flex-row items-center gap-[5px]">
+                <Image
+                  src="/Chats/iconlist/tag.png"
+                  width={16}
+                  height={16}
+                  alt=""
+                />
+                <p className="text-xs text-[#777E90]">Gắn thẻ</p>
+              </div>
             </div>
           </div>
         </div>

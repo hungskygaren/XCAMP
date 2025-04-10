@@ -624,8 +624,8 @@ const MessagesList = ({ chat, currentUser }) => {
                                 </div>
                               </div>
                             ) : (
-                              <div className="flex items-center  h-[58px]">
-                                <div className="mr-2">
+                              <div className="flex items-center ">
+                                <div className="mr-2 flex-shrink-0">
                                   <Image
                                     src="/Chats/iconchatdetail/icondoc.png"
                                     width={36}
@@ -633,15 +633,15 @@ const MessagesList = ({ chat, currentUser }) => {
                                     alt="Document"
                                   />
                                 </div>
-                                <div className="flex-1 flex flex-col gap-[3px]">
-                                  <p className="text-sm text-black font-medium truncate">
+                                <div className="flex-1 flex flex-col gap-[3px] ">
+                                  <p className="text-sm text-black font-medium">
                                     {attachment.name}
                                   </p>
                                   <p className="text-xs text-gray-500">
                                     {attachment.size}
                                   </p>
                                 </div>
-                                <div className="flex items-center gap-4 pr-[15px]">
+                                <div className="flex-shrink-0 flex  items-center gap-4 pr-[15px]">
                                   <Image
                                     src="/Chats/iconchatdetail/download_black.png"
                                     width={24}

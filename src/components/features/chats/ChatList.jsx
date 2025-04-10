@@ -136,10 +136,10 @@ const ChatList = ({
 
   return (
     <>
-      <div className="w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative h-full">
+      <div className="w-[20rem] lg:w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative h-full">
         <div className="w-full">
           <div className="flex w-full mt-4 gap-[1.375rem] justify-center items-center h-10">
-            <div className="relative w-[17.5rem]">
+            <div className="relative flex-1">
               <TextInput
                 type="text"
                 placeholder="Tìm kiếm"
@@ -154,16 +154,16 @@ const ChatList = ({
             {isSearchOpen ? (
               <div className="w-[90px]">
                 <Button
-                  className="w-full h-8 text-[.75rem] font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center"
+                  className=" flex-shink-0 w-full h-8 text-[.75rem] font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center"
                   onClick={handleCloseSearch}
                   children={"Đóng"}
                 />
               </div>
             ) : (
               <div className="relative">
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-shrink-0">
                   <button
-                    className="p-2 rounded-lg hover:bg-gray-100"
+                    className="p-2 rounded-lg hover:bg-gray-100 flex-shrink-0"
                     onClick={handleOpenAddGroup}
                   >
                     <Image
@@ -175,7 +175,7 @@ const ChatList = ({
                   </button>
                   <button
                     ref={settingButtonRef}
-                    className="p-2 rounded-lg hover:bg-gray-100"
+                    className="p-2 rounded-lg hover:bg-gray-100 flex-shink-0"
                     onClick={handleOpenAddSetting}
                   >
                     <Image
@@ -210,7 +210,7 @@ const ChatList = ({
                 onResetFilters={handleResetFilters}
               />
             </div>
-            <div className="flex flex-col items-center gap-[15px] overflow-y-auto  h-[calc(100vh-268px)]">
+            <div className="flex flex-col items-center gap-[15px] overflow-y-auto  h-[calc(100vh-268px)] w-full">
               {chatsToDisplay.length === 0 ? (
                 <p className="p-4 text-gray-500">
                   Không tìm thấy cuộc trò chuyện nào

@@ -8,6 +8,7 @@ import MediaAndLinks from "./components/ChatInformation/MediaAndLinks";
 import ChatActions from "./components/ChatInformation/ChatActions";
 import GroupMemberDetail from "./components/ChatInformation/GroupMemberDetail";
 import { useChat } from "../../../contexts/ChatContext"; // Điều chỉnh đường dẫn
+import MediaAndLinksDetail from "./components/ChatInformation/MediaAndLinksDetail";
 
 export default function ChatInformation() {
   const { initialView, toggleChatInfo } = useChat();
@@ -83,10 +84,12 @@ export default function ChatInformation() {
       timestamp: "2023-10-16T14:00:00Z",
     },
   ];
-
+  const handleShowMediaDetail = (type) => {
+    setIsDetailView(`media-${type}`); // Ví dụ: "media-media", "media-file", "media-link"
+  };
   return (
     <div className="w-[340px] h-full flex flex-col bg-white rounded-[10px] transition-transform duration-300 transform translate-x-0">
-      <div className="px-4 py-7 overflow-y-auto h-full">
+      <div className="px-3.75 py-7 overflow-y-auto h-full">
         {isDetailView === "members" ? (
           <GroupMemberDetail
             members={members}
@@ -97,6 +100,11 @@ export default function ChatInformation() {
             pinnedMessages={pinnedMessages}
             onBack={() => setIsDetailView(null)}
           />
+        ) : isDetailView?.startsWith("media-") ? (
+          <MediaAndLinksDetail
+            initialType={isDetailView.split("-")[1]} // Lấy type từ "media-type"
+            onBack={() => setIsDetailView(null)}
+          />
         ) : (
           <>
             <ChatInfoHeader />
@@ -105,7 +113,7 @@ export default function ChatInformation() {
               onShowDetail={() => setIsDetailView("members")}
             />
             <PinnedMessages onShowDetail={() => setIsDetailView("pinned")} />
-            <MediaAndLinks />
+            <MediaAndLinks onShowDetail={handleShowMediaDetail} />
             <ChatActions />
           </>
         )}

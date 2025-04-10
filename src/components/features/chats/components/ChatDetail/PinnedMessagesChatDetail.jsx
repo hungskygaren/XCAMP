@@ -64,9 +64,9 @@ const PinnedMessagesChatDetail = ({
   return (
     <div className="relative px-5.5">
       {!isExpanded ? (
-        <div className="h-[54px] flex items-center justify-between gap-2">
+        <div className="flex justify-between gap-2">
           <div
-            className="border-[#E6E8EC] border-1 rounded-lg h-full flex-1 py-2.5 px-3 flex items-center justify-between bg-white cursor-pointer"
+            className="border-[#E6E8EC] border-1 rounded-lg flex-1 py-2.5 px-3 flex items-center justify-between bg-white cursor-pointer"
             onClick={() => onMessageClick(latestPinnedMessage.id)}
           >
             <div className="flex flex-col">
@@ -99,13 +99,15 @@ const PinnedMessagesChatDetail = ({
           </div>
           {pinnedMessages.length > 1 && (
             <button
-              className="bg-[#F4F5F6] rounded-lg w-[54px] h-full flex flex-col items-center justify-center"
+              className="bg-[#F4F5F6] rounded-lg w-[54px] self-stretch flex items-center justify-center"
               onClick={() => onToggleExpand(true)}
             >
-              <span className="text-sm text-[#777E90] font-semibold">
-                +{pinnedMessages.length - 1}
-              </span>
-              <span className="text-xs text-[#777E90]">Ghim</span>
+              <div className="flex flex-col items-center justify-center py-2">
+                <span className="text-sm text-[#777E90] font-semibold">
+                  +{pinnedMessages.length - 1}
+                </span>
+                <span className="text-xs text-[#777E90]">Ghim</span>
+              </div>
             </button>
           )}
         </div>

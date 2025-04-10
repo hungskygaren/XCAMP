@@ -77,7 +77,7 @@ const MessageInput = ({ onSendMessage }) => {
 
   return (
     <div className="p-4 bg-white  ">
-      <div className="rounded-lg bg-[#F4F5F6] py-[15px] px-[21px]">
+      <div className="rounded-lg bg-[#F4F5F6] py-[15px] px-[21px] shrink">
         {attachments.length > 0 && (
           <div className="mb-3">
             {/* Dòng tổng hợp số lượng */}
@@ -170,16 +170,17 @@ const MessageInput = ({ onSendMessage }) => {
         )}
 
         {/* Phần input và nút */}
-        <form onSubmit={handleSendMessage} className="flex items-center gap-2">
+        <form onSubmit={handleSendMessage} className="flex items-center gap-2 ">
           <button
             type="button"
-            className="text-gray-500 hover:text-gray-700 focus:outline-none"
+            className="text-gray-500 hover:text-gray-700 focus:outline-none shrink "
             onClick={() => fileInputRef.current?.click()}
           >
             <Image
               src="/Chats/iconchatdetail/paperclip.png"
               width={20}
               height={20}
+              className="w-5 h-5 "
               alt=""
             />
           </button>
@@ -199,6 +200,7 @@ const MessageInput = ({ onSendMessage }) => {
               src="/Chats/iconchatdetail/emotions.png"
               width={20}
               height={20}
+              className="w-5 h-5 "
               alt=""
             />
           </button>
@@ -230,6 +232,7 @@ const MessageInput = ({ onSendMessage }) => {
               }
               width={20}
               height={20}
+              className="w-5 h-5 "
               alt="Send"
             />
           </button>

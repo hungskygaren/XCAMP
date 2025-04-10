@@ -103,7 +103,7 @@ export default function PinnedMessages({ onShowDetail }) {
           </div>
           <div
             className="mt-4 text-xs text-[#4A30B1] font-semibold flex justify-center cursor-pointer"
-            onClick={onShowDetail} // Chuyển sang chế độ chi tiết
+            onClick={onShowDetail}
           >
             Xem tất cả ghim
           </div>

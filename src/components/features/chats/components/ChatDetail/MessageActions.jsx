@@ -1,7 +1,6 @@
 // src/components/features/chats/components/ChatDetail/MessageActions.js
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
-import ForwardDetail from "./ForwardDetail";
 
 const MessageActions = ({ message, onForward }) => {
   const [isMoreOpen, setIsMoreOpen] = useState(false);

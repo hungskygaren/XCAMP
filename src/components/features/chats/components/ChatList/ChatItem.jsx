@@ -152,7 +152,7 @@ const ChatItem = ({
   return (
     <>
       <div
-        className={`relative flex items-start hover:bg-violet-50 w-[362px] min-h-[70px] h-[70px] pl-[13px] pr-[17px] pt-[13px] rounded-[8px] border-[#E6E8EC] border-[1px] cursor-pointer transition-colors ${
+        className={`relative flex items-start hover:bg-violet-50 w-full min-h-[70px] h-[70px] pl-[13px] pr-[17px] pt-[13px] rounded-[8px] border-[#E6E8EC] border-[1px] cursor-pointer transition-colors ${
           activeChat && activeChat.id === chat.id ? "bg-[#E8E3FF]" : ""
         } `}
         onClick={() => onSelectChat(chat.id)}
@@ -240,7 +240,7 @@ const ChatItem = ({
               <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
             )}
         </div>
-        <div className="ml-3 w-full">
+        <div className="ml-3 flex-1 min-w-0">
           <div className="flex justify-between items-center">
             <h3 className="font-semibold text-twdark text-sm">
               {getChatName(chat, currentUser)}
@@ -251,7 +251,7 @@ const ChatItem = ({
           </div>
           <div className="flex w-full justify-between items-center">
             <p
-              className={`text-sm ${
+              className={`text-sm truncate ${
                 chat.unreadCount > 0 ? "text-black" : "text-twgrey"
               }`}
             >
