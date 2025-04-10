@@ -45,7 +45,6 @@ export default function SidebarEmail({ categories }) {
     );
   };
 
-  // Component TagItem (tags phụ) - Bỏ Link, chỉ là giao diện
   const TagItem = ({ tag }) => {
     return (
       <div className="flex items-center gap-2.5 pl-11 py-2.5 w-full rounded-lg hover:bg-gray-50 transition-colors text-neutral-900">

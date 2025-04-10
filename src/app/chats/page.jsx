@@ -163,10 +163,10 @@ const Chat = () => {
   return (
     <div className="flex ">
       <VerticalNavbar />
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <Navbar />
-        <div className="flex bg-[#F4F5F6] p-4 ">
-          <div className="">
+        <div className="flex bg-[#F4F5F6] p-4 w-full ">
+          <div className="w-full">
             <ChatView
               chats={chats}
               activeChat={activeChat}

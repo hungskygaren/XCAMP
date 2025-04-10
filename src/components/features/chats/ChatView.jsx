@@ -1,20 +1,33 @@
-import React from "react";
+// src/components/features/chats/components/ChatView.js
+import React, { useEffect, useRef } from "react";
 import ChatList from "./ChatList";
 import ChatDetail from "./ChatDetail";
-import ChatInformation from "./ChatInformation"; // Import component mới
+import ChatInformation from "./ChatInformation";
+import { ChatProvider, useChat } from "../../../contexts/ChatContext";
 
-const ChatView = ({
+const ChatViewContent = ({
   chats,
   activeChat,
   onSelectChat,
   onSendMessage,
   currentUser,
   contacts,
-  isChatInfoOpen, // Nhận trạng thái
-  toggleChatInfo, // Nhận hàm toggle
 }) => {
+  const modalRef = useRef(null);
+  const { isChatInfoOpen, toggleChatInfo } = useChat();
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        toggleChatInfo(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isChatInfoOpen, toggleChatInfo]);
+
   return (
-    <div className="flex gap-4 h-[calc(100vh-98px)]  ">
+    <div className="flex gap-4 h-[calc(100vh-98px)] w-full">
       <ChatList
         chats={chats}
         activeChat={activeChat}
@@ -22,15 +35,13 @@ const ChatView = ({
         contacts={contacts}
         currentUser={currentUser}
       />
-      <div className="flex transition-all duration-300 gap-4 w-[926px] h-full">
+      <div className="flex transition-all duration-300 gap-4 w-full h-full relative">
         {activeChat ? (
-          <div className={`transition-all duration-300 flex-1 h-full`}>
+          <div className="transition-all duration-300 flex-1 h-full">
             <ChatDetail
               chat={activeChat}
               onSendMessage={onSendMessage}
               currentUser={currentUser}
-              toggleChatInfo={toggleChatInfo} // Truyền toggle xuống ChatDetail
-              isChatInfoOpen={isChatInfoOpen} // Truyền trạng thái xuống ChatDetail
             />
           </div>
         ) : (
@@ -41,7 +52,10 @@ const ChatView = ({
           </div>
         )}
         {isChatInfoOpen && (
-          <div className="w-[340px] transition-all duration-300">
+          <div
+            className="xl:relative absolute right-0 top-0 h-full"
+            ref={modalRef}
+          >
             <ChatInformation />
           </div>
         )}
@@ -49,5 +63,11 @@ const ChatView = ({
     </div>
   );
 };
+
+const ChatView = (props) => (
+  <ChatProvider>
+    <ChatViewContent {...props} />
+  </ChatProvider>
+);
 
 export default ChatView;

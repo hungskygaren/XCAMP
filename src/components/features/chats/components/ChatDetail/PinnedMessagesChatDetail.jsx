@@ -2,12 +2,13 @@
 import Image from "next/image";
 import React from "react";
 
-const PinnedMessagesHeader = ({
+const PinnedMessagesChatDetail = ({
   pinnedMessages,
   currentUser,
   onToggleExpand,
   isExpanded,
-  onMessageClick, // Thêm prop mới
+  onMessageClick,
+  onOpenPinnedMessagesDetail,
 }) => {
   const getMessageSender = (senderId) => {
     return (
@@ -55,14 +56,18 @@ const PinnedMessagesHeader = ({
   };
 
   const latestPinnedMessage = pinnedMessages[0];
-
+  // Thêm hàm xử lý nhấp "Xem tất cả ghim" để bỏ expand
+  const handleViewAllPins = () => {
+    onOpenPinnedMessagesDetail(); // Mở ChatInformation với PinnedMessagesDetail
+    onToggleExpand(false); // Thêm dòng này để bỏ trạng thái expand
+  };
   return (
     <div className="relative px-5.5">
       {!isExpanded ? (
         <div className="h-[54px] flex items-center justify-between gap-2">
           <div
             className="border-[#E6E8EC] border-1 rounded-lg h-full flex-1 py-2.5 px-3 flex items-center justify-between bg-white cursor-pointer"
-            onClick={() => onMessageClick(latestPinnedMessage.id)} // Thêm sự kiện click
+            onClick={() => onMessageClick(latestPinnedMessage.id)}
           >
             <div className="flex flex-col">
               <div className="flex items-center gap-[7px]">
@@ -106,7 +111,7 @@ const PinnedMessagesHeader = ({
         </div>
       ) : (
         <div className="h-[54px] relative">
-          <div className="border-[#E6E8EC] border-1 absolute z-20 top-0 left-0 right-0 rounded-lg py-2.5 px-2 flex flex-col gap-[10px] bg-white shadow-lg">
+          <div className="border-[#E6E8EC] border-1 absolute z-20 top-0 left-0 right-0 rounded-lg py-2.5 px-2 flex flex-col items-center gap-[10px] bg-white shadow-lg">
             <div className="flex justify-between w-full items-center">
               <div className="text-xs font-semibold">Tin nhắn đã ghim</div>
               <button
@@ -127,7 +132,7 @@ const PinnedMessagesHeader = ({
                 <div
                   key={msg.id}
                   className="rounded-lg bg-[#F4F5F6] w-full py-2.5 px-3 flex items-center justify-between cursor-pointer"
-                  onClick={() => onMessageClick(msg.id)} // Thêm sự kiện click
+                  onClick={() => onMessageClick(msg.id)}
                 >
                   <div className="flex flex-col">
                     <div className="flex items-center gap-[7px]">
@@ -159,6 +164,12 @@ const PinnedMessagesHeader = ({
                 </div>
               ))}
             </div>
+            <div
+              className="text-xs text-[#4A30B1] font-semibold cursor-pointer"
+              onClick={handleViewAllPins}
+            >
+              Xem tất cả ghim
+            </div>
           </div>
         </div>
       )}
@@ -166,4 +177,4 @@ const PinnedMessagesHeader = ({
   );
 };
 
-export default PinnedMessagesHeader;
+export default PinnedMessagesChatDetail;

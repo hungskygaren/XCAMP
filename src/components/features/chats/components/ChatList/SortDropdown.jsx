@@ -13,7 +13,7 @@ const SortDropdown = ({
   const [selectedTags, setSelectedTags] = useState([]); // Danh sách tag được chọn
   const [isTagManagementOpen, setIsTagManagementOpen] = useState(false);
   const dropdownRef = useRef(null); // Ref để tham chiếu đến dropdown
-
+  const buttonRef = useRef(null); // Thêm ref cho nút "Phân loại"
   // Lấy danh sách tag từ API
   useEffect(() => {
     fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
@@ -28,7 +28,9 @@ const SortDropdown = ({
       if (
         isSortOpen &&
         dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
+        !dropdownRef.current.contains(event.target) &&
+        buttonRef.current && // Kiểm tra thêm nút "Phân loại"
+        !buttonRef.current.contains(event.target) // Nếu nhấp vào nút thì không đóng
       ) {
         setIsSortOpen(false);
       }
@@ -72,7 +74,8 @@ const SortDropdown = ({
       viewBox="0 0 18 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-    >vvvvvvv
+    >
+      vvvvvvv
       <path
         d="M15.6959 8.9218L15.6964 8.9223C15.7984 9.02422 15.8665 9.132 15.9087 9.24713C15.9585 9.38311 15.9813 9.51246 15.9813 9.6375C15.9813 9.76236 15.9586 9.88675 15.9106 10.0133C15.8692 10.1224 15.8012 10.2292 15.6964 10.3339L10.3339 15.6964C10.2294 15.801 10.117 15.8747 9.99555 15.9233C9.86253 15.9765 9.73788 16 9.61875 16C9.49962 16 9.37497 15.9765 9.24195 15.9233C9.12047 15.8747 9.00813 15.801 8.90355 15.6964L2.2848 9.0777C2.19419 8.98708 2.12461 8.88302 2.07451 8.76195C2.02509 8.64252 2 8.51697 2 8.38125V3C2 2.72116 2.09345 2.49491 2.29418 2.29418C2.49491 2.09345 2.72116 2 3 2H8.38125C8.51135 2 8.63755 2.02599 8.7637 2.08065C8.89632 2.13812 9.00551 2.21267 9.09622 2.30333C9.0963 2.3034 9.09637 2.30348 9.09645 2.30355L15.6959 8.9218ZM9.2647 15.3531L9.61825 15.7076L9.9723 15.3536L15.3348 9.99105L15.6879 9.638L15.3353 9.28445L8.71655 2.64695L8.57002 2.5H8.3625H3H2.5V3V8.3625V8.56919L2.64595 8.71555L9.2647 15.3531ZM5.31832 5.31832C5.1944 5.44224 5.05641 5.5 4.875 5.5C4.69359 5.5 4.5556 5.44224 4.43168 5.31832C4.30776 5.1944 4.25 5.05641 4.25 4.875C4.25 4.69359 4.30776 4.5556 4.43168 4.43168C4.5556 4.30776 4.69359 4.25 4.875 4.25C5.05641 4.25 5.1944 4.30776 5.31832 4.43168C5.44224 4.5556 5.5 4.69359 5.5 4.875C5.5 5.05641 5.44224 5.1944 5.31832 5.31832Z"
         fill={color}
@@ -111,6 +114,7 @@ const SortDropdown = ({
   return (
     <div className="relative items-center flex justify-between">
       <button
+        ref={buttonRef} // Gắn ref cho nút
         className={`flex items-center gap-0.5 my-[10px] py-[4px] text-sm font-semibold text-gray-900 ${
           selectedTags.length > 0 || isSortOpen
             ? "bg-[#00B6FF26] rounded-full px-[13px]"

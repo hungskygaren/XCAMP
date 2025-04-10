@@ -1,17 +1,19 @@
-// app/email/[type]/page.js
 "use client";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation"; // Thêm usePathname
 import EmailList from "@/components/features/email/EmailList";
 import EmailDetail from "@/components/features/email/EmailDetail";
 
 export default function EmailView({ type }) {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname(); // Lấy đường dẫn hiện tại
   const initialEmailId = searchParams.get("emailId");
   const [emails, setEmails] = useState([]);
   const [selectedEmail, setSelectedEmail] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Fetch email và xử lý initialEmailId
   useEffect(() => {
     const fetchEmails = async () => {
       try {
@@ -19,9 +21,8 @@ export default function EmailView({ type }) {
         if (!response.ok) throw new Error("Không thể tải email");
         const allEmails = await response.json();
         console.log("All emails in EmailView:", allEmails);
-        console.log("Type in EmailView:", type); // Log type
+        console.log("Type in EmailView:", type);
 
-        // Thay thế đoạn code lọc cũ
         const filteredEmails = allEmails.filter(
           (email) => email.category === type
         );
@@ -33,7 +34,7 @@ export default function EmailView({ type }) {
           );
           setSelectedEmail(email || null);
           if (email) {
-            window.history.replaceState(null, "", `/email/${type}/${email.id}`);
+            router.replace(`/email/${type}/${email.id}`); // Cập nhật URL
           }
         }
       } catch (err) {
@@ -44,32 +45,30 @@ export default function EmailView({ type }) {
       }
     };
     fetchEmails();
-  }, [type, initialEmailId]);
+  }, [type, initialEmailId, router]);
 
+  // Đồng bộ selectedEmail với pathname
+  useEffect(() => {
+    const pathParts = pathname.split("/");
+    const currentEmailId = pathParts[pathParts.length - 1];
+
+    if (currentEmailId && !isNaN(currentEmailId)) {
+      const email = emails.find((e) => e.id === parseInt(currentEmailId, 10));
+      setSelectedEmail(email || null);
+    } else {
+      setSelectedEmail(null);
+    }
+  }, [pathname, emails, type]);
+
+  // Xử lý khi chọn email
   const handleEmailSelect = (email) => {
     setSelectedEmail(email);
     if (email) {
-      window.history.pushState(null, "", `/email/${type}/${email.id}`);
+      router.push(`/email/${type}/${email.id}`); // Thêm vào lịch sử
     } else {
-      window.history.pushState(null, "", `/email/${type}`);
+      router.push(`/email/${type}`); // Về danh sách
     }
   };
-
-  useEffect(() => {
-    const handlePopState = () => {
-      const path = window.location.pathname.split("/");
-      const currentEmailId = path[path.length - 1];
-      if (currentEmailId && !isNaN(currentEmailId)) {
-        const email = emails.find((e) => e.id === parseInt(currentEmailId, 10));
-        setSelectedEmail(email || null);
-      } else {
-        setSelectedEmail(null);
-      }
-    };
-
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, [emails, type]);
 
   if (loading)
     return (

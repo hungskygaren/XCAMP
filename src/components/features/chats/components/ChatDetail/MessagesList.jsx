@@ -1,17 +1,22 @@
 // src/components/features/chats/components/ChatDetail/MessagesList.js
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import PinnedMessagesHeader from "./PinnedMessagesHeader";
+
 import AttachmentModal from "./AttachmentModal";
 import MessageActions from "./MessageActions"; // Import component mới
-
+import PinnedMessagesChatDetail from "./PinnedMessagesChatDetail";
+import LikeModal from "./LikeModal";
+import ForwardDetail from "./ForwardDetail";
+import { useChat } from "@/contexts/ChatContext";
 const MessagesList = ({ chat, currentUser }) => {
   const messagesContainerRef = useRef(null);
   const [modalContent, setModalContent] = useState(null);
   const [isPinnedExpanded, setIsPinnedExpanded] = useState(false);
   const [highlightedMessageId, setHighlightedMessageId] = useState(null);
   const [hoveredMessageId, setHoveredMessageId] = useState(null); // Thêm trạng thái hover
-
+  const [isLikeModalOpen, setIsLikeModalOpen] = useState(false); // Trạng thái modal
+  const [isForwardModalOpen, setIsForwardModalOpen] = useState(false);
+  const { openPinnedMessagesDetail } = useChat(); // Lấy hàm từ context
   useEffect(() => {
     scrollToBottom();
   }, [chat?.messages]);
@@ -143,12 +148,13 @@ const MessagesList = ({ chat, currentUser }) => {
   return (
     <div className={`relative h-[calc(100%-170px)]`}>
       {pinnedMessages.length > 0 && (
-        <PinnedMessagesHeader
+        <PinnedMessagesChatDetail
           pinnedMessages={pinnedMessages}
           currentUser={currentUser}
           onToggleExpand={setIsPinnedExpanded}
           isExpanded={isPinnedExpanded}
           onMessageClick={scrollToMessage}
+          onOpenPinnedMessagesDetail={openPinnedMessagesDetail}
         />
       )}
 
@@ -156,13 +162,304 @@ const MessagesList = ({ chat, currentUser }) => {
         ref={messagesContainerRef}
         className={`overflow-y-auto p-4 space-y-4 ${messagesHeight}`}
       >
+        {/* Thêm tin nhắn tĩnh ở cuối */}
+        <div
+          className={`flex justify-start transition-all duration-300`}
+          onMouseEnter={() => setHoveredMessageId("static-message")}
+          onMouseLeave={() => setHoveredMessageId(null)}
+        >
+          <div className={`flex gap-[15px] max-w-[70%]`}>
+            <div>
+              <Image
+                src="/chats/avatar3.png" // Avatar gán cứng
+                alt=""
+                width={30}
+                height={30}
+                className="rounded-full object-cover"
+              />
+            </div>
+
+            <div className={`flex w-full flex-col gap-1 relative `}>
+              <div className="text-sm font-semibold text-[#777E90]">
+                Cyclops
+              </div>
+              {hoveredMessageId === "static-message" && (
+                <MessageActions
+                  onForward={() => setIsForwardModalOpen(true)} // Truyền hàm mở Forward
+                />
+              )}
+              <div className={`rounded-lg px-5 py-3 bg-[#F4F5F6] text-xs`}>
+                <div className="flex flex-col gap-3">
+                  <div className="flex justify-between">
+                    <div className="flex gap-2.5 items-center">
+                      <Image
+                        src="Chats/iconchatdetail/videocall.png"
+                        width={18}
+                        height={18}
+                        alt=""
+                      />
+                      <p className="font-semibold">
+                        Cuộc họp video - Development Team
+                      </p>
+                    </div>
+                    <p>30:05</p>
+                  </div>
+                  <div className="flex gap-2.5 items-center">
+                    <Image
+                      src="Chats/iconchatdetail/calendar.png"
+                      width={18}
+                      height={18}
+                      alt=""
+                    />
+                    <p className="">
+                      Thời gian: Thứ 6, ngày 16/10/2024, 13:38 - 14:38
+                    </p>
+                  </div>
+                  <div className="flex gap-2.5 items-center">
+                    <Image
+                      src="Chats/iconchatdetail/infor.png"
+                      width={18}
+                      height={18}
+                      alt=""
+                    />
+                    <p className="">ID cuộc họp: 352 870 172</p>
+                  </div>
+                  <div className="flex gap-2.5 items-center">
+                    <Image
+                      src="Chats/iconlist/addGroup.png"
+                      width={18}
+                      height={18}
+                      alt=""
+                    />
+                    <div className="flex gap-1.5  flex-wrap">
+                      <Image
+                        src="Chats/avatar1.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar2.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar3.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar4.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar1.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar1.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar2.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar3.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar4.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <span className="w-6 h-6 bg-white rounded-full flex items-center justify-center text-[#B1B5C3]">
+                        +3
+                      </span>
+                    </div>
+                  </div>
+                  <div className="bg-[#D2D4D7] h-8 rounded-[6px] text-white  flex items-center justify-center font-semibold">
+                    Đã kết thúc
+                  </div>
+                </div>
+              </div>
+              <div
+                className={`flex flex-col items-start mt-1 text-sm text-[#A8ABB8]`}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-xs">
+                    {formatShortTime(new Date().toISOString())}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className={`flex justify-end transition-all duration-300`}
+          onMouseEnter={() => setHoveredMessageId("static-message")}
+          onMouseLeave={() => setHoveredMessageId(null)}
+        >
+          <div className={`flex flex-row-reverse gap-[15px] max-w-[70%]`}>
+            <div>
+              <Image
+                src="/chats/avatar2.png"
+                alt=""
+                width={30}
+                height={30}
+                className="rounded-full object-cover"
+              />
+            </div>
+
+            <div className={`flex w-full flex-col gap-1 relative items-end`}>
+              <div className="text-sm font-semibold text-[#777E90]">Joker</div>
+              {hoveredMessageId === "static-message" && (
+                <MessageActions
+                  onForward={() => setIsForwardModalOpen(true)} // Truyền hàm mở Forward
+                />
+              )}
+              <div
+                className={`rounded-lg px-5 py-3 bg-[#4A30B1] text-xs text-white`}
+              >
+                <div className="flex flex-col gap-3">
+                  <div className="flex justify-between">
+                    <div className="flex gap-2.5 items-center">
+                      <Image
+                        src="Chats/iconchatdetail/videocall.png"
+                        width={18}
+                        height={18}
+                        alt=""
+                      />
+                      <p className="font-semibold">
+                        Cuộc họp video - Development Team
+                      </p>
+                    </div>
+                    {/* <p>30:05</p> */}
+                  </div>
+                  <div className="flex gap-2.5 items-center">
+                    <Image
+                      src="Chats/iconchatdetail/calendar.png"
+                      width={18}
+                      height={18}
+                      alt=""
+                    />
+                    <p className="">
+                      Thời gian: Thứ 6, ngày 16/10/2024, 13:38 - 14:38
+                    </p>
+                  </div>
+                  <div className="flex gap-2.5 items-center">
+                    <Image
+                      src="Chats/iconchatdetail/infor.png"
+                      width={18}
+                      height={18}
+                      alt=""
+                    />
+                    <p className="">ID cuộc họp: 352 870 172</p>
+                  </div>
+                  <div className="flex gap-2.5 items-center">
+                    <Image
+                      src="Chats/iconlist/addGroup.png"
+                      width={18}
+                      height={18}
+                      alt=""
+                    />
+                    <div className="flex gap-1.5 flex-wrap">
+                      <Image
+                        src="Chats/avatar1.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar2.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar3.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar4.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar1.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar1.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar2.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar3.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <Image
+                        src="Chats/avatar4.png"
+                        width={24}
+                        height={24}
+                        alt=""
+                      />
+                      <span className="w-6 h-6 bg-white rounded-full flex items-center justify-center text-[#B1B5C3]">
+                        +3
+                      </span>
+                    </div>
+                  </div>
+                  <div className="bg-[#EE316B] h-8 rounded-[6px] text-white  flex items-center justify-center font-semibold">
+                    Tham gia
+                  </div>
+                </div>
+              </div>
+              <div
+                className={`flex flex-col items-start mt-1 text-sm text-[#A8ABB8]`}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-xs">
+                    {formatShortTime(new Date().toISOString())}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {chat.messages &&
           chat.messages.map((message, index) => {
             const isCurrentUser = message.senderId === currentUser.id;
             const showDateHeader = isFirstMessageOfDay(index);
 
             return (
-              <React.Fragment key={message.id}>
+              <div key={message.id}>
                 {showDateHeader && (
                   <div className="text-center my-4">
                     <span className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">
@@ -173,19 +470,19 @@ const MessagesList = ({ chat, currentUser }) => {
                   </div>
                 )}
                 <div
-                  id={`message-${message.id}`}
                   className={`flex ${
                     isCurrentUser ? "justify-end" : "justify-start"
                   } transition-all duration-300 ${
                     highlightedMessageId === message.id ? "bg-[#E8E3FF]" : ""
                   }`}
-                  onMouseEnter={() => setHoveredMessageId(message.id)}
-                  onMouseLeave={() => setHoveredMessageId(null)}
                 >
                   <div
+                    id={`message-${message.id}`}
                     className={`flex  ${
                       isCurrentUser ? "flex-row-reverse" : ""
                     } gap-[15px] max-w-[70%] `}
+                    onMouseEnter={() => setHoveredMessageId(message.id)}
+                    onMouseLeave={() => setHoveredMessageId(null)}
                   >
                     <div>
                       <Image
@@ -209,6 +506,14 @@ const MessagesList = ({ chat, currentUser }) => {
                       <div className="text-sm font-semibold text-[#777E90]">
                         {getMessageSender(message.senderId)}
                       </div>
+                      {/* Hiển thị MessageActions khi hover */}
+                      {hoveredMessageId === message.id && (
+                        <MessageActions
+                          isCurrentUser={isCurrentUser}
+                          message={message}
+                          onForward={() => setIsForwardModalOpen(true)}
+                        />
+                      )}
                       {message.content && (
                         <div
                           className={`rounded-lg px-5 py-3 relative ${
@@ -217,15 +522,70 @@ const MessagesList = ({ chat, currentUser }) => {
                               : "bg-[#F4F5F6]"
                           }`}
                         >
-                          {/* Hiển thị MessageActions khi hover */}
-                          {hoveredMessageId === message.id && (
-                            <MessageActions isCurrentUser={isCurrentUser} />
+                          {(index === 7 || index === 8 || index === 9) && (
+                            <>
+                              {isCurrentUser ? (
+                                <div className="rounded-lg bg-[#16006D] flex items-center py-2.5 pr-3 mb-2.5   text-xs">
+                                  <div className="bg-[#EE316B] w-0.5 h-9"></div>
+                                  <div className="ml-4">
+                                    <span>Nguyễn Tuấn Anh</span>
+                                    <p>
+                                      Ever wondered how some graphic desi...
+                                    </p>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="rounded-lg bg-white flex items-center py-2.5 pr-3 mb-2.5   text-xs">
+                                  <div className="bg-[#EE316B] w-0.5 h-9"></div>
+                                  <div className="ml-4">
+                                    <span>Nguyễn Tuấn Anh</span>
+                                    <p>
+                                      Ever wondered how some graphic desi...
+                                    </p>
+                                  </div>
+                                </div>
+                              )}
+                            </>
                           )}
                           <p className="text-sm">
                             {renderMessageContent(message.content)}
                           </p>
+                          {(index === 4 || index === 5 || index === 6) && (
+                            <>
+                              {isCurrentUser ? (
+                                <div
+                                  onClick={() => setIsLikeModalOpen(true)}
+                                  className="rounded-full cursor-pointer bg-[#16006D] px-[15px] py-[5px] mt-[10px] inline-flex gap-1.5 items-center justify-center"
+                                >
+                                  <Image
+                                    src="/Chats/iconchatdetail/like_red.png"
+                                    width={18}
+                                    height={18}
+                                    alt=""
+                                  />
+                                  <p className="text-xs font-semibold text-white/60">
+                                    Nguyễn Tuấn Anh
+                                  </p>
+                                </div>
+                              ) : (
+                                <div
+                                  onClick={() => setIsLikeModalOpen(true)}
+                                  className="rounded-full cursor-pointer bg-white px-[15px] py-[5px] mt-[10px] inline-flex gap-1.5 items-center justify-center"
+                                >
+                                  <Image
+                                    src="/Chats/iconchatdetail/like_red.png"
+                                    width={18}
+                                    height={18}
+                                    alt=""
+                                  />
+                                  <p className="text-xs text-[#777E90]">+99</p>
+                                </div>
+                              )}
+                            </>
+                          )}
                         </div>
                       )}
+
                       {message.attachments &&
                         message.attachments.length > 0 &&
                         message.attachments.map((attachment) => (
@@ -235,21 +595,20 @@ const MessagesList = ({ chat, currentUser }) => {
                             onClick={() => openModal(attachment)}
                           >
                             {attachment.type === "image" ? (
-                              <div className="relative w-[400px] h-[250px]">
+                              <div className="relative 2xl:w-[400px] xl:w-[300px] lg:w-[200px] w-[150px] h-[100px]  2xl:h-[250px] xl:h-[190px] lg:h-[140px]">
                                 <Image
                                   src={attachment.url}
-                                  fill
                                   alt={attachment.name}
-                                  className="object-cover rounded-lg"
+                                  fill={true}
+                                  className="object-cover rounded-lg w-full h-full"
                                 />
                               </div>
                             ) : attachment.type === "video" ? (
-                              <div className="relative w-[400px] h-[250px]">
+                              <div className="relative 2xl:w-[400px] xl:w-[300px] lg:w-[200px] w-[150px] h-[100px]  2xl:h-[250px] xl:h-[190px] lg:h-[140px]">
                                 <video
                                   src={attachment.url}
-                                  width={400}
-                                  height={250}
-                                  className="object-cover rounded-lg"
+                                  alt={attachment.name}
+                                  className="object-cover rounded-lg w-full h-full"
                                   controls={false}
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center">
@@ -265,7 +624,7 @@ const MessagesList = ({ chat, currentUser }) => {
                                 </div>
                               </div>
                             ) : (
-                              <div className="flex items-center w-[400px] h-[58px]">
+                              <div className="flex items-center  h-[58px]">
                                 <div className="mr-2">
                                   <Image
                                     src="/Chats/iconchatdetail/icondoc.png"
@@ -332,24 +691,31 @@ const MessagesList = ({ chat, currentUser }) => {
                           <div className="flex items-center gap-1 text-xs text-[#777E90] mt-1">
                             <Image
                               src="/Chats/iconlist/pin.png"
-                              width={12}
-                              height={12}
+                              width={18}
+                              height={18}
                               alt="Pin"
                             />
-                            <span>
-                              {getPinnedByName(message.pinnedBy)} đã ghim tin
-                              nhắn
+                            <span className="text-[#4A30B1] text-sm">
+                              {getPinnedByName(message.pinnedBy)}{" "}
                             </span>
+                            <p className="text-sm"> đã ghim tin nhắn</p>
                           </div>
                         )}
                       </div>
                     </div>
                   </div>
                 </div>
-              </React.Fragment>
+              </div>
             );
           })}
       </div>
+
+      {isLikeModalOpen && (
+        <LikeModal onClose={() => setIsLikeModalOpen(false)} />
+      )}
+      {isForwardModalOpen && (
+        <ForwardDetail onClose={() => setIsForwardModalOpen(false)} />
+      )}
 
       {modalContent && (
         <AttachmentModal attachment={modalContent} onClose={closeModal} />
