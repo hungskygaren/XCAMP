@@ -41,9 +41,9 @@ export default function GroupMemberDetail({ members, onBack }) {
         <p className="font-semibold text-sm">Thành viên trong nhóm</p>
       </div>
 
-      <div className="relative w-full h-8 bg-[#F4F5F6] rounded-lg flex mt-8">
+      <div className="relative w-full min-h-8 bg-[#F4F5F6] mt-8 rounded-lg flex ">
         <div
-          className={`absolute h-full w-1/2 bg-[#EE316B] rounded-lg transition-all duration-300 ${
+          className={`absolute h-full w-1/2  bg-[#EE316B] rounded-lg transition-all duration-300 ${
             filter === "admins" ? "translate-x-full" : "translate-x-0"
           }`}
         />
@@ -78,7 +78,7 @@ export default function GroupMemberDetail({ members, onBack }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 mt-4 overflow-y-auto h-full">
+      <div className="flex flex-col gap-2 mt-4 overflow-y-auto ">
         {filteredMembers.map((member) => (
           <div
             key={member.id}
@@ -150,6 +150,19 @@ export default function GroupMemberDetail({ members, onBack }) {
             </div>
           </div>
         ))}
+      </div>
+      <div className="bg-[#F4F5F6] min-h-8 flex gap-1.5 items-center justify-center mt-2">
+        <Image
+          src="/Chats/iconlist/addGroup.png"
+          width={20}
+          height={20}
+          alt=""
+          className="cursor-pointer"
+          onClick={onBack}
+        />
+        <div className="text-xs font-semibold text-[#777E90]">
+          Thêm thành viên
+        </div>
       </div>
     </div>
   );
