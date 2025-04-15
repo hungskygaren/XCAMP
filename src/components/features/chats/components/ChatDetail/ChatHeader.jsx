@@ -148,7 +148,7 @@ const ChatHeader = ({ chat, currentUser, toggleChatInfo, isChatInfoOpen }) => {
               width={24}
               height={24}
               alt="chatinfor"
-              className="bg-gray-300 rounded-sm"
+              className="bg-gray-300 rounded-sm cursor-pointer"
             />
           ) : (
             <Image
@@ -156,7 +156,7 @@ const ChatHeader = ({ chat, currentUser, toggleChatInfo, isChatInfoOpen }) => {
               width={24}
               height={24}
               alt="chatinfor"
-              className="hover:bg-violet-200 rounded-sm"
+              className="hover:bg-violet-200 rounded-sm cursor-pointer"
             />
           )}
         </button>
