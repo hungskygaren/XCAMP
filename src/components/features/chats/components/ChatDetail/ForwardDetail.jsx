@@ -105,7 +105,7 @@ const ForwardDetail = ({ onClose }) => {
             inputClassName="w-full pl-[15px] h-8 text-[.75rem] text-[#A8ABB8] font-semibold border border-gray-200 rounded-lg focus:outline-none placeholder:text-gray-500"
           />
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-4">
           <Button
             className="px-[30px] py-[10px] bg-[#F4F5F6] text-[#777E90] text-sm rounded-[10px] cursor-pointer"
             onClick={onClose}

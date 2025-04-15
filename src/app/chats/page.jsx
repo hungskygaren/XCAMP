@@ -149,6 +149,24 @@ const Chat = () => {
       console.error("Lỗi khi cập nhật dữ liệu:", error);
     }
   };
+
+  // Hàm cập nhật chat (dùng cho gắn thẻ)
+  const handleUpdateChat = (chatId, updates) => {
+    const updatedChats = chats.map((chat) =>
+      chat.id === chatId ? { ...chat, ...updates } : chat
+    );
+    setChats(updatedChats);
+    if (activeChat && activeChat.id === chatId) {
+      setActiveChat({ ...activeChat, ...updates });
+    }
+
+    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/chats/${chatId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updates),
+    }).catch((err) => console.error("Error updating chat:", err));
+  };
+
   const toggleChatInfo = () => {
     console.log(isChatInfoOpen); // Thêm để debug
     setIsChatInfoOpen((prev) => !prev); // Toggle trạng thái
@@ -176,6 +194,7 @@ const Chat = () => {
               contacts={contacts}
               isChatInfoOpen={isChatInfoOpen} // Truyền trạng thái
               toggleChatInfo={toggleChatInfo} // Truyền hàm toggle
+              onUpdateChat={handleUpdateChat}
             />
           </div>
         </div>

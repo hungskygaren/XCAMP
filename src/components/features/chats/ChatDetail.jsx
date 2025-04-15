@@ -5,7 +5,7 @@ import MessagesList from "./components/ChatDetail/MessagesList";
 import MessageInput from "./components/ChatDetail/MessageInput";
 import { useChat } from "../../../contexts/ChatContext"; // Điều chỉnh đường dẫn
 
-const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
+const ChatDetail = ({ chat, onSendMessage, currentUser, onUpdateChat }) => {
   const { toggleChatInfo, isChatInfoOpen } = useChat();
 
   if (!chat) return <div className="flex-1">No chat selected</div>;
@@ -17,6 +17,7 @@ const ChatDetail = ({ chat, onSendMessage, currentUser }) => {
         currentUser={currentUser}
         toggleChatInfo={toggleChatInfo}
         isChatInfoOpen={isChatInfoOpen}
+        onUpdateChat={onUpdateChat}
       />
       <MessagesList chat={chat} currentUser={currentUser} />
       <MessageInput onSendMessage={onSendMessage} />

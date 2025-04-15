@@ -1,8 +1,8 @@
-// src/components/features/chats/components/ChatView.js
 import React, { useEffect, useRef } from "react";
 import ChatList from "./ChatList";
 import ChatDetail from "./ChatDetail";
 import ChatInformation from "./ChatInformation";
+import SearchPanel from "./SearchPanel";
 import { ChatProvider, useChat } from "../../../contexts/ChatContext";
 
 const ChatViewContent = ({
@@ -12,19 +12,128 @@ const ChatViewContent = ({
   onSendMessage,
   currentUser,
   contacts,
+  onUpdateChat,
 }) => {
   const modalRef = useRef(null);
-  const { isChatInfoOpen, toggleChatInfo } = useChat();
+  const searchPanelRef = useRef(null); // Thêm ref cho SearchPanel
+  const { isChatInfoOpen, toggleChatInfo, isSearchOpen, toggleSearchPanel } =
+    useChat();
 
+  // Đóng ChatInformation và SearchPanel khi nhấp ra ngoài (dưới xl) hoặc thu nhỏ từ xl
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutsideChatInfo = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
         toggleChatInfo(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isChatInfoOpen, toggleChatInfo]);
+
+    const handleClickOutsideSearchPanel = (e) => {
+      const isChatInfoButton = e.target.closest("[data-chatinfor-button]");
+      if (
+        searchPanelRef.current &&
+        !searchPanelRef.current.contains(e.target) &&
+        !isChatInfoButton
+      ) {
+        toggleSearchPanel(false);
+      }
+    };
+
+    // Theo dõi breakpoint xl
+    const mediaQuery = window.matchMedia("(min-width: 1280px)");
+
+    // Cập nhật sự kiện mousedown cho ChatInformation
+    const updateClickOutsideChatInfo = () => {
+      if (
+        isChatInfoOpen &&
+        modalRef.current &&
+        window.getComputedStyle(modalRef.current).position === "absolute"
+      ) {
+        console.log(
+          "Attaching click outside handler for ChatInformation (position: absolute)"
+        );
+        document.addEventListener("mousedown", handleClickOutsideChatInfo);
+      } else {
+        console.log(
+          "Removing click outside handler for ChatInformation (not absolute)"
+        );
+        document.removeEventListener("mousedown", handleClickOutsideChatInfo);
+      }
+    };
+
+    // Cập nhật sự kiện mousedown cho SearchPanel
+    const updateClickOutsideSearchPanel = () => {
+      if (
+        isSearchOpen &&
+        searchPanelRef.current &&
+        window.getComputedStyle(searchPanelRef.current).position === "absolute"
+      ) {
+        console.log(
+          "Attaching click outside handler for SearchPanel (position: absolute)"
+        );
+        document.addEventListener("mousedown", handleClickOutsideSearchPanel);
+      } else {
+        console.log(
+          "Removing click outside handler for SearchPanel (not absolute)"
+        );
+        document.removeEventListener(
+          "mousedown",
+          handleClickOutsideSearchPanel
+        );
+      }
+    };
+
+    // Tự đóng khi thu nhỏ từ xl xuống dưới xl
+    const handleMediaChange = (e) => {
+      if (!e.matches) {
+        if (isChatInfoOpen) {
+          console.log("Window resized below xl, closing ChatInformation");
+          toggleChatInfo(false);
+        }
+        if (isSearchOpen) {
+          console.log("Window resized below xl, closing SearchPanel");
+          toggleSearchPanel(false);
+        }
+      }
+    };
+
+    // Kiểm tra ban đầu
+    updateClickOutsideChatInfo();
+    updateClickOutsideSearchPanel();
+
+    // Theo dõi thay đổi media query
+    mediaQuery.addEventListener("change", handleMediaChange);
+
+    // Dọn dẹp
+    return () => {
+      console.log("Cleaning up listeners");
+      document.removeEventListener("mousedown", handleClickOutsideChatInfo);
+      document.removeEventListener("mousedown", handleClickOutsideSearchPanel);
+      mediaQuery.removeEventListener("change", handleMediaChange);
+    };
+  }, [isChatInfoOpen, toggleChatInfo, isSearchOpen, toggleSearchPanel]);
+
+  // Debug refs và position
+  useEffect(() => {
+    console.log("modalRef.current:", modalRef.current);
+    if (modalRef.current) {
+      console.log("modalRef classList:", modalRef.current.classList);
+      console.log(
+        "modalRef position:",
+        window.getComputedStyle(modalRef.current).position
+      );
+    }
+    console.log("searchPanelRef.current:", searchPanelRef.current);
+    if (searchPanelRef.current) {
+      console.log(
+        "searchPanelRef classList:",
+        searchPanelRef.current.classList
+      );
+      console.log(
+        "searchPanelRef position:",
+        window.getComputedStyle(searchPanelRef.current).position
+      );
+    }
+  }, [isChatInfoOpen, isSearchOpen]);
 
   return (
     <div className="flex gap-4 h-[calc(100vh-98px)] w-full">
@@ -42,6 +151,7 @@ const ChatViewContent = ({
               chat={activeChat}
               onSendMessage={onSendMessage}
               currentUser={currentUser}
+              onUpdateChat={onUpdateChat}
             />
           </div>
         ) : (
@@ -57,6 +167,14 @@ const ChatViewContent = ({
             ref={modalRef}
           >
             <ChatInformation />
+          </div>
+        )}
+        {isSearchOpen && (
+          <div
+            className="xl:relative absolute right-0 top-0 h-full"
+            ref={searchPanelRef}
+          >
+            <SearchPanel />
           </div>
         )}
       </div>
