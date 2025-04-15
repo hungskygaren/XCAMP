@@ -15,11 +15,10 @@ const ChatViewContent = ({
   onUpdateChat,
 }) => {
   const modalRef = useRef(null);
-  const searchPanelRef = useRef(null); // Thêm ref cho SearchPanel
+  const searchPanelRef = useRef(null);
   const { isChatInfoOpen, toggleChatInfo, isSearchOpen, toggleSearchPanel } =
     useChat();
 
-  // Đóng ChatInformation và SearchPanel khi nhấp ra ngoài (dưới xl) hoặc thu nhỏ từ xl
   useEffect(() => {
     const handleClickOutsideChatInfo = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -38,10 +37,8 @@ const ChatViewContent = ({
       }
     };
 
-    // Theo dõi breakpoint xl
     const mediaQuery = window.matchMedia("(min-width: 1280px)");
 
-    // Cập nhật sự kiện mousedown cho ChatInformation
     const updateClickOutsideChatInfo = () => {
       if (
         isChatInfoOpen &&
@@ -60,7 +57,6 @@ const ChatViewContent = ({
       }
     };
 
-    // Cập nhật sự kiện mousedown cho SearchPanel
     const updateClickOutsideSearchPanel = () => {
       if (
         isSearchOpen &&
@@ -82,7 +78,6 @@ const ChatViewContent = ({
       }
     };
 
-    // Tự đóng khi thu nhỏ từ xl xuống dưới xl
     const handleMediaChange = (e) => {
       if (!e.matches) {
         if (isChatInfoOpen) {
@@ -96,7 +91,6 @@ const ChatViewContent = ({
       }
     };
 
-    // Kiểm tra ban đầu
     updateClickOutsideChatInfo();
     updateClickOutsideSearchPanel();
 

@@ -3,12 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import TagManagement from "./TagManagement";
 import Image from "next/image";
 
-const SortDropdown = ({
-  isSortOpen,
-  setIsSortOpen,
-  onFilterByTag, // Hàm để lọc tin nhắn theo danh sách tag
-  chats,
-}) => {
+const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]); // Danh sách tag được chọn
   const [isTagManagementOpen, setIsTagManagementOpen] = useState(false);
@@ -30,7 +25,7 @@ const SortDropdown = ({
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target) &&
         buttonRef.current && // Kiểm tra thêm nút "Phân loại"
-        !buttonRef.current.contains(event.target) // Nếu nhấp vào nút thì không đóng
+        !buttonRef.current.contains(event.target)
       ) {
         setIsSortOpen(false);
       }
@@ -62,7 +57,7 @@ const SortDropdown = ({
   // Reset tất cả tag được chọn
   const handleResetTags = () => {
     setSelectedTags([]);
-    onFilterByTag([]); // Gửi mảng rỗng để reset lọc
+    onFilterByTag([]); //reset lọc
     setIsSortOpen(false); // Đóng dropdown
   };
 

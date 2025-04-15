@@ -7,7 +7,7 @@ import PinnedMessagesDetail from "./components/ChatInformation/PinnedMessagesDet
 import MediaAndLinks from "./components/ChatInformation/MediaAndLinks";
 import ChatActions from "./components/ChatInformation/ChatActions";
 import GroupMemberDetail from "./components/ChatInformation/GroupMemberDetail";
-import { useChat } from "../../../contexts/ChatContext"; // Điều chỉnh đường dẫn
+import { useChat } from "../../../contexts/ChatContext";
 import MediaAndLinksDetail from "./components/ChatInformation/MediaAndLinksDetail";
 
 export default function ChatInformation() {

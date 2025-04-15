@@ -41,9 +41,9 @@ const ChatItem = ({
       case "toggleNotification":
         onUpdateChat(chat.id, { isNotificationOff: !chat.isNotificationOff });
         break;
-      case "toggleFlag":
-        onUpdateChat(chat.id, { isFlagged: !chat.isFlagged });
-        break;
+      // case "toggleFlag":
+      //   onUpdateChat(chat.id, { isFlagged: !chat.isFlagged });
+      //   break;
       case "setTag":
         onUpdateChat(chat.id, { tag: value === chat.tag ? null : value });
         break;
@@ -301,7 +301,7 @@ const ChatItem = ({
                   }}
                 />
               )}
-              {chat.isFlagged && (
+              {/* {chat.isFlagged && (
                 <Image
                   width={18}
                   height={18}
@@ -313,7 +313,7 @@ const ChatItem = ({
                     handleToggle("isFlagged");
                   }}
                 />
-              )}
+              )} */}
             </div>
           </div>
         </div>
