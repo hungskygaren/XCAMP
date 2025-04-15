@@ -333,8 +333,8 @@ const ChatItem = ({
             <Image
               src={
                 chat.isPinned
-                  ? "/Chats/iconlist/verticalpin.png"
-                  : "/Chats/iconlist/unpin.png"
+                  ? "/Chats/iconlist/unpin.png"
+                  : "/Chats/iconlist/verticalpin.png"
               }
               alt=""
               className="w-[18px] h-[18px]"
@@ -373,7 +373,7 @@ const ChatItem = ({
             />
             {chat.isNotificationOff ? "Bật thông báo" : "Tắt thông báo"}
           </button>
-          <button
+          {/* <button
             className="flex items-center gap-2 w-full text-left text-black text-xs px-2 py-2 hover:bg-[#F4F5F6]"
             onClick={() => handleMenuAction("toggleFlag")}
           >
@@ -389,7 +389,7 @@ const ChatItem = ({
               className="w-[18px] h-[18px]"
             />
             {chat.isFlagged ? "Bỏ đánh dấu" : "Đánh dấu"}
-          </button>
+          </button> */}
 
           <div className="relative group">
             <button

@@ -1,6 +1,5 @@
-// src/components/features/chats/components/ChatDetail/PinnedMessagesHeader.js
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const PinnedMessagesChatDetail = ({
   pinnedMessages,
@@ -10,6 +9,26 @@ const PinnedMessagesChatDetail = ({
   onMessageClick,
   onOpenPinnedMessagesDetail,
 }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(null);
+  const dropdownRef = useRef(null);
+
+  const handleToggleDropdown = (messageId, event) => {
+    event.stopPropagation(); // Ngăn lan truyền để tránh gọi onMessageClick
+    setIsDropdownOpen(isDropdownOpen === messageId ? null : messageId);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(null);
+      }
+    };
+    if (isDropdownOpen !== null) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isDropdownOpen]); // Thêm dependency để tối ưu
+
   const getMessageSender = (senderId) => {
     return (
       pinnedMessages[0].participants.find((p) => p.id === senderId)?.name ||
@@ -42,14 +61,14 @@ const PinnedMessagesChatDetail = ({
             className="ml-[5px]"
             alt={attachment.type}
           />
-          <p className="text-sm text-[#141416] ml-[5px] truncate  ">
+          <p className="text-sm text-[#141416] ml-[5px] truncate">
             {attachment.name}
           </p>
         </div>
       );
     }
     return (
-      <p className="text-sm text-[#141416]  ml-[5px] ">
+      <p className="text-sm text-[#141416] ml-[5px]">
         {message.content.length > 30
           ? `${message.content.substring(0, 30)}...`
           : message.content}
@@ -58,10 +77,10 @@ const PinnedMessagesChatDetail = ({
   };
 
   const latestPinnedMessage = pinnedMessages[0];
-  // Thêm hàm xử lý nhấp "Xem tất cả ghim" để bỏ expand
+
   const handleViewAllPins = () => {
-    onOpenPinnedMessagesDetail(); // Mở ChatInformation với PinnedMessagesDetail
-    onToggleExpand(false); // Thêm dòng này để bỏ trạng thái expand
+    onOpenPinnedMessagesDetail();
+    onToggleExpand(false);
   };
 
   return (
@@ -80,31 +99,58 @@ const PinnedMessagesChatDetail = ({
                   height={18}
                   alt="Pin"
                 />
-                <div className="flex items-center  ">
+                <div className="flex items-center">
                   <p className="text-sm text-[#141416] text-nowrap truncate">{`${getMessageSender(
                     latestPinnedMessage.senderId
                   )} `}</p>
-                  <p className="flex items-center text-sm ml-1 "> :</p>
-
+                  <p className="flex items-center text-sm ml-1">:</p>
                   {renderPinnedContent(latestPinnedMessage)}
                 </div>
               </div>
-              <div className="text-xs text-[#777E90] ">
+              <div className="text-xs text-[#777E90]">
                 Được ghim bởi {getPinnedByName(latestPinnedMessage.pinnedBy)}
               </div>
             </div>
-
-            <Image
-              className="shrink"
-              src="/Chats/iconlist/3Dot.png"
-              width={18}
-              height={18}
-              alt="More"
-            />
+            <div className="relative">
+              <Image
+                className="shrink"
+                src="/Chats/iconlist/3Dot.png"
+                width={18}
+                height={18}
+                alt="More"
+                onClick={(e) => handleToggleDropdown(latestPinnedMessage.id, e)}
+              />
+              {/* Dòng cần thêm để hiển thị dropdown ở trạng thái thu gọn */}
+              {isDropdownOpen === latestPinnedMessage.id && (
+                <div
+                  ref={dropdownRef}
+                  className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                >
+                  <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
+                    <Image
+                      src="/Chats/iconchatdetail/forward.png"
+                      width={18}
+                      height={18}
+                      alt=""
+                    />
+                    Chuyển tiếp
+                  </button>
+                  <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
+                    <Image
+                      src="/Chats/iconlist/unpin.png"
+                      width={18}
+                      height={18}
+                      alt=""
+                    />
+                    Bỏ ghim tin nhắn
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
           {pinnedMessages.length > 1 && (
             <button
-              className="bg-[#F4F5F6] rounded-lg w-[54px] self-stretch flex items-center justify-center"
+              className="bg-[#F4F5F6] cursor-pointer rounded-lg w-[54px] self-stretch flex items-center justify-center"
               onClick={() => onToggleExpand(true)}
             >
               <div className="flex flex-col items-center justify-center py-2">
@@ -122,7 +168,7 @@ const PinnedMessagesChatDetail = ({
             <div className="flex justify-between w-full items-center">
               <div className="text-xs font-semibold">Tin nhắn đã ghim</div>
               <button
-                className="flex items-center gap-[5px]"
+                className="flex items-center gap-[5px] cursor-pointer"
                 onClick={() => onToggleExpand(false)}
               >
                 <div className="text-[#4A30B1] text-xs">Thu gọn</div>
@@ -138,7 +184,7 @@ const PinnedMessagesChatDetail = ({
               {pinnedMessages.map((msg) => (
                 <div
                   key={msg.id}
-                  className="rounded-lg bg-[#F4F5F6] w-full py-2.5 px-3 flex items-center justify-between cursor-pointer "
+                  className="rounded-lg bg-[#F4F5F6] w-full py-2.5 px-3 flex items-center justify-between cursor-pointer"
                   onClick={() => onMessageClick(msg.id)}
                 >
                   <div className="flex flex-col text-nowrap truncate">
@@ -149,11 +195,11 @@ const PinnedMessagesChatDetail = ({
                         height={18}
                         alt="Pin"
                       />
-                      <div className="flex items-center ">
-                        <p className="text-sm text-[#141416] ">{`${getMessageSender(
+                      <div className="flex items-center">
+                        <p className="text-sm text-[#141416]">{`${getMessageSender(
                           msg.senderId
                         )}`}</p>
-                        <p className="flex items-center text-sm ml-1 "> :</p>
+                        <p className="flex items-center text-sm ml-1">:</p>
                         {renderPinnedContent(msg)}
                       </div>
                     </div>
@@ -161,14 +207,40 @@ const PinnedMessagesChatDetail = ({
                       Được ghim bởi {getPinnedByName(msg.pinnedBy)}
                     </div>
                   </div>
-                  <div>
+                  <div className="relative">
                     <Image
                       className="shrink"
                       src="/Chats/iconlist/3Dot.png"
                       width={18}
                       height={18}
                       alt="More"
+                      onClick={(e) => handleToggleDropdown(msg.id, e)}
                     />
+                    {isDropdownOpen === msg.id && (
+                      <div
+                        ref={dropdownRef}
+                        className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                      >
+                        <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
+                          <Image
+                            src="/Chats/iconchatdetail/forward.png"
+                            width={18}
+                            height={18}
+                            alt=""
+                          />
+                          Chuyển tiếp
+                        </button>
+                        <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
+                          <Image
+                            src="/Chats/iconlist/unpin.png"
+                            width={18}
+                            height={18}
+                            alt=""
+                          />
+                          Bỏ ghim tin nhắn
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

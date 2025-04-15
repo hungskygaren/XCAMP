@@ -46,6 +46,7 @@ const mockFiles = [
 ];
 const SearchPanel = () => {
   const [search, setSearch] = useState("");
+  const { isSearchOpen, toggleSearchPanel } = useChat();
   return (
     <div className="w-[340px] h-full bg-white  rounded-[10px] transition-transform duration-300 transform translate-x-0">
       <div className="px-3.75 py-7 overflow-y-auto h-full">
@@ -60,7 +61,7 @@ const SearchPanel = () => {
               height={24}
               alt="Close"
               className="cursor-pointer"
-              onClick={() => toggleSearchPanel(false)}
+              onClick={() => toggleSearchPanel(!isSearchOpen)}
             />
           </div>
           <div className="mt-4 overflow-y-auto">

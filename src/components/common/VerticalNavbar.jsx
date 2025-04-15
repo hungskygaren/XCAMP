@@ -1,26 +1,25 @@
-"use client"; // Thêm dòng này vì useRouter yêu cầu component là Client Component trong Next.js App Router.
+"use client";
 
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation"; // Import useRouter và usePathname để điều hướng và kiểm tra route.
-import { useEffect, useState } from "react"; // Import useState và useEffect để quản lý trạng thái.
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function VerticalNavbar() {
-  const router = useRouter(); // Hook để điều hướng.
-  const pathname = usePathname(); // Hook để lấy đường dẫn hiện tại.
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Danh sách menu với route tương ứng
   const navItems = [
     { name: "Trang chủ", icon: "/VerticalBar/home.png", route: "/" },
     { name: "Kênh", icon: "/VerticalBar/network.png", route: "/channels" },
-    { name: "Tin nhắn", icon: "/VerticalBar/messeage.png", route: "/chats" }, // Route cho chat
+    { name: "Tin nhắn", icon: "/VerticalBar/messeage.png", route: "/chats" },
     { name: "Email", icon: "/VerticalBar/envelope 1.png", route: "/email" },
     { name: "Cuộc họp", icon: "/VerticalBar/video.png", route: "/meetings" },
     { name: "Tài liệu", icon: "/VerticalBar/folder.png", route: "/documents" },
   ];
 
-  // Hàm xử lý khi click vào một mục
   const handleNavClick = (route) => {
-    router.push(route); // Chuyển hướng đến route tương ứng.
+    router.push(route);
   };
 
   return (
@@ -35,10 +34,10 @@ export default function VerticalNavbar() {
         {navItems.map((item, index) => (
           <li
             key={index}
-            onClick={() => handleNavClick(item.route)} // Gọi hàm điều hướng khi click.
+            onClick={() => handleNavClick(item.route)}
             className={`rounded-[.5rem] hover:bg-[#feb7cd] cursor-pointer flex items-center justify-center ${
               pathname === item.route
-                ? "bg-[#fce0e9] w-[3.5rem] h-[3.5rem]" // Đánh dấu active nếu route hiện tại khớp.
+                ? "bg-[#fce0e9] w-[3.5rem] h-[3.5rem]"
                 : "w-[3.5rem] h-[3.5rem]"
             }`}
           >

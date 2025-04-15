@@ -1,780 +1,4 @@
 {
-  "emails": [
-    {
-      "id": "1",
-      "category": "inbox",
-      "sender": {
-        "name": "Peggy from Quire",
-        "email": "peggy@quire.com",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [
-        {
-          "name": "Lưu Thị Dung",
-          "email": "dung.luuthi@nitto.com"
-        }
-      ],
-      "subject": "Invitation: Quire Webinar on Product Updates",
-      "timestamp": "2025-03-10T09:15:00Z",
-      "isUnread": true,
-      "hasAttachment": false,
-      "summary": "Join our webinar to explore the latest Quire updates!",
-      "content": {
-        "body": "Dear Sang Nguyễn,\n\nI’m Peggy, the Customer Success Manager at Quire. We’re excited to invite you to our upcoming webinar on March 15, 2025, where we’ll showcase the latest updates to our product. This session will cover new features, performance improvements, and tips to maximize your productivity using Quire. We’ll also have a live Q&A session with our product team.\n\nPlease RSVP by March 12 to secure your spot. Looking forward to seeing you there!\n\nBest regards,\nPeggy",
-        "signature": {
-          "company": "Quire Inc.",
-          "details": [
-            "Address: 123 Tech Street, Hanoi, Vietnam",
-            "Tel: +84-123-456-789",
-            "Email: peggy@quire.com"
-          ]
-        }
-      }
-    },
-    {
-      "id": "2",
-      "category": "sent",
-      "tagIds": [
-        "website"
-      ],
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Nga Nguyễn",
-          "email": "nga.nguyenthithuy@nitto.com"
-        }
-      ],
-      "cc": [
-        {
-          "name": "Đào Phương Uyên",
-          "email": "uyen.dao@techup.vn"
-        }
-      ],
-      "subject": "Báo giá thiết kế website cho Nitto",
-      "timestamp": "2025-03-09T14:30:00Z",
-      "isUnread": false,
-      "hasAttachment": true,
-      "attachments": [
-        {
-          "name": "Báo giá website.pdf",
-          "size": "1.8 MB",
-          "url": "/attachments/website.pdf"
-        }
-      ],
-      "images": [
-        {
-          "src": "/ảnhmẫu.png",
-          "alt": "Thiết kế lịch",
-          "caption": "Mẫu thiết kế"
-        },
-        {
-          "src": "/ảnhmẫu.png",
-          "alt": "Thiết kế lịch",
-          "caption": "Mẫu thiết kế"
-        }
-      ],
-      "summary": "Gửi Nga báo giá thiết kế website cho Nitto",
-      "content": {
-        "body": "Chào Nga,\n\nAnh gửi em báo giá chi tiết cho dự án thiết kế website của Nitto. Trong tài liệu đính kèm, em sẽ thấy các hạng mục bao gồm thiết kế giao diện, phát triển backend, và tích hợp hệ thống quản lý nội dung (CMS). Tổng chi phí dự kiến là 150 triệu VND, thời gian hoàn thành khoảng 6 tuần. Nếu em cần chỉnh sửa hoặc bổ sung gì, cứ báo anh nhé. Anh cũng đính kèm một số mẫu thiết kế để em tham khảo.\n\nThân ái,\nSang",
-        "signature": {
-          "company": "TECHUP Corporation",
-          "details": [
-            "Address: 46 Nam Ngư, Cửa Nam, Hoàn Kiếm, Hà Nội",
-            "Tel: +84 981 077 093",
-            "Email: sang.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "3",
-      "category": "drafts",
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Nguyễn Tuấn Anh",
-          "email": "tuananh.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Cập nhật tiến độ dự án phần mềm",
-      "timestamp": "2025-03-11T08:00:00Z",
-      "isUnread": false,
-      "hasAttachment": false,
-      "summary": "Bản nháp cập nhật tiến độ dự án phần mềm",
-      "content": {
-        "body": "Chào Tuấn Anh,\n\nAnh đang soạn email để cập nhật tiến độ dự án phần mềm cho team. Hiện tại, chúng ta đã hoàn thành 70% giai đoạn phát triển backend, frontend đang trong quá trình tối ưu giao diện. Dự kiến tuần sau sẽ bắt đầu testing. Em có thể gửi anh báo cáo chi tiết về các bug đã fix trong tuần này để anh tổng hợp không? Ngoài ra, anh cũng muốn thảo luận thêm về việc tích hợp API bên thứ ba, vì khách hàng vừa yêu cầu bổ sung tính năng mới.\n\nThân,\nSang",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: sang.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "4",
-      "category": "trash",
-      "sender": {
-        "name": "Test User",
-        "email": "test@example.com",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Test Email - Please Ignore",
-      "timestamp": "2025-02-15T10:00:00Z",
-      "isUnread": false,
-      "hasAttachment": false,
-      "summary": "This is a test email moved to trash",
-      "content": {
-        "body": "Dear Sang,\n\nThis is just a test email to check the system functionality. It contains no valuable information and has been moved to trash. If you’re seeing this, it’s probably because I forgot to delete it earlier. Please ignore it unless I tell you otherwise.\n\nRegards,\nTest User",
-        "signature": {
-          "company": "Example Corp",
-          "details": []
-        }
-      }
-    },
-    {
-      "id": "5",
-      "category": "scheduled",
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Lưu Thị Dung",
-          "email": "dung.luuthi@nitto.com"
-        }
-      ],
-      "cc": [],
-      "subject": "Reminder: Meeting on Project Timeline",
-      "timestamp": "2025-03-12T09:00:00Z",
-      "isUnread": false,
-      "hasAttachment": false,
-      "summary": "Scheduled reminder for project meeting",
-      "content": {
-        "body": "Chào Dung,\n\nAnh lên lịch gửi email này để nhắc em về cuộc họp ngày 15/3 lúc 10:00 sáng. Chúng ta sẽ thảo luận về timeline dự án và phân công nhiệm vụ cho giai đoạn tiếp theo. Nếu em có tài liệu nào cần chuẩn bị trước, cứ gửi anh nhé. Hy vọng cuộc họp sẽ giúp team mình đẩy nhanh tiến độ.\n\nThân,\nSang",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: sang.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "6",
-      "category": "archive",
-      "sender": {
-        "name": "Nga Nguyễn",
-        "email": "nga.nguyenthithuy@nitto.com",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Old Project Files",
-      "timestamp": "2025-01-20T11:45:00Z",
-      "isUnread": false,
-      "hasAttachment": true,
-      "attachments": [
-        {
-          "name": "Files.zip",
-          "size": "3.2 MB",
-          "url": "/attachments/files.zip"
-        }
-      ],
-      "summary": "Archived files from last year’s project",
-      "content": {
-        "body": "Anh Sang ơi,\n\nEm gửi anh file nén chứa toàn bộ tài liệu của dự án năm ngoái để lưu trữ. Trong đó có các báo cáo, thiết kế, và hợp đồng đã ký với khách hàng. Nếu anh cần xem lại chi tiết nào, cứ unzip file ra nhé. Em đã lưu trữ email này để tiện tra cứu sau này.\n\nThanks,\nNga",
-        "signature": {
-          "company": "NITTO DENKO",
-          "details": [
-            "Email: nga.nguyenthithuy@nitto.com"
-          ]
-        }
-      }
-    },
-    {
-      "id": "7",
-      "category": "flagged",
-      "sender": {
-        "name": "Đào Phương Uyên",
-        "email": "uyen.dao@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Urgent: Client Feedback",
-      "timestamp": "2025-03-08T13:20:00Z",
-      "isUnread": true,
-      "hasAttachment": false,
-      "summary": "Client feedback needs immediate attention",
-      "content": {
-        "body": "Anh Sang,\n\nEm vừa nhận phản hồi từ khách hàng về bản thiết kế website. Họ yêu cầu chỉnh sửa một số chi tiết về màu sắc và bố cục, đồng thời muốn thêm tính năng đăng nhập bằng Google. Deadline là cuối tuần này, nên anh xem xét và cho em hướng xử lý nhé. Em đánh dấu email này để anh ưu tiên xem.\n\nCảm ơn anh,\nUyên",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: uyen.dao@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "8",
-      "category": "spam",
-      "sender": {
-        "name": "Promo Bot",
-        "email": "promo@spam.com",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Win a Free Vacation!",
-      "timestamp": "2025-03-05T07:00:00Z",
-      "isUnread": false,
-      "hasAttachment": false,
-      "summary": "Spam email about a fake vacation prize",
-      "content": {
-        "body": "Congratulations Sang Nguyễn!\n\nYou’ve been selected to win a free vacation to Hawaii! Click the link below to claim your prize now. Don’t miss out on this once-in-a-lifetime opportunity! Offer expires in 24 hours.\n\nBest,\nPromo Bot",
-        "signature": {
-          "company": "Spam Corp",
-          "details": []
-        }
-      }
-    },
-    {
-      "id": "9",
-      "category": "tags",
-      "tagIds": [
-        "phần-mềm"
-      ],
-      "sender": {
-        "name": "Nguyễn Tuấn Anh",
-        "email": "tuananh.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Software Development Progress",
-      "timestamp": "2025-02-28T15:10:00Z",
-      "isUnread": false,
-      "hasAttachment": false,
-      "summary": "Update on software development",
-      "content": {
-        "body": "Chào anh Sang,\n\nEm báo cáo tiến độ phát triển phần mềm: hiện tại backend đã xong 80%, frontend đang tối ưu UI/UX. Tuần tới team sẽ bắt đầu test các module chính. Anh có muốn tổ chức một buổi review để kiểm tra không? Em gắn tag ‘phần-mềm’ để tiện theo dõi.\n\nThân,\nTuấn Anh",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: tuananh.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "10",
-      "category": "inbox",
-      "sender": {
-        "name": "Lưu Thị Dung",
-        "email": "dung.luuthi@nitto.com",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Request for Project Timeline",
-      "timestamp": "2025-03-07T10:30:00Z",
-      "isUnread": true,
-      "hasAttachment": false,
-      "images": [
-        {
-          "src": "/ảnhmẫu.png",
-          "alt": "Thiết kế lịch",
-          "caption": "Mẫu thiết kế"
-        }
-      ],
-      "summary": "Requesting timeline for Nitto project",
-      "content": {
-        "body": "Anh Sang ơi,\n\nEm cần anh gửi lại timeline chi tiết cho dự án Nitto để báo cáo lên sếp. Hiện tại bên em đang lên kế hoạch sản xuất, nên cần biết thời gian hoàn thành các hạng mục thiết kế và phát triển. Anh gửi em trước thứ 6 này nhé. Em đính kèm mẫu thiết kế để anh tham khảo thêm.\n\nCảm ơn anh,\nDung",
-        "signature": {
-          "company": "NITTO DENKO",
-          "details": [
-            "Email: dung.luuthi@nitto.com"
-          ]
-        }
-      }
-    },
-    {
-      "id": "11",
-      "category": "sent",
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Peggy from Quire",
-          "email": "peggy@quire.com"
-        }
-      ],
-      "cc": [],
-      "subject": "Confirmation: Webinar Attendance",
-      "timestamp": "2025-03-10T11:00:00Z",
-      "isUnread": false,
-      "hasAttachment": false,
-      "summary": "Confirming attendance for Quire webinar",
-      "content": {
-        "body": "Dear Peggy,\n\nThank you for the webinar invitation. I’m confirming my attendance for the session on March 15. I’m particularly interested in the new features and the Q&A session. Please let me know if there’s anything I need to prepare beforehand. Looking forward to it!\n\nBest regards,\nSang",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: sang.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "12",
-      "category": "drafts",
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [],
-      "cc": [],
-      "subject": "Team Meeting Agenda",
-      "timestamp": "2025-03-11T09:15:00Z",
-      "isUnread": false,
-      "hasAttachment": false,
-      "summary": "Draft agenda for team meeting",
-      "content": {
-        "body": "Chào team,\n\nAnh đang soạn agenda cho cuộc họp tuần này. Các nội dung chính bao gồm: 1) Báo cáo tiến độ dự án, 2) Phân công nhiệm vụ mới, 3) Thảo luận yêu cầu từ khách hàng. Nếu ai có đề xuất gì muốn đưa vào, cứ nhắn anh trước thứ 4 nhé. Dự kiến họp vào thứ 5, 10:00 sáng.\n\nThân,\nSang",
-        "signature": {
-          "company": "TECHUP",
-          "details": []
-        }
-      }
-    },
-    {
-      "id": "13",
-      "category": "trash",
-      "sender": {
-        "name": "Old Client",
-        "email": "oldclient@example.com",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Outdated Invoice",
-      "timestamp": "2025-01-10T14:00:00Z",
-      "isUnread": false,
-      "hasAttachment": true,
-      "attachments": [
-        {
-          "name": "Invoice.pdf",
-          "size": "500 KB",
-          "url": "/attachments/invoice.pdf"
-        }
-      ],
-      "summary": "Old invoice moved to trash",
-      "content": {
-        "body": "Dear Sang,\n\nAttached is the invoice for our last project from January 2024. Since the project is completed and payment was settled, I’m sending this for your records. Let me know if you need any clarification.\n\nRegards,\nOld Client",
-        "signature": {
-          "company": "Old Corp",
-          "details": []
-        }
-      }
-    },
-    {
-      "id": "14",
-      "category": "scheduled",
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Đào Phương Uyên",
-          "email": "uyen.dao@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Follow-up: Client Feedback",
-      "timestamp": "2025-03-13T08:00:00Z",
-      "isUnread": false,
-      "hasAttachment": false,
-      "summary": "Scheduled follow-up on client feedback",
-      "content": {
-        "body": "Chào Uyên,\n\nAnh lên lịch gửi email này để follow-up về phản hồi của khách hàng. Sau khi xem email em gửi, anh đồng ý với hướng chỉnh sửa giao diện và thêm tính năng Google login. Em có thể bắt đầu implement và gửi anh bản draft trước thứ 6 không? Nếu cần hỗ trợ gì, cứ báo anh nhé.\n\nThân,\nSang",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: sang.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "15",
-      "category": "archive",
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Nga Nguyễn",
-          "email": "nga.nguyenthithuy@nitto.com"
-        }
-      ],
-      "cc": [],
-      "subject": "Completed Project Report",
-      "timestamp": "2025-02-01T16:00:00Z",
-      "isUnread": false,
-      "hasAttachment": true,
-      "attachments": [
-        {
-          "name": "Report.pdf",
-          "size": "2.1 MB",
-          "url": "/attachments/report.pdf"
-        }
-      ],
-      "images": [
-        {
-          "src": "/ảnhmẫu.png",
-          "alt": "Thiết kế lịch",
-          "caption": "Mẫu thiết kế"
-        }
-      ],
-      "summary": "Archived report for completed project",
-      "content": {
-        "body": "Chào Nga,\n\nAnh gửi em báo cáo tổng kết dự án vừa hoàn thành vào tháng 1. Trong file đính kèm có chi tiết các giai đoạn, kết quả, và phản hồi từ khách hàng. Em lưu trữ lại để sau này tham khảo nhé. Anh cũng đính kèm một mẫu thiết kế cuối cùng để đối chiếu.\n\nThân,\nSang",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: sang.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "16",
-      "category": "flagged",
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Nguyễn Tuấn Anh",
-          "email": "tuananh.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Urgent: Bug Report",
-      "timestamp": "2025-03-06T09:45:00Z",
-      "isUnread": false,
-      "hasAttachment": false,
-      "summary": "Flagged email about urgent bug",
-      "content": {
-        "body": "Chào Tuấn Anh,\n\nAnh vừa nhận báo cáo từ khách hàng về một bug nghiêm trọng trong phần mềm: tính năng export dữ liệu bị lỗi khi xử lý file lớn. Em kiểm tra và fix gấp nhé, deadline là thứ 5 này. Anh đánh dấu email này để theo dõi tiến độ. Cần hỗ trợ gì cứ báo anh.\n\nThân,\nSang",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: sang.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "17",
-      "category": "spam",
-      "sender": {
-        "name": "Fake Shop",
-        "email": "sales@fakeshop.com",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "50% Off Everything!",
-      "timestamp": "2025-03-03T12:00:00Z",
-      "isUnread": true,
-      "hasAttachment": false,
-      "summary": "Spam email with fake discount offer",
-      "content": {
-        "body": "Dear Sang,\n\nGet 50% off everything at Fake Shop this week only! Shop now for exclusive deals on electronics, clothing, and more. Click here to claim your discount before it’s gone!\n\nBest,\nFake Shop Team",
-        "signature": {
-          "company": "Fake Shop",
-          "details": []
-        }
-      }
-    },
-    {
-      "id": "18",
-      "category": "tags",
-      "tagIds": [
-        "website",
-        "phần-mềm"
-      ],
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Đào Phương Uyên",
-          "email": "uyen.dao@techup.vn"
-        }
-      ],
-      "cc": [],
-      "subject": "Website & Software Integration",
-      "timestamp": "2025-02-25T14:15:00Z",
-      "isUnread": false,
-      "hasAttachment": true,
-      "attachments": [
-        {
-          "name": "Plan.docx",
-          "size": "900 KB",
-          "url": "/attachments/plan.docx"
-        }
-      ],
-      "images": [
-        {
-          "src": "/ảnhmẫu.png",
-          "alt": "Thiết kế lịch",
-          "caption": "Mẫu thiết kế"
-        }
-      ],
-      "summary": "Plan for website and software integration",
-      "content": {
-        "body": "Chào Uyên,\n\nAnh gửi em kế hoạch tích hợp website và phần mềm quản lý nội dung. Trong file đính kèm, anh đã liệt kê các bước: thiết kế giao diện, phát triển API, và triển khai CMS. Em xem và cho ý kiến nhé. Anh cũng đính kèm một mẫu thiết kế để tham khảo. Gắn tag ‘website’ và ‘phần-mềm’ để tiện theo dõi.\n\nThân,\nSang",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: sang.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "19",
-      "category": "inbox",
-      "sender": {
-        "name": "Nguyễn Tuấn Anh",
-        "email": "tuananh.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [
-        {
-          "name": "Đào Phương Uyên",
-          "email": "uyen.dao@techup.vn"
-        }
-      ],
-      "subject": "Bug Fix Update",
-      "timestamp": "2025-03-07T16:30:00Z",
-      "isUnread": true,
-      "hasAttachment": false,
-      "summary": "Update on bug fix progress",
-      "content": {
-        "body": "Anh Sang,\n\nEm đã fix xong bug export dữ liệu mà anh báo hôm trước. Nguyên nhân là do bộ nhớ đệm bị đầy khi xử lý file lớn. Hiện tại tính năng đã hoạt động ổn định với file lên tới 500MB. Anh test lại giúp em nhé, nếu ok thì em sẽ deploy lên production. CC Uyên để theo dõi.\n\nThân,\nTuấn Anh",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: tuananh.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "20",
-      "category": "sent",
-      "sender": {
-        "name": "Sang Nguyễn",
-        "email": "sang.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Lưu Thị Dung",
-          "email": "dung.luuthi@nitto.com"
-        }
-      ],
-      "cc": [],
-      "subject": "Project Timeline for Nitto",
-      "timestamp": "2025-03-08T10:00:00Z",
-      "isUnread": false,
-      "hasAttachment": true,
-      "attachments": [
-        {
-          "name": "Timeline.xlsx",
-          "size": "1.2 MB",
-          "url": "/attachments/timeline.xlsx"
-        }
-      ],
-      "images": [
-        {
-          "src": "/ảnhmẫu.png",
-          "alt": "Thiết kế lịch",
-          "caption": "Mẫu thiết kế"
-        }
-      ],
-      "summary": "Sent timeline for Nitto project",
-      "content": {
-        "body": "Chào Dung,\n\nAnh gửi em timeline chi tiết cho dự án Nitto như em yêu cầu. Trong file Excel đính kèm, anh đã chia nhỏ các giai đoạn: thiết kế (2 tuần), phát triển (3 tuần), và testing (1 tuần). Tổng thời gian dự kiến là 6 tuần, bắt đầu từ 15/3. Em xem và phản hồi nếu cần chỉnh sửa nhé. Anh cũng đính kèm mẫu thiết kế để đối chiếu.\n\nThân,\nSang",
-        "signature": {
-          "company": "TECHUP",
-          "details": [
-            "Email: sang.nguyen@techup.vn"
-          ]
-        }
-      }
-    },
-    {
-      "id": "21",
-      "category": "inbox",
-      "sender": {
-        "name": "Nguyễn Tuấn Anh",
-        "email": "tuananh.nguyen@techup.vn",
-        "avatar": "/avatar.png"
-      },
-      "recipients": [
-        {
-          "name": "Sang Nguyễn",
-          "email": "sang.nguyen@techup.vn"
-        }
-      ],
-      "cc": [
-        {
-          "name": "Lưu Thị Dung",
-          "email": "dung.luuthi@nitto.com"
-        },
-        {
-          "name": "Đào Phương Uyên",
-          "email": "uyen.dao@techup.vn"
-        }
-      ],
-      "subject": "RE: [External] Trả lời: TECHUP - YÊU CẦU BÁO GIÁ LỊCH",
-      "timestamp": "2024-10-09T11:20:00Z",
-      "isUnread": false,
-      "hasAttachment": true,
-      "attachments": [
-        {
-          "name": "Ý tưởng lịch Nitto.xlsx",
-          "size": "840.8 KB",
-          "url": "/attachments/nitto.xlsx"
-        },
-        {
-          "name": "Thiết kế lịch Nitto.pdf",
-          "size": "1.2 MB",
-          "url": "/attachments/nitto.pdf"
-        }
-      ],
-      "images": [
-        {
-          "src": "/ảnhmẫu.png",
-          "alt": "Thiết kế lịch",
-          "caption": "Mẫu thiết kế"
-        },
-        {
-          "src": "/ảnhmẫu.png",
-          "alt": "Thiết kế lịch",
-          "caption": "Mẫu thiết kế"
-        },
-        {
-          "src": "/ảnhmẫu.png",
-          "alt": "Thiết kế lịch",
-          "caption": "Mẫu thiết kế"
-        }
-      ],
-      "summary": "Dear anh Sang, Báo giá bản scan là đc anh ạ...",
-      "content": {
-        "body": "Dear anh Sang,\n\nBáo giá bản scan là đc anh ạ.\n\nBest regards,\nNguyễn Tuấn Anh",
-        "signature": {
-          "company": "TECHUP Corporation",
-          "details": [
-            "Address: 46 Nam Ngư, Cửa Nam, Hoàn Kiếm, Hà Nội",
-            "Tel: +84 981 077 093",
-            "Email: tuananh.nguyen@techup.vn"
-          ]
-        },
-        "forwarded": {
-          "sender": {
-            "name": "Sang Nguyễn",
-            "email": "sang.nguyen@techup.vn"
-          },
-          "timestamp": "2024-10-09T16:03:00Z",
-          "body": "Dear Nga,\n\nEm cung cấp giúp bên anh thông tin người nhận và địa chỉ cụ thể để bên anh chuyển báo giá qua nhé.\n\nCảm ơn em,\nSang"
-        }
-      }
-    }
-  ],
   "actions": [
     {
       "id": "1",
@@ -888,9 +112,7 @@
           "content": "Chào anh Sang, em đã nhận được yêu cầu báo giá lịch từ công ty Nitto rồi ạ...",
           "timestamp": "2024-10-09T09:30:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": [],
           "isPinned": true,
           "pinnedBy": "2"
@@ -901,9 +123,7 @@
           "content": "Chào anh Sang, em đã nhận được yêu cầu báo giá lịch từ công ty Nitto rồi ạ...",
           "timestamp": "2024-10-09T09:30:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": []
         },
         {
@@ -912,10 +132,7 @@
           "content": "Chào Tuấn Anh, tốt quá. Em đã liên hệ với bên đối tác chưa?",
           "timestamp": "2024-10-09T09:32:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "1"
-          ],
+          "readBy": ["2", "1"],
           "attachments": []
         },
         {
@@ -924,9 +141,7 @@
           "content": "Dạ em đã gọi điện và gửi email cho bên đối tác rồi ạ...",
           "timestamp": "2024-10-09T09:35:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": []
         },
         {
@@ -935,10 +150,7 @@
           "content": "Ok em, khi nào có báo giá thì gửi anh xem nhé.",
           "timestamp": "2024-10-09T09:36:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "1"
-          ],
+          "readBy": ["2", "1"],
           "attachments": []
         },
         {
@@ -947,9 +159,7 @@
           "content": "Vâng ạ. Em vừa nhận được file thiết kế mẫu từ bên Nitto...",
           "timestamp": "2024-10-09T11:15:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": [
             {
               "id": "1001",
@@ -968,10 +178,7 @@
           "content": "Anh đã xem qua rồi, trông ổn đấy. Có điều chỉnh gì không em?",
           "timestamp": "2024-10-09T11:25:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "1"
-          ],
+          "readBy": ["2", "1"],
           "attachments": []
         },
         {
@@ -980,9 +187,7 @@
           "content": "Dạ không ạ, bên Nitto họ đã duyệt mẫu này rồi...",
           "timestamp": "2024-10-09T11:28:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": []
         },
         {
@@ -991,9 +196,7 @@
           "content": "em gửi video ",
           "timestamp": "2024-10-09T11:15:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": []
         },
         {
@@ -1002,9 +205,7 @@
           "content": "",
           "timestamp": "2024-10-09T11:15:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": [
             {
               "id": "1743757088216vj7s7gj6q7",
@@ -1107,7 +308,7 @@
           "name": "Lưu Thị Dung",
           "email": "dung.luuthi@nitto.com",
           "avatar": "/chats/avatar3.png",
-          "isOnline": false,
+          "isOnline": true,
           "lastSeen": "2024-10-09T10:15:00Z"
         }
       ],
@@ -1118,9 +319,7 @@
           "content": "Chào anh Sang, tôi là Lưu Thị Dung từ công ty Nitto.",
           "timestamp": "2024-10-08T14:20:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": []
         },
         {
@@ -1129,10 +328,7 @@
           "content": "Chào chị Dung, rất vui được làm việc với chị. Chúng tôi đã nhận được yêu cầu báo giá lịch của Nitto.",
           "timestamp": "2024-10-08T14:25:00Z",
           "isRead": true,
-          "readBy": [
-            "3",
-            "1"
-          ],
+          "readBy": ["3", "1"],
           "attachments": []
         },
         {
@@ -1141,9 +337,7 @@
           "content": "Vâng, chúng tôi đang cần báo giá cho lịch năm 2025. Tôi có gửi một số yêu cầu chi tiết qua email rồi.",
           "timestamp": "2024-10-08T14:30:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": []
         },
         {
@@ -1152,10 +346,7 @@
           "content": "Tôi đã nhận được email. Chúng tôi sẽ gửi báo giá chi tiết cho chị trong ngày mai.",
           "timestamp": "2024-10-08T14:33:00Z",
           "isRead": true,
-          "readBy": [
-            "3",
-            "1"
-          ],
+          "readBy": ["3", "1"],
           "attachments": []
         },
         {
@@ -1164,9 +355,7 @@
           "content": "Cảm ơn anh. Chúng tôi cần báo giá sớm để kịp trình lãnh đạo phê duyệt.",
           "timestamp": "2024-10-08T14:35:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": []
         },
         {
@@ -1175,10 +364,7 @@
           "content": "xczxcxzc",
           "timestamp": "2025-03-13T08:55:51.962Z",
           "isRead": true,
-          "readBy": [
-            "3",
-            "1"
-          ],
+          "readBy": ["3", "1"],
           "attachments": []
         },
         {
@@ -1305,11 +491,7 @@
           "content": "Chào mọi người, tôi tạo nhóm này để trao đổi về dự án lịch cho Nitto năm 2025.",
           "timestamp": "2024-10-07T10:00:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4"
-          ],
+          "readBy": ["2", "3", "4"],
           "attachments": []
         },
         {
@@ -1318,11 +500,7 @@
           "content": "Cảm ơn anh Sang. Tôi là Dung từ Nitto. Chúng tôi rất mong được hợp tác với TECHUP cho dự án lịch này.",
           "timestamp": "2024-10-07T10:05:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "4",
-            "1"
-          ],
+          "readBy": ["2", "4", "1"],
           "attachments": []
         },
         {
@@ -1331,11 +509,7 @@
           "content": "Chào chị Dung. Em là Tuấn Anh, phụ trách thiết kế của dự án này. Em sẽ làm việc trực tiếp với chị về các mẫu thiết kế.",
           "timestamp": "2024-10-07T10:08:00Z",
           "isRead": true,
-          "readBy": [
-            "3",
-            "4",
-            "1"
-          ],
+          "readBy": ["3", "4", "1"],
           "attachments": []
         },
         {
@@ -1344,12 +518,7 @@
           "content": "Chào mọi người. Mình là Uyên, phụ trách phần sản xuất và in ấn. Mình sẽ phối hợp với các bên để đảm bảo chất lượng sản phẩm tốt nhất.",
           "timestamp": "2024-10-07T10:12:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "1"
-          ],
+          "readBy": ["2", "3", "4", "1"],
           "attachments": []
         },
         {
@@ -1358,12 +527,7 @@
           "content": "Tôi đã gửi một số ý tưởng và yêu cầu ban đầu qua email. Mọi người có thể xem qua để nắm được định hướng của chúng tôi.",
           "timestamp": "2024-10-07T10:15:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "1"
-          ],
+          "readBy": ["2", "3", "4", "1"],
           "attachments": [
             {
               "id": "3001",
@@ -1380,12 +544,7 @@
           "content": "Em đã xem qua tài liệu rồi ạ. Em sẽ chuẩn bị một số mẫu thiết kế dựa trên ý tưởng này và gửi lại cho mọi người trong tuần tới.",
           "timestamp": "2024-10-07T10:20:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "1"
-          ],
+          "readBy": ["2", "3", "4", "1"],
           "attachments": []
         },
         {
@@ -1394,12 +553,7 @@
           "content": "Tốt lắm. Chúng ta hẹn họp online vào thứ Năm tuần này để thảo luận chi tiết hơn nhé.",
           "timestamp": "2024-10-07T10:25:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "1"
-          ],
+          "readBy": ["2", "3", "4", "1"],
           "attachments": []
         },
         {
@@ -1408,13 +562,7 @@
           "content": "AAAAA",
           "timestamp": "2025-04-01T08:23:41.797Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "6",
-            "7"
-          ],
+          "readBy": ["2", "3", "4", "6", "7"],
           "attachments": []
         },
         {
@@ -1423,13 +571,7 @@
           "content": "cxc",
           "timestamp": "2025-04-01T08:26:10.882Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "6",
-            "7"
-          ],
+          "readBy": ["2", "3", "4", "6", "7"],
           "attachments": []
         },
         {
@@ -1438,13 +580,7 @@
           "content": "fdsfdf",
           "timestamp": "2025-04-01T08:26:17.279Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "6",
-            "7"
-          ],
+          "readBy": ["2", "3", "4", "6", "7"],
           "attachments": []
         },
         {
@@ -1453,13 +589,7 @@
           "content": "nihao",
           "timestamp": "2025-04-04T08:55:45.860Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "6",
-            "7"
-          ],
+          "readBy": ["2", "3", "4", "6", "7"],
           "attachments": []
         },
         {
@@ -1468,13 +598,7 @@
           "content": "",
           "timestamp": "2025-04-04T08:58:10.001Z",
           "isRead": true,
-          "readBy": [
-            "1",
-            "3",
-            "4",
-            "6",
-            "7"
-          ],
+          "readBy": ["1", "3", "4", "6", "7"],
           "attachments": [
             {
               "id": "1743757088216vj7s7gj6q7",
@@ -1522,10 +646,7 @@
           "content": "Uyên ơi, em liên hệ với nhà in chưa?",
           "timestamp": "2024-10-08T09:00:00Z",
           "isRead": true,
-          "readBy": [
-            "4",
-            "1"
-          ],
+          "readBy": ["4", "1"],
           "attachments": []
         },
         {
@@ -1534,9 +655,7 @@
           "content": "Em chào anh. Em đã liên hệ với 3 nhà in rồi ạ. Họ hẹn chiều nay sẽ gửi báo giá cho mình.",
           "timestamp": "2024-10-08T09:05:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": []
         },
         {
@@ -1545,10 +664,7 @@
           "content": "Tốt, khi nào có báo giá thì gửi anh xem nhé.",
           "timestamp": "2024-10-08T09:07:00Z",
           "isRead": true,
-          "readBy": [
-            "4",
-            "1"
-          ],
+          "readBy": ["4", "1"],
           "attachments": []
         },
         {
@@ -1557,9 +673,7 @@
           "content": "Vâng ạ, em sẽ tổng hợp và gửi anh sau khi nhận đủ.",
           "timestamp": "2024-10-08T09:10:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": []
         },
         {
@@ -1568,9 +682,7 @@
           "content": "Anh Sang, em đã nhận được báo giá từ 3 nhà in rồi ạ. Em gửi anh xem qua.",
           "timestamp": "2024-10-08T15:30:00Z",
           "isRead": true,
-          "readBy": [
-            "1"
-          ],
+          "readBy": ["1"],
           "attachments": [
             {
               "id": "4001",
@@ -1587,10 +699,7 @@
           "content": "Anh đã nhận được, cảm ơn em.",
           "timestamp": "2024-10-08T15:35:00Z",
           "isRead": true,
-          "readBy": [
-            "4",
-            "1"
-          ],
+          "readBy": ["4", "1"],
           "attachments": []
         },
         {
@@ -1599,10 +708,7 @@
           "content": "ko",
           "timestamp": "2025-03-13T04:32:19.931Z",
           "isRead": true,
-          "readBy": [
-            "4",
-            "1"
-          ],
+          "readBy": ["4", "1"],
           "attachments": []
         },
         {
@@ -1611,10 +717,7 @@
           "content": "sdss",
           "timestamp": "2025-03-13T08:54:47.915Z",
           "isRead": true,
-          "readBy": [
-            "4",
-            "1"
-          ],
+          "readBy": ["4", "1"],
           "attachments": []
         },
         {
@@ -1623,10 +726,7 @@
           "content": "dfđ",
           "timestamp": "2025-03-13T09:43:03.480Z",
           "isRead": true,
-          "readBy": [
-            "1",
-            "4"
-          ],
+          "readBy": ["1", "4"],
           "attachments": []
         },
         {
@@ -1674,9 +774,7 @@
           "timestamp": "2024-10-08T16:00:00Z",
           "isRead": true,
           "attachments": [],
-          "readBy": [
-            "1"
-          ]
+          "readBy": ["1"]
         },
         {
           "id": "502",
@@ -1693,9 +791,7 @@
           "timestamp": "2024-10-08T16:08:00Z",
           "isRead": true,
           "attachments": [],
-          "readBy": [
-            "1"
-          ]
+          "readBy": ["1"]
         },
         {
           "id": "504",
@@ -1712,9 +808,7 @@
           "timestamp": "2024-10-08T16:12:00Z",
           "isRead": true,
           "attachments": [],
-          "readBy": [
-            "1"
-          ]
+          "readBy": ["1"]
         },
         {
           "id": "506",
@@ -1731,9 +825,7 @@
           "timestamp": "2024-10-08T16:18:00Z",
           "isRead": true,
           "attachments": [],
-          "readBy": [
-            "1"
-          ]
+          "readBy": ["1"]
         },
         {
           "id": "1741856337076",
@@ -1741,9 +833,7 @@
           "content": "xcx",
           "timestamp": "2025-03-13T08:58:57.076Z",
           "isRead": true,
-          "readBy": [
-            "5"
-          ],
+          "readBy": ["5"],
           "attachments": []
         },
         {
@@ -1752,9 +842,7 @@
           "content": "Xin người",
           "timestamp": "2025-03-13T09:18:44.298Z",
           "isRead": true,
-          "readBy": [
-            "5"
-          ],
+          "readBy": ["5"],
           "attachments": []
         },
         {
@@ -1763,10 +851,7 @@
           "content": "hhhhh",
           "timestamp": "2025-03-13T09:38:29.108Z",
           "isRead": true,
-          "readBy": [
-            "1",
-            "5"
-          ],
+          "readBy": ["1", "5"],
           "attachments": []
         },
         {
@@ -1872,11 +957,7 @@
           "content": "Chào mọi người, tôi tạo nhóm này để trao đổi về dự án lịch cho Nitto năm 2025.",
           "timestamp": "2024-10-07T10:00:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4"
-          ],
+          "readBy": ["2", "3", "4"],
           "attachments": []
         },
         {
@@ -1885,11 +966,7 @@
           "content": "Cảm ơn anh Sang. Tôi là Dung từ Nitto. Chúng tôi rất mong được hợp tác với TECHUP cho dự án lịch này.",
           "timestamp": "2024-10-07T10:05:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "4",
-            "1"
-          ],
+          "readBy": ["2", "4", "1"],
           "attachments": []
         },
         {
@@ -1898,11 +975,7 @@
           "content": "Chào chị Dung. Em là Tuấn Anh, phụ trách thiết kế của dự án này. Em sẽ làm việc trực tiếp với chị về các mẫu thiết kế.",
           "timestamp": "2024-10-07T10:08:00Z",
           "isRead": true,
-          "readBy": [
-            "3",
-            "4",
-            "1"
-          ],
+          "readBy": ["3", "4", "1"],
           "attachments": []
         },
         {
@@ -1911,12 +984,7 @@
           "content": "Chào mọi người. Mình là Uyên, phụ trách phần sản xuất và in ấn. Mình sẽ phối hợp với các bên để đảm bảo chất lượng sản phẩm tốt nhất.",
           "timestamp": "2024-10-07T10:12:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "1"
-          ],
+          "readBy": ["2", "3", "4", "1"],
           "attachments": []
         },
         {
@@ -1925,12 +993,7 @@
           "content": "Tôi đã gửi một số ý tưởng và yêu cầu ban đầu qua email. Mọi người có thể xem qua để nắm được định hướng của chúng tôi.",
           "timestamp": "2024-10-07T10:15:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "1"
-          ],
+          "readBy": ["2", "3", "4", "1"],
           "attachments": [
             {
               "id": "3001",
@@ -1947,12 +1010,7 @@
           "content": "Em đã xem qua tài liệu rồi ạ. Em sẽ chuẩn bị một số mẫu thiết kế dựa trên ý tưởng này và gửi lại cho mọi người trong tuần tới.",
           "timestamp": "2024-10-07T10:20:00Z",
           "isRead": true,
-          "readBy": [
-            "2",
-            "3",
-            "4",
-            "1"
-          ],
+          "readBy": ["2", "3", "4", "1"],
           "attachments": []
         },
         {
@@ -1961,10 +1019,7 @@
           "content": "Tốt lắm. Chúng ta hẹn họp online vào thứ Năm tuần này để thảo luận chi tiết hơn nhé.",
           "timestamp": "2024-10-07T10:25:00Z",
           "isRead": true,
-          "readBy": [
-            "6",
-            "7"
-          ],
+          "readBy": ["6", "7"],
           "attachments": []
         },
         {
@@ -1973,10 +1028,7 @@
           "content": "fdfd",
           "timestamp": "2025-03-13T08:53:01.716Z",
           "isRead": true,
-          "readBy": [
-            "6",
-            "7"
-          ],
+          "readBy": ["6", "7"],
           "attachments": []
         },
         {
@@ -1985,10 +1037,7 @@
           "content": "ngừng",
           "timestamp": "2025-03-13T09:18:48.567Z",
           "isRead": true,
-          "readBy": [
-            "6",
-            "7"
-          ],
+          "readBy": ["6", "7"],
           "attachments": []
         },
         {
@@ -1997,10 +1046,7 @@
           "content": "dev 2",
           "timestamp": "2025-03-13T09:36:56.041Z",
           "isRead": true,
-          "readBy": [
-            "6",
-            "7"
-          ],
+          "readBy": ["6", "7"],
           "attachments": []
         },
         {
@@ -2009,10 +1055,7 @@
           "content": "dev3",
           "timestamp": "2025-03-13T09:49:12.904Z",
           "isRead": true,
-          "readBy": [
-            "6",
-            "7"
-          ],
+          "readBy": ["6", "7"],
           "attachments": []
         },
         {
@@ -2021,16 +1064,14 @@
           "content": "kám",
           "timestamp": "2025-03-16T08:05:01.713Z",
           "isRead": true,
-          "readBy": [
-            "6",
-            "7"
-          ],
+          "readBy": ["6", "7"],
           "attachments": []
         }
       ],
       "unreadCount": 0,
       "lastMessageTime": "2025-03-17T08:05:01.713Z",
-      "tag": "5"
+      "tag": "5",
+      "isPinned": true
     },
     {
       "id": "1742372733073",
@@ -2092,10 +1133,7 @@
           "content": "ja ",
           "timestamp": "2025-03-26T09:10:08.538Z",
           "isRead": true,
-          "readBy": [
-            "5",
-            "3"
-          ],
+          "readBy": ["5", "3"],
           "attachments": []
         }
       ],

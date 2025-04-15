@@ -7,7 +7,6 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
   const [selectedFilter, setSelectedFilter] = useState(null); // null, "flagged", hoặc "mentioned"
   const moreRef = useRef(null);
 
-  // Xử lý nhấp ra ngoài để đóng dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -26,18 +25,18 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
 
   // Toggle dropdown
   const handleMoreOpen = (e) => {
-    e.stopPropagation(); // Ngăn sự kiện lan truyền để tránh xung đột với handleClickOutside
+    e.stopPropagation();
     setIsMoreOpen(!isMoreOpen);
   };
 
-  // Chọn "Đã gắn cờ"
-  const handleFilterFlagged = () => {
-    setSelectedFilter("flagged");
-    onFilterByFlag(true); // Kích hoạt lọc flagged
-    setIsMoreOpen(false);
-  };
+  // // Chọn "Đã gắn cờ"
+  // const handleFilterFlagged = () => {
+  //   setSelectedFilter("flagged");
+  //   onFilterByFlag(true); // Kích hoạt lọc flagged
+  //   setIsMoreOpen(false);
+  // };
 
-  // Chọn "Nhắc đến bạn" (không có chức năng lọc)
+  // Chọn "Nhắc đến bạn"
   const handleFilterMentioned = () => {
     setSelectedFilter("mentioned");
     onFilterByFlag(false); // Reset flagged vì chỉ được chọn 1
@@ -46,7 +45,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
 
   // Reset bộ lọc
   const handleReset = (e) => {
-    e.stopPropagation(); // Ngăn sự kiện lan truyền khi nhấp "x"
+    e.stopPropagation();
     setSelectedFilter(null);
     onResetFilters(); // Reset tất cả bộ lọc trong ChatList
     setIsMoreOpen(false);
@@ -60,7 +59,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
           selectedFilter || isMoreOpen ? "bg-[#00B6FF26] rounded-full" : ""
         }`}
       >
-        {selectedFilter === "flagged" ? (
+        {/* {selectedFilter === "flagged" ? (
           <>
             <Image
               src="/Chats/iconlist/flag.png"
@@ -71,7 +70,8 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
             />
             <span className="text-xs font-semibold">Đã gắn cờ</span>
           </>
-        ) : selectedFilter === "mentioned" ? (
+        ) : selectedFilter === "mentioned" ? ( */}
+        {selectedFilter === "mentioned" ? (
           <>
             <Image
               src="/Chats/iconlist/mention.png"
@@ -105,7 +105,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
       </button>
       {isMoreOpen && (
         <div className="absolute top-8 right-0 w-[150px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50">
-          {/* Item 1: Đã gắn cờ */}
+          {/* Item 1: Đã gắn cờ
           <button
             className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs text-[#141416] hover:bg-[#F4F5F6]"
             onClick={handleFilterFlagged}
@@ -118,7 +118,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
               className="w-[18px] h-[18px]"
             />
             Đã gắn cờ
-          </button>
+          </button> */}
           {/* Item 2: Nhắc đến bạn */}
           <button
             className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs text-[#141416] hover:bg-[#F4F5F6]"

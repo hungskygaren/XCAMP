@@ -171,7 +171,7 @@ const MessagesList = ({ chat, currentUser }) => {
           <div className={`flex gap-[15px] max-w-[70%]`}>
             <div>
               <Image
-                src="/chats/avatar3.png" // Avatar gán cứng
+                src="/chats/avatar3.png"
                 alt=""
                 width={30}
                 height={30}
