@@ -76,7 +76,7 @@ const MessageInput = ({ onSendMessage }) => {
   };
 
   return (
-    <div className="p-4 bg-white  ">
+    <div className="p-4 bg-white absolute bottom-0 w-full ">
       <div className="rounded-lg bg-[#F4F5F6] py-[15px] px-[21px] shrink">
         {attachments.length > 0 && (
           <div className="mb-3">
@@ -173,7 +173,7 @@ const MessageInput = ({ onSendMessage }) => {
         <form onSubmit={handleSendMessage} className="flex items-center gap-2 ">
           <button
             type="button"
-            className="text-gray-500 hover:text-gray-700 focus:outline-none shrink "
+            className="text-gray-500 hover:text-gray-700 focus:outline-none shrink cursor-pointer"
             onClick={() => fileInputRef.current?.click()}
           >
             <Image

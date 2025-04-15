@@ -118,12 +118,12 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
   // Logic chọn rightIcon
   const rightIcon = searchQuery
     ? "/Chats/iconlist/close.png"
-    : "/Chats/iconlist/Search.png"; // Thay image1 bằng đường dẫn thực tế
+    : "/Chats/iconlist/Search.png";
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="fixed inset-0  bg-black/50 flex items-center justify-center z-50">
       <div
         ref={modalRef}
-        className="bg-white rounded-lg w-[570px] pt-[14px] px-[15px] pb-[16px]"
+        className="bg-white rounded-lg w-[570px] max-h-[80vh]  overflow-y-auto pt-[14px] px-[15px] pb-[16px]"
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-[13px]">

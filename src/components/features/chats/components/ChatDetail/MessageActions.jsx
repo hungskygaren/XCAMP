@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 
-const MessageActions = ({ message, onForward }) => {
+const MessageActions = ({ message, onForward, isCurrentUser }) => {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [hoveredButton, setHoveredButton] = useState(null); // Thêm trạng thái hover
   const moreRef = useRef(null);
@@ -77,7 +77,11 @@ const MessageActions = ({ message, onForward }) => {
   const position = isMoreOpen ? getDropdownPosition() : {};
 
   return (
-    <div className="absolute top-[-36px] left-0 flex bg-white border-[#E6E8EC] rounded-lg shadow-lg z-10">
+    <div
+      className={`absolute top-[-15px]  min-w-[144px] flex bg-white border-[#E6E8EC] rounded-lg shadow-lg z-10 ${
+        isCurrentUser ? "left-0" : "right-0"
+      }`}
+    >
       {actions.map((action) => (
         <div
           key={action.key}

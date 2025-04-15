@@ -18,7 +18,7 @@ const ChatHeader = ({ chat, currentUser, toggleChatInfo, isChatInfoOpen }) => {
 
   return (
     <div className="flex items-center justify-between mt-5 ml-[22px] pb-[18px]">
-      <div className="flex items-center">
+      <div className="flex items-center ">
         <div className="mr-[14px]">
           {/* Logic avatar giữ nguyên */}
           {chat.type === "group" ? (
@@ -93,17 +93,21 @@ const ChatHeader = ({ chat, currentUser, toggleChatInfo, isChatInfoOpen }) => {
         <div className="flex flex-col gap-[6px]">
           <h3 className="text-black text-sm font-semibold">{getChatName()}</h3>
           <div className="flex gap-2">
-            <div className="w-[56px] h-6 bg-[#E8E3FF] rounded-full flex items-center pl-[14px]">
-              <div className="flex flex-row items-center gap-[5px]">
-                <Image
-                  src="/Chats/iconchatdetail/groupmember.png"
-                  width={16}
-                  height={16}
-                  alt=""
-                />
-                <p className="text-xs text-[#4A30B1]">3</p>
+            {chat.type === "group" && (
+              <div className="w-[56px] h-6 bg-[#E8E3FF] rounded-full flex items-center pl-[14px]">
+                <div className="flex flex-row items-center gap-[5px]">
+                  <Image
+                    src="/Chats/iconchatdetail/groupmember.png"
+                    width={16}
+                    height={16}
+                    alt=""
+                  />
+                  <p className="text-xs text-[#4A30B1]">
+                    {chat.participants.length}
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
             <div className="w-[98px] h-6 bg-[#777E90]/15 rounded-full flex items-center pl-[14px]">
               <div className="flex flex-row items-center gap-[5px]">
                 <Image
@@ -118,7 +122,7 @@ const ChatHeader = ({ chat, currentUser, toggleChatInfo, isChatInfoOpen }) => {
           </div>
         </div>
       </div>
-      <div className="flex gap-[15px] mr-6">
+      <div className="flex gap-[15px] mr-1 lg:mr-6 shrink-0">
         <Image
           src="/Chats/iconchatdetail/Search.png"
           width={24}
@@ -137,7 +141,7 @@ const ChatHeader = ({ chat, currentUser, toggleChatInfo, isChatInfoOpen }) => {
           height={24}
           alt=""
         />
-        <button onClick={toggleChatInfo}>
+        <button className="shrink" onClick={toggleChatInfo}>
           {isChatInfoOpen ? (
             <Image
               src="/Chats/iconchatdetail/chatinforviolet.png"

@@ -165,7 +165,7 @@ const MessagesList = ({ chat, currentUser }) => {
         {/* Thêm tin nhắn tĩnh ở cuối */}
         <div
           className={`flex justify-start transition-all duration-300`}
-          onMouseEnter={() => setHoveredMessageId("static-message")}
+          onMouseEnter={() => setHoveredMessageId("static-message-1")}
           onMouseLeave={() => setHoveredMessageId(null)}
         >
           <div className={`flex gap-[15px] max-w-[70%]`}>
@@ -183,8 +183,9 @@ const MessagesList = ({ chat, currentUser }) => {
               <div className="text-sm font-semibold text-[#777E90]">
                 Cyclops
               </div>
-              {hoveredMessageId === "static-message" && (
+              {hoveredMessageId === "static-message-1" && (
                 <MessageActions
+                  isCurrentUser={false}
                   onForward={() => setIsForwardModalOpen(true)} // Truyền hàm mở Forward
                 />
               )}
@@ -310,7 +311,7 @@ const MessagesList = ({ chat, currentUser }) => {
         </div>
         <div
           className={`flex justify-end transition-all duration-300`}
-          onMouseEnter={() => setHoveredMessageId("static-message")}
+          onMouseEnter={() => setHoveredMessageId("static-message-2")}
           onMouseLeave={() => setHoveredMessageId(null)}
         >
           <div className={`flex flex-row-reverse gap-[15px] max-w-[70%]`}>
@@ -326,8 +327,9 @@ const MessagesList = ({ chat, currentUser }) => {
 
             <div className={`flex w-full flex-col gap-1 relative items-end`}>
               <div className="text-sm font-semibold text-[#777E90]">Joker</div>
-              {hoveredMessageId === "static-message" && (
+              {hoveredMessageId === "static-message-2" && (
                 <MessageActions
+                  isCurrentUser={true}
                   onForward={() => setIsForwardModalOpen(true)} // Truyền hàm mở Forward
                 />
               )}
@@ -499,7 +501,7 @@ const MessagesList = ({ chat, currentUser }) => {
                     </div>
 
                     <div
-                      className={`flex w-full flex-col gap-1 relative ${
+                      className={`flex w-full flex-col gap-1 relative min-w-[160px] ${
                         isCurrentUser ? "items-end" : ""
                       }`}
                     >
@@ -516,7 +518,7 @@ const MessagesList = ({ chat, currentUser }) => {
                       )}
                       {message.content && (
                         <div
-                          className={`rounded-lg px-5 py-3 relative ${
+                          className={`rounded-lg px-5 py-3 relative  ${
                             isCurrentUser
                               ? "bg-[#4A30B1] text-white"
                               : "bg-[#F4F5F6]"
@@ -591,7 +593,7 @@ const MessagesList = ({ chat, currentUser }) => {
                         message.attachments.map((attachment) => (
                           <div
                             key={attachment.id}
-                            className="mt-2 cursor-pointer"
+                            className=" cursor-pointer"
                             onClick={() => openModal(attachment)}
                           >
                             {attachment.type === "image" ? (

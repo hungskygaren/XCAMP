@@ -30,7 +30,7 @@ export default function MediaAndLinks({ onShowDetail }) {
       {isExpanded && (
         <div className="flex flex-col gap-2 mt-2">
           <button
-            className="px-[9px] pl-[15px] flex items-center gap-2 hover:bg-gray-100 rounded-md"
+            className="px-[9px] pl-[15px] flex items-center gap-2 cursor-pointer rounded-md "
             onClick={() => onShowDetail("media")}
           >
             <Image
@@ -42,7 +42,7 @@ export default function MediaAndLinks({ onShowDetail }) {
             <p className="text-xs pt-0.25">Ảnh/Video</p>
           </button>
           <button
-            className="px-[9px] pl-[15px] flex items-center gap-2 hover:bg-gray-100 rounded-md"
+            className="px-[9px] pl-[15px] flex items-center gap-2 cursor-pointer rounded-md"
             onClick={() => onShowDetail("file")}
           >
             <Image
@@ -54,7 +54,7 @@ export default function MediaAndLinks({ onShowDetail }) {
             <p className="text-xs pt-0.25">File</p>
           </button>
           <button
-            className="px-[9px] pl-[15px] flex items-center gap-2 hover:bg-gray-100 rounded-md"
+            className="px-[9px] pl-[15px] flex items-center gap-2 cursor-pointer rounded-md"
             onClick={() => onShowDetail("link")}
           >
             <Image

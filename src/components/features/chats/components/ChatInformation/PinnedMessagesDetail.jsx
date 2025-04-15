@@ -1,7 +1,22 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function PinnedMessagesDetail({ pinnedMessages, onBack }) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(null); // Trạng thái mở rộng/thu gọn
+  const dropdownRef = useRef(null);
+  const handleToggleDropdown = function (messageId) {
+    setIsDropdownOpen(isDropdownOpen === messageId ? null : messageId);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   return (
     <div className="flex flex-col h-full">
       {/* Tiêu đề */}
@@ -33,13 +48,41 @@ export default function PinnedMessagesDetail({ pinnedMessages, onBack }) {
                   <p className="text-xs">{message.sender}</p>
                 </div>
               </div>
-              <Image
-                className="mr-2.75"
-                src="/Chats/iconlist/3Dot.png"
-                width={18}
-                height={18}
-                alt=""
-              />
+              <div className="relative">
+                <Image
+                  className="mr-2.75 cursor-pointer"
+                  src="/Chats/iconlist/3Dot.png"
+                  width={18}
+                  height={18}
+                  alt=""
+                  onClick={() => handleToggleDropdown(message.id)}
+                />
+                {isDropdownOpen === message.id && (
+                  <div
+                    ref={dropdownRef}
+                    className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                  >
+                    <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
+                      <Image
+                        src="/Chats/iconchatdetail/forward.png"
+                        width={18}
+                        height={18}
+                        alt=""
+                      />
+                      Chuyển tiếp
+                    </button>
+                    <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
+                      <Image
+                        src="/Chats/iconlist/unpin.png"
+                        width={18}
+                        height={18}
+                        alt=""
+                      />
+                      Bỏ ghim tin nhắn
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="text-xs mt-1.5">
               {message.attachment ? (
@@ -60,7 +103,7 @@ export default function PinnedMessagesDetail({ pinnedMessages, onBack }) {
               <div className="text-[10px] text-[#A8ABB8] w-[92px]">
                 Được ghim bởi {message.pinnedBy}
               </div>
-              <div className="bg-[#E8E3FF] h-[24px] w-[120px] px-[14px] pl-1.25 pr-1.75 rounded-full text-[10px] font-semibold text-[#4A30B1] flex items-center justify-center">
+              <div className="bg-[#E8E3FF] cursor-pointer h-[24px] w-[120px] px-[14px] pl-1.25 pr-1.75 rounded-full text-[10px] font-semibold text-[#4A30B1] flex items-center justify-center">
                 Xem tin nhắn gốc
               </div>
             </div>

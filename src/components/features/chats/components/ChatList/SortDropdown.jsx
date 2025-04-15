@@ -115,7 +115,7 @@ const SortDropdown = ({
     <div className="relative items-center flex justify-between">
       <button
         ref={buttonRef} // Gắn ref cho nút
-        className={`flex items-center gap-0.5 my-[10px] py-[4px] text-sm font-semibold text-gray-900 ${
+        className={`flex cursor-pointer items-center gap-0.5 my-[10px] py-[4px] text-sm font-semibold text-gray-900 ${
           selectedTags.length > 0 || isSortOpen
             ? "bg-[#00B6FF26] rounded-full px-[13px]"
             : ""

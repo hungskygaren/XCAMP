@@ -1088,7 +1088,7 @@
       "tag": "6",
       "isPinned": false,
       "isNotificationOff": true,
-      "isFlagged": true
+      "isFlagged": false
     },
     {
       "id": "2",
@@ -1238,7 +1238,7 @@
       ],
       "unreadCount": 0,
       "lastMessageTime": "2025-03-19T08:25:18.972Z",
-      "tag": "2",
+      "tag": null,
       "isFlagged": false
     },
     {
@@ -1490,8 +1490,8 @@
       ],
       "unreadCount": 0,
       "lastMessageTime": "2025-04-04T08:58:10.001Z",
-      "isFlagged": true,
-      "tag": "3",
+      "isFlagged": false,
+      "tag": null,
       "isNotificationOff": false
     },
     {

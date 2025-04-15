@@ -218,8 +218,8 @@ const ChatItem = ({
                       className="w-6 h-6 rounded-full object-cover"
                     />
                   ) : chat.participants.length > 3 ? (
-                    <div className="w-6 h-6 rounded-full bg-gray-400 flex items-center justify-center text-white text-sm">
-                      +{chat.participants.length - 2}
+                    <div className="w-6 h-6 rounded-full bg-gray-400 flex items-center justify-center text-white text-[8px] font-semibold">
+                      +{Math.min(chat.participants.length - 2 + 99, 99)}
                     </div>
                   ) : null}
                 </div>
@@ -242,10 +242,10 @@ const ChatItem = ({
         </div>
         <div className="ml-3 flex-1 min-w-0">
           <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-twdark text-sm">
+            <h3 className="font-semibold text-twdark text-sm text-nowrap truncate">
               {getChatName(chat, currentUser)}
             </h3>
-            <span className="text-xs text-gray-500">
+            <span className="text-xs text-gray-500 text-nowrap">
               {formatTime(chat.lastMessageTime)}
             </span>
           </div>

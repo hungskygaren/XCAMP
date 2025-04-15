@@ -42,12 +42,14 @@ const PinnedMessagesChatDetail = ({
             className="ml-[5px]"
             alt={attachment.type}
           />
-          <p className="text-sm text-[#141416] ml-[5px]">{attachment.name}</p>
+          <p className="text-sm text-[#141416] ml-[5px] truncate  ">
+            {attachment.name}
+          </p>
         </div>
       );
     }
     return (
-      <p className="text-sm text-[#141416]">
+      <p className="text-sm text-[#141416]  ml-[5px] ">
         {message.content.length > 30
           ? `${message.content.substring(0, 30)}...`
           : message.content}
@@ -61,6 +63,7 @@ const PinnedMessagesChatDetail = ({
     onOpenPinnedMessagesDetail(); // Mở ChatInformation với PinnedMessagesDetail
     onToggleExpand(false); // Thêm dòng này để bỏ trạng thái expand
   };
+
   return (
     <div className="relative px-5.5">
       {!isExpanded ? (
@@ -77,25 +80,27 @@ const PinnedMessagesChatDetail = ({
                   height={18}
                   alt="Pin"
                 />
-                <div className="flex items-center">
-                  <p className="text-sm text-[#141416]">{`${getMessageSender(
+                <div className="flex items-center  ">
+                  <p className="text-sm text-[#141416] text-nowrap truncate">{`${getMessageSender(
                     latestPinnedMessage.senderId
-                  )}: `}</p>
+                  )} `}</p>
+                  <p className="flex items-center text-sm ml-1 "> :</p>
+
                   {renderPinnedContent(latestPinnedMessage)}
                 </div>
               </div>
-              <div className="text-xs text-[#777E90]">
+              <div className="text-xs text-[#777E90] ">
                 Được ghim bởi {getPinnedByName(latestPinnedMessage.pinnedBy)}
               </div>
             </div>
-            <div>
-              <Image
-                src="/Chats/iconlist/3Dot.png"
-                width={18}
-                height={18}
-                alt="More"
-              />
-            </div>
+
+            <Image
+              className="shrink"
+              src="/Chats/iconlist/3Dot.png"
+              width={18}
+              height={18}
+              alt="More"
+            />
           </div>
           {pinnedMessages.length > 1 && (
             <button
@@ -133,10 +138,10 @@ const PinnedMessagesChatDetail = ({
               {pinnedMessages.map((msg) => (
                 <div
                   key={msg.id}
-                  className="rounded-lg bg-[#F4F5F6] w-full py-2.5 px-3 flex items-center justify-between cursor-pointer"
+                  className="rounded-lg bg-[#F4F5F6] w-full py-2.5 px-3 flex items-center justify-between cursor-pointer "
                   onClick={() => onMessageClick(msg.id)}
                 >
-                  <div className="flex flex-col">
+                  <div className="flex flex-col text-nowrap truncate">
                     <div className="flex items-center gap-[7px]">
                       <Image
                         src="/Chats/iconlist/pin.png"
@@ -144,19 +149,21 @@ const PinnedMessagesChatDetail = ({
                         height={18}
                         alt="Pin"
                       />
-                      <div className="flex items-center">
-                        <p className="text-sm text-[#141416]">{`${getMessageSender(
+                      <div className="flex items-center ">
+                        <p className="text-sm text-[#141416] ">{`${getMessageSender(
                           msg.senderId
-                        )}: `}</p>
+                        )}`}</p>
+                        <p className="flex items-center text-sm ml-1 "> :</p>
                         {renderPinnedContent(msg)}
                       </div>
                     </div>
-                    <div className="text-xs text-[#777E90]">
+                    <div className="text-xs text-[#777E90] truncate">
                       Được ghim bởi {getPinnedByName(msg.pinnedBy)}
                     </div>
                   </div>
                   <div>
                     <Image
+                      className="shrink"
                       src="/Chats/iconlist/3Dot.png"
                       width={18}
                       height={18}

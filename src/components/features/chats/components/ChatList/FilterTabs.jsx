@@ -1,7 +1,7 @@
 import React from "react";
 
 const FilterTabs = ({ filter, setFilter }) => (
-  <div className="relative w-[370px] h-8 bg-gray-100 rounded-lg flex mt-4">
+  <div className="relative w-full h-8 bg-gray-100 rounded-lg flex mt-4">
     <div
       className={`absolute h-full w-1/2 bg-[#EE316B] rounded-lg transition-all duration-300 ${
         filter === "unread" ? "translate-x-full" : "translate-x-0"
