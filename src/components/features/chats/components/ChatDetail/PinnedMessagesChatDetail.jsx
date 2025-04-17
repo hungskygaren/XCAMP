@@ -153,7 +153,7 @@ const PinnedMessagesChatDetail = ({
               {isDropdownOpen === latestPinnedMessage.id && (
                 <div
                   ref={getDropdownRef(latestPinnedMessage.id)}
-                  className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                  className="absolute right-0 top-4 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
                 >
                   <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
                     <Image
