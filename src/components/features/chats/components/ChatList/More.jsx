@@ -55,7 +55,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
     <div ref={moreRef} className="relative">
       <button
         onClick={handleMoreOpen}
-        className={`flex items-center gap-1 py-1 px-2 ${
+        className={`flex items-center cursor-pointer gap-1 py-1 px-2 ${
           selectedFilter || isMoreOpen ? "bg-[#00B6FF26] rounded-full" : ""
         }`}
       >

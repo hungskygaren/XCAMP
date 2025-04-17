@@ -252,7 +252,11 @@ const ChatItem = ({
           <div className="flex w-full justify-between items-center">
             <p
               className={`text-sm truncate ${
-                chat.unreadCount > 0 ? "text-black" : "text-twgrey"
+                chat.unreadCount > 0
+                  ? "text-black"
+                  : activeChat && activeChat.id === chat.id
+                  ? "text-[#978FB8]"
+                  : "text-[#777e90]"
               }`}
             >
               {getLastMessage(chat)}

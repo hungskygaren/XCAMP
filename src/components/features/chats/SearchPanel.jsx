@@ -97,7 +97,7 @@ const SearchPanel = () => {
                     />
                     <div className="flex flex-col w-full">
                       <div className="flex text-xs justify-between items-center">
-                        <p className="text-[#978FB8] font-semibold">
+                        <p className="text-[#777e90] font-semibold">
                           {message.name}
                         </p>
                         <p className="text-[#777E90]">{message.date}</p>

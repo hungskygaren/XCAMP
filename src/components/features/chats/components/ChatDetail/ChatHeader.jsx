@@ -198,10 +198,17 @@ const ChatHeader = ({
             <div className="relative ">
               <button
                 ref={tagButtonRef}
-                className={`min-w-[98px] py-1 px-3 h-6 rounded-full flex items-center pl-[14px] cursor-pointer text-xs ${
+                style={
                   currentTag
-                    ? `bg-[#777E90]/15 text-[${currentTag.color}]`
-                    : "bg-[#777E90]/15 text-[#777E90]"
+                    ? {
+                        backgroundColor: `${currentTag.color}15`,
+                        color: currentTag.color,
+                      }
+                    : {}
+                }
+                className={`min-w-[98px] py-1  px-3 h-6 rounded-full flex items-center pl-[14px] cursor-pointer text-xs ${
+                  !currentTag ? "bg-[#777E90]/15 text-[#777E90]" : {}
+                }
                 }`}
                 onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
               >

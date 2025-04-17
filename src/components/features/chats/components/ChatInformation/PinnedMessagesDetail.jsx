@@ -3,20 +3,53 @@ import React, { useEffect, useRef, useState } from "react";
 
 export default function PinnedMessagesDetail({ pinnedMessages, onBack }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(null); // Trạng thái mở rộng/thu gọn
-  const dropdownRef = useRef(null);
-  const handleToggleDropdown = function (messageId) {
+  const dropdownRefs = useRef({});
+
+  // Thêm hàm getDropdownRef để quản lý refs động
+  // Hàm này sẽ tạo hoặc trả về ref tương ứng với messageId
+  const getDropdownRef = (messageId) => {
+    if (!dropdownRefs.current[messageId]) {
+      // Nếu chưa có ref cho messageId này, tạo mới
+      dropdownRefs.current[messageId] = React.createRef();
+    }
+    // Trả về ref đã có hoặc vừa tạo
+    return dropdownRefs.current[messageId];
+  };
+  const handleToggleDropdown = function (messageId, e) {
+    e.stopPropagation();
     setIsDropdownOpen(isDropdownOpen === messageId ? null : messageId);
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(null);
+      // Kiểm tra xem có dropdown nào đang mở không (isDropdownOpen chứa messageId)
+      if (isDropdownOpen !== null) {
+        // Lấy ref tương ứng với dropdown đang mở từ object refs
+        const currentRef = dropdownRefs.current[isDropdownOpen];
+
+        // Kiểm tra xem click có nằm ngoài dropdown đang mở không
+        if (
+          currentRef &&
+          currentRef.current &&
+          !currentRef.current.contains(event.target)
+        ) {
+          // Thêm kiểm tra: Đảm bảo click không phải là vào nút 3 chấm của chính dropdown đó
+          // (Vì handleToggleDropdown đã xử lý việc đóng/mở khi click vào nút 3 chấm)
+          const isClickOn3DotButton = event.target.closest(
+            `img[data-message-id="${isDropdownOpen}"]` // Thêm data-message-id vào Image 3 chấm
+          );
+
+          if (!isClickOn3DotButton) {
+            setIsDropdownOpen(null); // Đóng dropdown nếu click ra ngoài
+          }
+        }
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    // Thêm isDropdownOpen vào dependency array để đảm bảo effect chạy lại khi dropdown mở/đóng
+  }, [isDropdownOpen]);
   return (
     <div className="flex flex-col h-full">
       {/* Tiêu đề */}
@@ -55,11 +88,12 @@ export default function PinnedMessagesDetail({ pinnedMessages, onBack }) {
                   width={18}
                   height={18}
                   alt=""
-                  onClick={() => handleToggleDropdown(message.id)}
+                  data-message-id={message.id}
+                  onClick={(e) => handleToggleDropdown(message.id, e)} // Truyền event vào handler
                 />
                 {isDropdownOpen === message.id && (
                   <div
-                    ref={dropdownRef}
+                    ref={getDropdownRef(message.id)}
                     className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
                   >
                     <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">

@@ -117,8 +117,8 @@ const MediaItem = ({
       className={`relative ${
         type === "media" ? "w-[97px] h-[97px]" : "w-full"
       }`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => type === "media" && setHovered(true)}
+      onMouseLeave={() => type === "media" && setHovered(false)}
     >
       {type === "media" ? (
         <Image
@@ -134,8 +134,8 @@ const MediaItem = ({
             <Image
               src={
                 type === "file"
-                  ? "Chats/iconchatdetail/icondoc.png"
-                  : "Chats/iconchatinfor/tenten-vn.png"
+                  ? "/Chats/iconchatdetail/icondoc.png"
+                  : "/Chats/iconchatinfor/tenten-vn.png"
               }
               width={36}
               height={36}
@@ -152,18 +152,22 @@ const MediaItem = ({
               </div>
             </div>
           </div>
+          {/* Nút 3 chấm cố định cho file/link */}
           <Image
-            src="Chats/iconlist/3Dot.png"
+            data-item-id={item.id}
+            src="/Chats/iconlist/3Dot.png"
             width={18}
             height={18}
             alt=""
-            className="opacity-0"
+            className="cursor-pointer"
+            onClick={() => onToggleDropdown(item.id)}
           />
         </div>
       )}
-      {hovered && (
+      {type === "media" && hovered && (
         <div className="absolute top-1 right-1 bg-white rounded-[4px] border-1 border-[#E6E8EC] w-6 h-6 flex items-center justify-center z-20">
           <Image
+            data-item-id={item.id}
             src="/Chats/iconlist/3Dot.png"
             width={18}
             height={18}
@@ -176,7 +180,7 @@ const MediaItem = ({
       {dropdownOpen === item.id && (
         <div
           ref={dropdownRef}
-          className="absolute right-0 top-[28px] text-xs w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg px-2.5 py-2 z-50"
+          className="absolute right-0 top-[40px] text-xs w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg px-2.5 py-2 z-50"
         >
           {dropdownOptions[type].map((option, index) => (
             <button
@@ -196,9 +200,16 @@ const MediaItem = ({
 export default function MediaAndLinksDetail({ initialType = "media", onBack }) {
   const [filter, setFilter] = useState(initialType);
   const [dropdownOpen, setDropdownOpen] = useState(null);
-  const dropdownRef = useRef(null);
+  const dropdownRefs = useRef({});
 
-  // Dữ liệu tập trung cho cả 3 tab
+  // Quản lý refs cho từng item
+  const getDropdownRef = (itemId) => {
+    if (!dropdownRefs.current[itemId]) {
+      dropdownRefs.current[itemId] = React.createRef();
+    }
+    return dropdownRefs.current[itemId];
+  };
+
   const data = {
     media: [
       {
@@ -247,18 +258,63 @@ export default function MediaAndLinksDetail({ initialType = "media", onBack }) {
     ],
   };
 
-  // Đóng dropdown khi click ra ngoài
+  // Đóng dropdown khi chuột rời khỏi vùng (cho media) hoặc click ngoài
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(null);
+      if (dropdownOpen !== null) {
+        const currentRef = dropdownRefs.current[dropdownOpen];
+        const isClickOn3DotButton = event.target.closest(
+          `img[data-item-id="${dropdownOpen}"]`
+        );
+
+        if (
+          currentRef &&
+          currentRef.current &&
+          !currentRef.current.contains(event.target) &&
+          !isClickOn3DotButton
+        ) {
+          setDropdownOpen(null);
+        }
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
-  const handleToggleDropdown = (itemId) => {
+    const handleMouseLeaveItem = (event) => {
+      if (filter === "media" && dropdownOpen !== null) {
+        const currentRef = dropdownRefs.current[dropdownOpen];
+        if (
+          currentRef &&
+          currentRef.current &&
+          !currentRef.current.contains(event.relatedTarget)
+        ) {
+          setDropdownOpen(null);
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    if (filter === "media") {
+      document.addEventListener("mouseleave", handleMouseLeaveItem);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mouseleave", handleMouseLeaveItem);
+    };
+  }, [dropdownOpen, filter]);
+
+  // Dọn dẹp refs khi danh sách thay đổi
+  useEffect(() => {
+    const validItemIds = data[filter]
+      .flatMap((group) => group.items)
+      .map((item) => item.id);
+    dropdownRefs.current = Object.fromEntries(
+      Object.entries(dropdownRefs.current).filter(([id]) =>
+        validItemIds.includes(id)
+      )
+    );
+  }, [filter]);
+
+  const handleToggleDropdown = (itemId, e) => {
+    if (e) e.stopPropagation();
     setDropdownOpen(dropdownOpen === itemId ? null : itemId);
   };
 
@@ -308,7 +364,7 @@ export default function MediaAndLinksDetail({ initialType = "media", onBack }) {
       </div>
 
       {/* Nội dung thay đổi dựa trên filter */}
-      <div className="mt-4 overflow-y-auto">
+      <div className="mt-4 overflow-y-auto h-full">
         {(filter === "file" || filter === "link") && (
           <div className="relative w-full mb-4">
             <TextInput
@@ -339,7 +395,7 @@ export default function MediaAndLinksDetail({ initialType = "media", onBack }) {
                     type={filter}
                     onToggleDropdown={handleToggleDropdown}
                     dropdownOpen={dropdownOpen}
-                    dropdownRef={dropdownRef}
+                    dropdownRef={getDropdownRef(item.id)}
                   />
                 ))}
               </div>

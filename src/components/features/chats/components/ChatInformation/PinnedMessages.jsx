@@ -4,7 +4,15 @@ import React, { useEffect, useRef, useState } from "react";
 export default function PinnedMessages({ onShowDetail }) {
   const [isExpanded, setIsExpanded] = useState(true); // Trạng thái mở rộng/thu gọn
   const [isDropdownOpen, setIsDropdownOpen] = useState(null); // Trạng thái mở rộng/thu gọn
-  const dropdownRef = useRef(null);
+  const dropdownRefs = useRef({});
+
+  const getDropdownRef = (messageId) => {
+    if (!dropdownRefs.current[messageId]) {
+      dropdownRefs.current[messageId] = React.createRef();
+    }
+    return dropdownRefs.current[messageId];
+  };
+
   const pinnedMessages = [
     {
       id: "1",
@@ -29,19 +37,38 @@ export default function PinnedMessages({ onShowDetail }) {
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
-  const handleToggleDropdown = function (messageId) {
+  const handleToggleDropdown = function (messageId, e) {
+    e.stopPropagation();
     setIsDropdownOpen(isDropdownOpen === messageId ? null : messageId);
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(null);
+      if (isDropdownOpen !== null) {
+        // Lấy ref tương ứng với dropdown đang mở
+        const currentRef = dropdownRefs.current[isDropdownOpen];
+
+        if (
+          currentRef &&
+          currentRef.current &&
+          !currentRef.current.contains(event.target)
+        ) {
+          // Kiểm tra xem click có phải vào nút 3 chấm không
+          const isClickOn3DotButton = event.target.closest(
+            `img[data-message-id="${isDropdownOpen}"]`
+          );
+
+          if (!isClickOn3DotButton) {
+            setIsDropdownOpen(null); // Đóng dropdown nếu click ra ngoài và không phải nút 3 chấm
+          }
+        }
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [isDropdownOpen]); // Thêm isDropdownOpen vào dependency array
+
   return (
     <div className="mt-4.5">
       <div
@@ -86,11 +113,12 @@ export default function PinnedMessages({ onShowDetail }) {
                       width={18}
                       height={18}
                       alt=""
-                      onClick={() => handleToggleDropdown(message.id)}
+                      data-message-id={message.id}
+                      onClick={(e) => handleToggleDropdown(message.id, e)}
                     />
                     {isDropdownOpen === message.id && (
                       <div
-                        ref={dropdownRef}
+                        ref={getDropdownRef(message.id)}
                         className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
                       >
                         <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">

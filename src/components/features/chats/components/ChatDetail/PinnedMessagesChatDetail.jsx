@@ -10,7 +10,17 @@ const PinnedMessagesChatDetail = ({
   onOpenPinnedMessagesDetail,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(null);
-  const dropdownRef = useRef(null);
+  const dropdownRefs = useRef({});
+
+  // Sử dụng object để lưu nhiều refs cho từng dropdown
+  const getDropdownRef = (messageId) => {
+    if (!dropdownRefs.current[messageId]) {
+      dropdownRefs.current[messageId] = React.createRef();
+    }
+    return dropdownRefs.current[messageId];
+  };
+  console.log(dropdownRefs);
+  console.log(dropdownRefs.current);
 
   const handleToggleDropdown = (messageId, event) => {
     event.stopPropagation(); // Ngăn lan truyền để tránh gọi onMessageClick
@@ -19,13 +29,31 @@ const PinnedMessagesChatDetail = ({
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(null);
+      // Nếu một dropdown đang mở
+      if (isDropdownOpen !== null) {
+        const currentRef = dropdownRefs.current[isDropdownOpen];
+
+        // Kiểm tra nếu click không phải là trong dropdown
+        if (
+          currentRef &&
+          currentRef.current &&
+          !currentRef.current.contains(event.target)
+        ) {
+          // Kiểm tra xem đó có phải là nút 3dot của tin nhắn đang mở không
+          const is3DotButton = event.target.closest(
+            `img[data-message-id="${isDropdownOpen}"]`
+          );
+
+          // Nếu không phải là nút 3dot của tin nhắn đang mở, đóng dropdown
+          if (!is3DotButton) {
+            setIsDropdownOpen(null);
+          }
+          // Nếu là nút 3dot, handleToggleDropdown sẽ xử lý việc đóng/mở
+        }
       }
     };
-    if (isDropdownOpen !== null) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
+
+    document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isDropdownOpen]); // Thêm dependency để tối ưu
 
@@ -113,17 +141,18 @@ const PinnedMessagesChatDetail = ({
             </div>
             <div className="relative">
               <Image
-                className="shrink"
+                className="shrink cursor-pointer"
                 src="/Chats/iconlist/3Dot.png"
                 width={18}
                 height={18}
                 alt="More"
+                data-message-id={latestPinnedMessage.id}
                 onClick={(e) => handleToggleDropdown(latestPinnedMessage.id, e)}
               />
-              {/* Dòng cần thêm để hiển thị dropdown ở trạng thái thu gọn */}
+              {/* Dropdown ở trạng thái thu gọn */}
               {isDropdownOpen === latestPinnedMessage.id && (
                 <div
-                  ref={dropdownRef}
+                  ref={getDropdownRef(latestPinnedMessage.id)}
                   className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
                 >
                   <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
@@ -209,16 +238,17 @@ const PinnedMessagesChatDetail = ({
                   </div>
                   <div className="relative">
                     <Image
-                      className="shrink"
+                      className="shrink cursor-pointer"
                       src="/Chats/iconlist/3Dot.png"
                       width={18}
                       height={18}
                       alt="More"
+                      data-message-id={msg.id}
                       onClick={(e) => handleToggleDropdown(msg.id, e)}
                     />
                     {isDropdownOpen === msg.id && (
                       <div
-                        ref={dropdownRef}
+                        ref={getDropdownRef(msg.id)}
                         className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
                       >
                         <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
