@@ -121,11 +121,10 @@ const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
         onClick={handleToggleDropdown} // Sử dụng hàm mới để xử lý toggle dropdown
       >
         {getButtonIcon()}
-        <p className="text-xs pl-1.5 mt-0.5 font-semibold">
-          {getButtonLabel()}
-        </p>
+        <p className="text-xs pl-1.5  font-semibold">{getButtonLabel()}</p>
         {selectedTags.length > 0 ? (
           <span
+            className="flex items-center justify-center"
             onClick={(e) => {
               e.stopPropagation(); // Ngăn mở dropdown khi nhấp "x"
               handleResetTags();
@@ -159,7 +158,7 @@ const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
       </button>
 
       {isSortOpen && (
-        <div className="absolute  top-10 left-0 w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50">
+        <div className="absolute  top-9.5 left-0 w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50">
           {/* Danh sách các tag với checkbox */}
           {tags.map((tag) => (
             <label
