@@ -270,17 +270,23 @@ const ChatHeader = ({
       </div>
       <div className="flex gap-[15px] mr-1 lg:mr-6 shrink-0">
         <button onClick={() => toggleSearchPanel(!isSearchOpen)}>
-          <Image
-            src={
-              isSearchOpen
-                ? "/Chats/iconchatdetail/Search-violet.png"
-                : "/Chats/iconchatdetail/Search.png"
-            }
-            width={24}
-            height={24}
-            alt="search"
-            className="cursor-pointer"
-          />
+          {isSearchOpen ? (
+            <Image
+              src="/Chats/iconchatdetail/Search-violet.png"
+              width={24}
+              height={24}
+              alt="chatinfor"
+              className="bg-[#4A30B1]/30 rounded-sm cursor-pointer"
+            />
+          ) : (
+            <Image
+              src="/Chats/iconchatdetail/Search.png"
+              width={24}
+              height={24}
+              alt="chatinfor"
+              className="hover:bg-[#4A30B1]/20 rounded-sm cursor-pointer"
+            />
+          )}
         </button>
         <Image
           src="/Chats/iconchatdetail/phone.png"
@@ -304,7 +310,7 @@ const ChatHeader = ({
               width={24}
               height={24}
               alt="chatinfor"
-              className="bg-gray-300 rounded-sm cursor-pointer"
+              className="bg-[#4A30B1]/30 rounded-sm cursor-pointer"
             />
           ) : (
             <Image
@@ -312,7 +318,7 @@ const ChatHeader = ({
               width={24}
               height={24}
               alt="chatinfor"
-              className="hover:bg-violet-200 rounded-sm cursor-pointer"
+              className="hover:bg-[#4A30B1]/20 rounded-sm cursor-pointer"
             />
           )}
         </button>

@@ -154,7 +154,7 @@ const ChatList = ({
             {isSearchOpen ? (
               <div className="w-[90px]">
                 <Button
-                  className=" flex-shink-0 w-full h-8 text-[.75rem] font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center"
+                  className=" cursor-pointer flex-shink-0 w-full h-8 text-[.75rem] font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center"
                   onClick={handleCloseSearch}
                   children={"Đóng"}
                 />
@@ -163,7 +163,7 @@ const ChatList = ({
               <div className="relative">
                 <div className="flex gap-2 flex-shrink-0">
                   <button
-                    className="p-2 rounded-lg hover:bg-gray-100 flex-shrink-0"
+                    className="p-2 rounded-lg hover:bg-gray-100 flex-shrink-0 cursor-pointer"
                     onClick={handleOpenAddGroup}
                   >
                     <Image
@@ -175,7 +175,7 @@ const ChatList = ({
                   </button>
                   <button
                     ref={settingButtonRef}
-                    className="p-2 rounded-lg hover:bg-gray-100 flex-shink-0"
+                    className="p-2 cursor-pointer rounded-lg hover:bg-gray-100 flex-shink-0"
                     onClick={handleOpenAddSetting}
                   >
                     <Image

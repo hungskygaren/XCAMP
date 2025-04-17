@@ -78,7 +78,7 @@ const MessageActions = ({ message, onForward, isCurrentUser }) => {
 
   return (
     <div
-      className={`absolute top-[-15px]  min-w-[144px] flex bg-white border-[#E6E8EC] rounded-lg shadow-lg z-10 ${
+      className={`absolute top-[-15px]  min-w-[144px] flex bg-white  border-[#E6E8EC] rounded-lg shadow-lg z-10 ${
         isCurrentUser ? "left-0" : "right-0"
       }`}
     >
@@ -105,7 +105,7 @@ const MessageActions = ({ message, onForward, isCurrentUser }) => {
           )}
           <button
             ref={action.key === "more" ? moreButtonRef : null}
-            className="hover:bg-gray-100 border-r-1 p-[9px] border-[#E6E8EC] last:border-r-0"
+            className="hover:bg-gray-100 border-r-1 cursor-pointer p-[9px] border-[#E6E8EC] last:border-r-0"
             onClick={
               action.key === "more"
                 ? () => setIsMoreOpen(!isMoreOpen)
@@ -133,7 +133,7 @@ const MessageActions = ({ message, onForward, isCurrentUser }) => {
           {moreActions.map((moreAction, index) => (
             <button
               key={index}
-              className="flex items-center gap-2 w-full text-left py-1.75 px-1 text-xs hover:bg-[#F4F5F6]"
+              className="flex  cursor-pointer items-center gap-2 w-full text-left py-1.75 px-1 text-xs hover:bg-[#F4F5F6]"
               style={{ color: moreAction.color }}
             >
               <Image

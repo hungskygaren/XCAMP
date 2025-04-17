@@ -8,7 +8,7 @@ const FilterTabs = ({ filter, setFilter }) => (
       }`}
     />
     <button
-      className={`relative text-xs font-semibold w-1/2 text-center z-10 ${
+      className={`relative text-xs font-semibold w-1/2 text-center  z-10 cursor-pointer ${
         filter === "all" ? "text-white" : "text-[#777E90]"
       }`}
       onClick={() => setFilter("all")}
@@ -16,7 +16,7 @@ const FilterTabs = ({ filter, setFilter }) => (
       Tất cả tin nhắn
     </button>
     <button
-      className={`relative text-xs font-semibold w-1/2 text-center z-10 ${
+      className={`relative text-xs font-semibold w-1/2 text-center z-10 cursor-pointer ${
         filter === "unread" ? "text-white" : "text-[#777E90]"
       }`}
       onClick={() => setFilter("unread")}
