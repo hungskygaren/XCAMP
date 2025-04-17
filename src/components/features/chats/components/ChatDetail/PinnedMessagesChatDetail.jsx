@@ -149,7 +149,7 @@ const PinnedMessagesChatDetail = ({
                 data-message-id={latestPinnedMessage.id}
                 onClick={(e) => handleToggleDropdown(latestPinnedMessage.id, e)}
               />
-              {/* Dropdown ở trạng thái thu gọn */}
+
               {isDropdownOpen === latestPinnedMessage.id && (
                 <div
                   ref={getDropdownRef(latestPinnedMessage.id)}
@@ -249,7 +249,15 @@ const PinnedMessagesChatDetail = ({
                     {isDropdownOpen === msg.id && (
                       <div
                         ref={getDropdownRef(msg.id)}
-                        className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                        className="fixed w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                        style={{
+                          top: `${
+                            document
+                              .querySelector(`img[data-message-id="${msg.id}"]`)
+                              ?.getBoundingClientRect().bottom - 5
+                          }px`,
+                          right: "57px",
+                        }}
                       >
                         <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
                           <Image

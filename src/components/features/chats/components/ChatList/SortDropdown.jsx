@@ -96,7 +96,7 @@ const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
       <Image
         src="/Chats/iconlist/tag.png"
         alt="Sort"
-        className="w-[1.125rem] mt-[1px] h-[1.125rem]"
+        className="w-[1.125rem]h-[1.125rem]"
         width={18}
         height={18}
       />
@@ -113,7 +113,7 @@ const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
       className="relative items-center flex justify-between"
     >
       <button
-        className={`flex cursor-pointer items-center  rounded-full  px-[13px] gap-0.5 my-[10px] py-[4px] text-sm font-semibold text-gray-900 ${
+        className={`flex cursor-pointer items-center justify-center  rounded-full  px-[13px] gap-0.5 my-[10px] py-[4px] text-sm font-semibold text-gray-900 ${
           selectedTags.length > 0 || isSortOpen
             ? "bg-[#00B6FF26] "
             : "bg-[#F4F5F6]"
@@ -126,40 +126,40 @@ const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
         </p>
         {selectedTags.length > 0 ? (
           <span
-            className="ml-1 cursor-pointer"
             onClick={(e) => {
               e.stopPropagation(); // Ngăn mở dropdown khi nhấp "x"
               handleResetTags();
             }}
           >
             <Image
-              src="/Chats/iconlist/close.png"
+              src="/Chats/iconlist/close1.png"
               alt="Reset"
-              className="w-4 h-4"
+              className="w-4 h-4 "
               width={16}
               height={16}
             />
           </span>
         ) : isSortOpen ? (
           <Image
-            src="/Chats/iconlist/Line.png"
+            src="/Chats/iconlist/line1.png"
             alt="Sort"
-            width={20}
-            height={20}
-            className="w-5 h-5 rotate-180"
+            width={16}
+            height={16}
+            className="w-4 h-4 rotate-180"
           />
         ) : (
           <Image
-            src="/Chats/iconlist/Line.png"
+            src="/Chats/iconlist/line1.png"
             alt="Sort"
-            className="w-5 h-5"
-            width={20}
-            height={20}
+            className="w-4 h-4"
+            width={16}
+            height={16}
           />
         )}
       </button>
+
       {isSortOpen && (
-        <div className="absolute  top-8 left-0 w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50">
+        <div className="absolute  top-10 left-0 w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50">
           {/* Danh sách các tag với checkbox */}
           {tags.map((tag) => (
             <label
@@ -179,11 +179,11 @@ const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
               >
                 {selectedTags.includes(tag.id) && (
                   <Image
-                    width={12}
-                    height={12}
+                    width={8}
+                    height={6}
                     src="/Chats/iconlist/WhiteCheck.png"
                     alt="Check"
-                    className="w-3 h-3"
+                    className="w-2 h-1.5"
                   />
                 )}
               </span>

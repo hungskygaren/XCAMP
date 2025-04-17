@@ -222,7 +222,7 @@ const ChatHeader = ({
                 <div
                   ref={dropdownRef}
                   className={`absolute  w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50 left-0 ${
-                    shouldDropdownPopUp() ? "bottom-8" : "top-8"
+                    shouldDropdownPopUp() ? "bottom-7" : "top-7"
                   }`}
                 >
                   {tags.map((tag) => (
