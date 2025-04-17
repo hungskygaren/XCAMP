@@ -9,6 +9,7 @@ const MediaItem = ({
   onToggleDropdown,
   dropdownOpen,
   dropdownRef,
+  itemindex,
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -180,7 +181,13 @@ const MediaItem = ({
       {dropdownOpen === item.id && (
         <div
           ref={dropdownRef}
-          className="absolute right-0 top-[40px] text-xs w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg px-2.5 py-2 z-50"
+          className={`absolute ${
+            type === "media"
+              ? (itemindex + 1) % 3 === 1
+                ? "left-0"
+                : "right-0"
+              : "right-4"
+          } top-[35px] text-xs w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg px-2.5 py-2 z-50`}
         >
           {dropdownOptions[type].map((option, index) => (
             <button
@@ -388,7 +395,7 @@ export default function MediaAndLinksDetail({ initialType = "media", onBack }) {
                     : "flex flex-col gap-2.5"
                 }`}
               >
-                {group.items.map((item) => (
+                {group.items.map((item, index) => (
                   <MediaItem
                     key={item.id}
                     item={item}
@@ -396,6 +403,7 @@ export default function MediaAndLinksDetail({ initialType = "media", onBack }) {
                     onToggleDropdown={handleToggleDropdown}
                     dropdownOpen={dropdownOpen}
                     dropdownRef={getDropdownRef(item.id)}
+                    itemindex={index}
                   />
                 ))}
               </div>

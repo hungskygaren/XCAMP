@@ -136,7 +136,7 @@ export default function GroupMemberDetail({ members, onBack }) {
               {isDropdownOpen === member.id && (
                 <div
                   ref={getDropdownRef(member.id)}
-                  className="fixed right-4 top-auto w-[200px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                  className="fixed right-3 transform translate-y-[-5px] w-[200px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
                 >
                   <button className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs text-[#141416] hover:bg-[#F4F5F6]">
                     <Image

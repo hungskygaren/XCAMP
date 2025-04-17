@@ -94,7 +94,7 @@ export default function PinnedMessagesDetail({ pinnedMessages, onBack }) {
                 {isDropdownOpen === message.id && (
                   <div
                     ref={getDropdownRef(message.id)}
-                    className="absolute right-2 top-6 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                    className="absolute right-2 top-3 w-[193px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
                   >
                     <button className="flex items-center gap-2 w-full text-left pl-[10px] py-[7px] text-xs text-[#141416] hover:bg-[#F4F5F6]">
                       <Image
