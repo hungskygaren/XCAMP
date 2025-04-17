@@ -66,7 +66,7 @@ export default function PinnedMessagesDetail({ pinnedMessages, onBack }) {
       </div>
 
       {/* Danh sách tin nhắn ghim */}
-      <div className="flex flex-col gap-2 mt-4 overflow-y-auto">
+      <div className="flex flex-col gap-2 mt-4 overflow-y-auto h-full">
         {pinnedMessages.map((message) => (
           <div
             key={message.id}

@@ -103,7 +103,7 @@ export default function GroupMemberDetail({ members, onBack }) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 mt-4 overflow-y-auto ">
+      <div className="flex flex-col gap-2 mt-4 overflow-y-auto relative z-100 ">
         {filteredMembers.map((member) => (
           <div
             key={member.id}
@@ -131,12 +131,12 @@ export default function GroupMemberDetail({ members, onBack }) {
                 alt=""
                 className="cursor-pointer"
                 data-member-id={member.id} // Thêm dòng này
-                onClick={(e) => handleToggleDropdown(member.id, e)} // Sửa dòng này: truyền event (e)
+                onClick={(e) => handleToggleDropdown(member.id, e)}
               />
               {isDropdownOpen === member.id && (
                 <div
                   ref={getDropdownRef(member.id)}
-                  className="absolute right-0  top-6 w-[200px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
+                  className="fixed right-4 top-auto w-[200px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50"
                 >
                   <button className="flex items-center gap-2 w-full text-left px-2 py-2 text-xs text-[#141416] hover:bg-[#F4F5F6]">
                     <Image
@@ -151,8 +151,8 @@ export default function GroupMemberDetail({ members, onBack }) {
                     <Image
                       src={
                         member.role === "Quản trị viên"
-                          ? "/Chats/iconchatinfor/Delete Shield Person.png"
-                          : "/Chats/iconchatinfor/Shield Person.png"
+                          ? "/Chats/iconchatinfor/deleteshieldperson.png"
+                          : "/Chats/iconchatinfor/shieldperson.png"
                       }
                       width={18}
                       height={18}
