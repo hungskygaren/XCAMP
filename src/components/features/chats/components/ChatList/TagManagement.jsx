@@ -233,7 +233,7 @@ const TagManagement = ({
                     <div className="flex items-center">
                       <div className="mr-2">
                         <Image
-                          src="/chats/iconlist/Verticaldots.png"
+                          src="/Chats/iconlist/Verticaldots.png"
                           className="w-[18px] h-[18px]"
                           width={18}
                           height={18}
@@ -249,7 +249,7 @@ const TagManagement = ({
                         onClick={() => handleEdit(tag)}
                       >
                         <Image
-                          src="/chats/iconlist/edit.png"
+                          src="/Chats/iconlist/edit.png"
                           alt="Edit"
                           className="w-[18px] h-[18px]"
                           width={18}
@@ -261,7 +261,7 @@ const TagManagement = ({
                         onClick={() => handleDelete(tag.id)}
                       >
                         <Image
-                          src="/chats/iconlist/delete.png"
+                          src="/Chats/iconlist/delete.png"
                           alt="Delete"
                           className="w-[18px] h-[18px]"
                           width={18}
