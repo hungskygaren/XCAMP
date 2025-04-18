@@ -171,11 +171,18 @@ const Chat = () => {
     console.log(isChatInfoOpen); // Thêm để debug
     setIsChatInfoOpen((prev) => !prev); // Toggle trạng thái
   };
-  useEffect(() => {
-    console.log("isChatInfoOpen after render:", isChatInfoOpen); // Log sau mỗi render
-  }, [isChatInfoOpen]);
+
   if (loading) {
-    return <div>Đang tải...</div>;
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-[#F4F5F6]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-500 border-t-transparent"></div>
+          <p className="text-lg font-medium text-gray-700">
+            Đang tải dữ liệu...
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (

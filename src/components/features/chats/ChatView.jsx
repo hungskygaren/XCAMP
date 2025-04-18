@@ -149,7 +149,7 @@ const ChatViewContent = ({
             />
           </div>
         ) : (
-          <div className="w-[57.875rem] h-full bg-white flex items-center justify-center">
+          <div className="w-full h-full bg-white flex items-center justify-center">
             <p className="text-gray-500 text-lg">
               Hãy chọn một cuộc trò chuyện để bắt đầu
             </p>
