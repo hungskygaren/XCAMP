@@ -178,22 +178,6 @@ const Chat = () => {
     return <div>Đang tải...</div>;
   }
 
-  if (!activeChat) {
-    return (
-      <div className="flex">
-        <VerticalNavbar />
-        <div className="flex flex-col w-full">
-          <Navbar />
-          <div className="flex bg-[#F4F5F6] p-4 w-full h-screen items-center justify-center">
-            <div className="text-2xl font-semibold text-gray-500">
-              Xin chào! Vui lòng chọn một cuộc trò chuyện để bắt đầu
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="flex ">
       <VerticalNavbar />
