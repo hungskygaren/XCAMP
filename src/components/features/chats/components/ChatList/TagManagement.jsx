@@ -317,7 +317,7 @@ const TagManagement = ({
                     >
                       {selectedColor === color && (
                         <Image
-                          src="/chats/iconlist/WhiteCheck.png"
+                          src="/Chats/iconlist/WhiteCheck.png"
                           className="w-5 h-[15px]"
                           width={15}
                           height={15}
