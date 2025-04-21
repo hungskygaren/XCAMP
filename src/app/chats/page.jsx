@@ -44,18 +44,21 @@ const Chat = () => {
   }, []);
 
   const handleSelectChat = async (chatId, newChat = null) => {
-    let selected = chats.find((chat) => chat.id === chatId);
+    console.log("handleSelectChat called with:", { chatId, newChat });
+    console.log("Current chats state:", chats);
 
-    // Nếu là chat mới (không tìm thấy trong chats)
+    let selected = chats.find((chat) => chat.id === chatId);
+    let updatedChats = [...chats];
+
     if (!selected && newChat) {
       selected = newChat;
-      setChats((prevChats) => [...prevChats, selected]);
+      updatedChats = [...updatedChats, selected];
       await saveChatToServer(selected);
+      console.log("New chat saved to server:", selected);
     }
 
     if (selected) {
-      // Cập nhật trạng thái "đã đọc" và "unreadCount"
-      const updatedChats = chats.map((chat) => {
+      updatedChats = updatedChats.map((chat) => {
         if (chat.id === chatId) {
           const updatedMessages = chat.messages.map((msg) => {
             if (!msg.isRead && msg.senderId !== currentUser.id) {
@@ -75,16 +78,14 @@ const Chat = () => {
         return chat;
       });
 
-      if (!chats.some((chat) => chat.id === chatId)) {
-        setChats([...updatedChats, selected]);
-      } else {
-        setChats(updatedChats);
-      }
-      setActiveChat(selected);
-      if (!newChat) await updateChatOnServer(chatId, selected); // Chỉ cập nhật nếu không phải chat mới
+      const updatedSelected = updatedChats.find((chat) => chat.id === chatId);
+      console.log("Updated chat before sending to server:", updatedSelected);
+
+      setChats(updatedChats);
+      setActiveChat(updatedSelected);
+      if (!newChat) await updateChatOnServer(chatId, updatedSelected);
     }
   };
-
   const saveChatToServer = async (chat) => {
     try {
       const response = await fetch(

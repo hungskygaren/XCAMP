@@ -112,7 +112,9 @@
           "content": "Chào anh Sang, em đã nhận được yêu cầu báo giá lịch từ công ty Nitto rồi ạ...",
           "timestamp": "2024-10-09T09:30:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": [],
           "isPinned": true,
           "pinnedBy": "2"
@@ -123,7 +125,9 @@
           "content": "Chào anh Sang, em đã nhận được yêu cầu báo giá lịch từ công ty Nitto rồi ạ...",
           "timestamp": "2024-10-09T09:30:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": [],
           "isPinned": true,
           "pinnedBy": "2"
@@ -134,7 +138,10 @@
           "content": "Chào Tuấn Anh, tốt quá. Em đã liên hệ với bên đối tác chưa?",
           "timestamp": "2024-10-09T09:32:00Z",
           "isRead": true,
-          "readBy": ["2", "1"],
+          "readBy": [
+            "2",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -143,7 +150,9 @@
           "content": "Dạ em đã gọi điện và gửi email cho bên đối tác rồi ạ...",
           "timestamp": "2024-10-09T09:35:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -152,7 +161,10 @@
           "content": "Ok em, khi nào có báo giá thì gửi anh xem nhé.",
           "timestamp": "2024-10-09T09:36:00Z",
           "isRead": true,
-          "readBy": ["2", "1"],
+          "readBy": [
+            "2",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -161,7 +173,9 @@
           "content": "Vâng ạ. Em vừa nhận được file thiết kế mẫu từ bên Nitto...",
           "timestamp": "2024-10-09T11:15:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": [
             {
               "id": "1001",
@@ -180,7 +194,10 @@
           "content": "Anh đã xem qua rồi, trông ổn đấy. Có điều chỉnh gì không em?",
           "timestamp": "2024-10-09T11:25:00Z",
           "isRead": true,
-          "readBy": ["2", "1"],
+          "readBy": [
+            "2",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -189,7 +206,9 @@
           "content": "Dạ không ạ, bên Nitto họ đã duyệt mẫu này rồi...",
           "timestamp": "2024-10-09T11:28:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -198,7 +217,9 @@
           "content": "em gửi video ",
           "timestamp": "2024-10-09T11:15:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -207,7 +228,9 @@
           "content": "",
           "timestamp": "2024-10-09T11:15:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": [
             {
               "id": "1743757088216vj7s7gj6q7",
@@ -321,7 +344,9 @@
           "content": "Chào anh Sang, tôi là Lưu Thị Dung từ công ty Nitto.",
           "timestamp": "2024-10-08T14:20:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -330,7 +355,10 @@
           "content": "Chào chị Dung, rất vui được làm việc với chị. Chúng tôi đã nhận được yêu cầu báo giá lịch của Nitto.",
           "timestamp": "2024-10-08T14:25:00Z",
           "isRead": true,
-          "readBy": ["3", "1"],
+          "readBy": [
+            "3",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -339,7 +367,9 @@
           "content": "Vâng, chúng tôi đang cần báo giá cho lịch năm 2025. Tôi có gửi một số yêu cầu chi tiết qua email rồi.",
           "timestamp": "2024-10-08T14:30:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -348,7 +378,10 @@
           "content": "Tôi đã nhận được email. Chúng tôi sẽ gửi báo giá chi tiết cho chị trong ngày mai.",
           "timestamp": "2024-10-08T14:33:00Z",
           "isRead": true,
-          "readBy": ["3", "1"],
+          "readBy": [
+            "3",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -357,7 +390,9 @@
           "content": "Cảm ơn anh. Chúng tôi cần báo giá sớm để kịp trình lãnh đạo phê duyệt.",
           "timestamp": "2024-10-08T14:35:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -366,7 +401,10 @@
           "content": "xczxcxzc",
           "timestamp": "2025-03-13T08:55:51.962Z",
           "isRead": true,
-          "readBy": ["3", "1"],
+          "readBy": [
+            "3",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -493,7 +531,11 @@
           "content": "Chào mọi người, tôi tạo nhóm này để trao đổi về dự án lịch cho Nitto năm 2025.",
           "timestamp": "2024-10-07T10:00:00Z",
           "isRead": true,
-          "readBy": ["2", "3", "4"],
+          "readBy": [
+            "2",
+            "3",
+            "4"
+          ],
           "attachments": []
         },
         {
@@ -502,7 +544,11 @@
           "content": "Cảm ơn anh Sang. Tôi là Dung từ Nitto. Chúng tôi rất mong được hợp tác với TECHUP cho dự án lịch này.",
           "timestamp": "2024-10-07T10:05:00Z",
           "isRead": true,
-          "readBy": ["2", "4", "1"],
+          "readBy": [
+            "2",
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -511,7 +557,11 @@
           "content": "Chào chị Dung. Em là Tuấn Anh, phụ trách thiết kế của dự án này. Em sẽ làm việc trực tiếp với chị về các mẫu thiết kế.",
           "timestamp": "2024-10-07T10:08:00Z",
           "isRead": true,
-          "readBy": ["3", "4", "1"],
+          "readBy": [
+            "3",
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -520,7 +570,12 @@
           "content": "Chào mọi người. Mình là Uyên, phụ trách phần sản xuất và in ấn. Mình sẽ phối hợp với các bên để đảm bảo chất lượng sản phẩm tốt nhất.",
           "timestamp": "2024-10-07T10:12:00Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "1"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -529,7 +584,12 @@
           "content": "Tôi đã gửi một số ý tưởng và yêu cầu ban đầu qua email. Mọi người có thể xem qua để nắm được định hướng của chúng tôi.",
           "timestamp": "2024-10-07T10:15:00Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "1"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "1"
+          ],
           "attachments": [
             {
               "id": "3001",
@@ -546,7 +606,12 @@
           "content": "Em đã xem qua tài liệu rồi ạ. Em sẽ chuẩn bị một số mẫu thiết kế dựa trên ý tưởng này và gửi lại cho mọi người trong tuần tới.",
           "timestamp": "2024-10-07T10:20:00Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "1"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -555,7 +620,12 @@
           "content": "Tốt lắm. Chúng ta hẹn họp online vào thứ Năm tuần này để thảo luận chi tiết hơn nhé.",
           "timestamp": "2024-10-07T10:25:00Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "1"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -564,7 +634,13 @@
           "content": "AAAAA",
           "timestamp": "2025-04-01T08:23:41.797Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "6", "7"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
           "attachments": []
         },
         {
@@ -573,7 +649,13 @@
           "content": "cxc",
           "timestamp": "2025-04-01T08:26:10.882Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "6", "7"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
           "attachments": []
         },
         {
@@ -582,7 +664,13 @@
           "content": "fdsfdf",
           "timestamp": "2025-04-01T08:26:17.279Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "6", "7"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
           "attachments": []
         },
         {
@@ -591,7 +679,13 @@
           "content": "nihao",
           "timestamp": "2025-04-04T08:55:45.860Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "6", "7"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
           "attachments": []
         },
         {
@@ -600,7 +694,13 @@
           "content": "",
           "timestamp": "2025-04-04T08:58:10.001Z",
           "isRead": true,
-          "readBy": ["1", "3", "4", "6", "7"],
+          "readBy": [
+            "1",
+            "3",
+            "4",
+            "6",
+            "7"
+          ],
           "attachments": [
             {
               "id": "1743757088216vj7s7gj6q7",
@@ -648,7 +748,10 @@
           "content": "Uyên ơi, em liên hệ với nhà in chưa?",
           "timestamp": "2024-10-08T09:00:00Z",
           "isRead": true,
-          "readBy": ["4", "1"],
+          "readBy": [
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -657,7 +760,9 @@
           "content": "Em chào anh. Em đã liên hệ với 3 nhà in rồi ạ. Họ hẹn chiều nay sẽ gửi báo giá cho mình.",
           "timestamp": "2024-10-08T09:05:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -666,7 +771,10 @@
           "content": "Tốt, khi nào có báo giá thì gửi anh xem nhé.",
           "timestamp": "2024-10-08T09:07:00Z",
           "isRead": true,
-          "readBy": ["4", "1"],
+          "readBy": [
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -675,7 +783,9 @@
           "content": "Vâng ạ, em sẽ tổng hợp và gửi anh sau khi nhận đủ.",
           "timestamp": "2024-10-08T09:10:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -684,7 +794,9 @@
           "content": "Anh Sang, em đã nhận được báo giá từ 3 nhà in rồi ạ. Em gửi anh xem qua.",
           "timestamp": "2024-10-08T15:30:00Z",
           "isRead": true,
-          "readBy": ["1"],
+          "readBy": [
+            "1"
+          ],
           "attachments": [
             {
               "id": "4001",
@@ -701,7 +813,10 @@
           "content": "Anh đã nhận được, cảm ơn em.",
           "timestamp": "2024-10-08T15:35:00Z",
           "isRead": true,
-          "readBy": ["4", "1"],
+          "readBy": [
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -710,7 +825,10 @@
           "content": "ko",
           "timestamp": "2025-03-13T04:32:19.931Z",
           "isRead": true,
-          "readBy": ["4", "1"],
+          "readBy": [
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -719,7 +837,10 @@
           "content": "sdss",
           "timestamp": "2025-03-13T08:54:47.915Z",
           "isRead": true,
-          "readBy": ["4", "1"],
+          "readBy": [
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -728,7 +849,10 @@
           "content": "dfđ",
           "timestamp": "2025-03-13T09:43:03.480Z",
           "isRead": true,
-          "readBy": ["1", "4"],
+          "readBy": [
+            "1",
+            "4"
+          ],
           "attachments": []
         },
         {
@@ -776,7 +900,9 @@
           "timestamp": "2024-10-08T16:00:00Z",
           "isRead": true,
           "attachments": [],
-          "readBy": ["1"]
+          "readBy": [
+            "1"
+          ]
         },
         {
           "id": "502",
@@ -793,7 +919,9 @@
           "timestamp": "2024-10-08T16:08:00Z",
           "isRead": true,
           "attachments": [],
-          "readBy": ["1"]
+          "readBy": [
+            "1"
+          ]
         },
         {
           "id": "504",
@@ -810,7 +938,9 @@
           "timestamp": "2024-10-08T16:12:00Z",
           "isRead": true,
           "attachments": [],
-          "readBy": ["1"]
+          "readBy": [
+            "1"
+          ]
         },
         {
           "id": "506",
@@ -827,7 +957,9 @@
           "timestamp": "2024-10-08T16:18:00Z",
           "isRead": true,
           "attachments": [],
-          "readBy": ["1"]
+          "readBy": [
+            "1"
+          ]
         },
         {
           "id": "1741856337076",
@@ -835,7 +967,9 @@
           "content": "xcx",
           "timestamp": "2025-03-13T08:58:57.076Z",
           "isRead": true,
-          "readBy": ["5"],
+          "readBy": [
+            "5"
+          ],
           "attachments": []
         },
         {
@@ -844,7 +978,9 @@
           "content": "Xin người",
           "timestamp": "2025-03-13T09:18:44.298Z",
           "isRead": true,
-          "readBy": ["5"],
+          "readBy": [
+            "5"
+          ],
           "attachments": []
         },
         {
@@ -853,7 +989,10 @@
           "content": "hhhhh",
           "timestamp": "2025-03-13T09:38:29.108Z",
           "isRead": true,
-          "readBy": ["1", "5"],
+          "readBy": [
+            "1",
+            "5"
+          ],
           "attachments": []
         },
         {
@@ -959,7 +1098,11 @@
           "content": "Chào mọi người, tôi tạo nhóm này để trao đổi về dự án lịch cho Nitto năm 2025.",
           "timestamp": "2024-10-07T10:00:00Z",
           "isRead": true,
-          "readBy": ["2", "3", "4"],
+          "readBy": [
+            "2",
+            "3",
+            "4"
+          ],
           "attachments": []
         },
         {
@@ -968,7 +1111,11 @@
           "content": "Cảm ơn anh Sang. Tôi là Dung từ Nitto. Chúng tôi rất mong được hợp tác với TECHUP cho dự án lịch này.",
           "timestamp": "2024-10-07T10:05:00Z",
           "isRead": true,
-          "readBy": ["2", "4", "1"],
+          "readBy": [
+            "2",
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -977,7 +1124,11 @@
           "content": "Chào chị Dung. Em là Tuấn Anh, phụ trách thiết kế của dự án này. Em sẽ làm việc trực tiếp với chị về các mẫu thiết kế.",
           "timestamp": "2024-10-07T10:08:00Z",
           "isRead": true,
-          "readBy": ["3", "4", "1"],
+          "readBy": [
+            "3",
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -986,7 +1137,12 @@
           "content": "Chào mọi người. Mình là Uyên, phụ trách phần sản xuất và in ấn. Mình sẽ phối hợp với các bên để đảm bảo chất lượng sản phẩm tốt nhất.",
           "timestamp": "2024-10-07T10:12:00Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "1"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -995,7 +1151,12 @@
           "content": "Tôi đã gửi một số ý tưởng và yêu cầu ban đầu qua email. Mọi người có thể xem qua để nắm được định hướng của chúng tôi.",
           "timestamp": "2024-10-07T10:15:00Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "1"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "1"
+          ],
           "attachments": [
             {
               "id": "3001",
@@ -1012,7 +1173,12 @@
           "content": "Em đã xem qua tài liệu rồi ạ. Em sẽ chuẩn bị một số mẫu thiết kế dựa trên ý tưởng này và gửi lại cho mọi người trong tuần tới.",
           "timestamp": "2024-10-07T10:20:00Z",
           "isRead": true,
-          "readBy": ["2", "3", "4", "1"],
+          "readBy": [
+            "2",
+            "3",
+            "4",
+            "1"
+          ],
           "attachments": []
         },
         {
@@ -1021,7 +1187,10 @@
           "content": "Tốt lắm. Chúng ta hẹn họp online vào thứ Năm tuần này để thảo luận chi tiết hơn nhé.",
           "timestamp": "2024-10-07T10:25:00Z",
           "isRead": true,
-          "readBy": ["6", "7"],
+          "readBy": [
+            "6",
+            "7"
+          ],
           "attachments": []
         },
         {
@@ -1030,7 +1199,10 @@
           "content": "fdfd",
           "timestamp": "2025-03-13T08:53:01.716Z",
           "isRead": true,
-          "readBy": ["6", "7"],
+          "readBy": [
+            "6",
+            "7"
+          ],
           "attachments": []
         },
         {
@@ -1039,7 +1211,10 @@
           "content": "ngừng",
           "timestamp": "2025-03-13T09:18:48.567Z",
           "isRead": true,
-          "readBy": ["6", "7"],
+          "readBy": [
+            "6",
+            "7"
+          ],
           "attachments": []
         },
         {
@@ -1048,7 +1223,10 @@
           "content": "dev 2",
           "timestamp": "2025-03-13T09:36:56.041Z",
           "isRead": true,
-          "readBy": ["6", "7"],
+          "readBy": [
+            "6",
+            "7"
+          ],
           "attachments": []
         },
         {
@@ -1057,7 +1235,10 @@
           "content": "dev3",
           "timestamp": "2025-03-13T09:49:12.904Z",
           "isRead": true,
-          "readBy": ["6", "7"],
+          "readBy": [
+            "6",
+            "7"
+          ],
           "attachments": []
         },
         {
@@ -1066,7 +1247,10 @@
           "content": "kám",
           "timestamp": "2025-03-16T08:05:01.713Z",
           "isRead": true,
-          "readBy": ["6", "7"],
+          "readBy": [
+            "6",
+            "7"
+          ],
           "attachments": []
         }
       ],
@@ -1074,35 +1258,6 @@
       "lastMessageTime": "2025-03-17T08:05:01.713Z",
       "tag": "5",
       "isPinned": true
-    },
-    {
-      "id": "1742372733073",
-      "type": "direct",
-      "participants": [
-        {
-          "id": "1",
-          "name": "Sang Nguyễn"
-        },
-        {
-          "id": "7",
-          "name": " OOO sa",
-          "email": "ooo1@owls.com",
-          "avatar": "/chats/avatar1.png"
-        }
-      ],
-      "messages": [
-        {
-          "id": "1742372740340",
-          "senderId": "1",
-          "content": "hellô",
-          "timestamp": "2025-03-19T08:25:40.340Z",
-          "isRead": true,
-          "readBy": [],
-          "attachments": []
-        }
-      ],
-      "unreadCount": 0,
-      "lastMessageTime": "2025-03-19T08:25:40.340Z"
     },
     {
       "id": "1742980195545",
@@ -1135,13 +1290,45 @@
           "content": "ja ",
           "timestamp": "2025-03-26T09:10:08.538Z",
           "isRead": true,
-          "readBy": ["5", "3"],
+          "readBy": [
+            "5",
+            "3"
+          ],
           "attachments": []
         }
       ],
       "unreadCount": 0,
       "lastMessageTime": "2025-03-26T09:10:08.538Z",
       "tag": null
+    },
+    {
+      "id": "1745206787727",
+      "type": "direct",
+      "participants": [
+        {
+          "id": "1",
+          "name": "Sang Nguyễn"
+        },
+        {
+          "id": "7",
+          "name": "OOO sa",
+          "email": "ooo1@owls.com",
+          "avatar": "/chats/avatar1.png"
+        }
+      ],
+      "messages": [
+        {
+          "id": "17452068015018vx0hw0w62",
+          "senderId": "1",
+          "content": "hello",
+          "timestamp": "2025-04-21T03:40:01.501Z",
+          "isRead": true,
+          "readBy": [],
+          "attachments": []
+        }
+      ],
+      "unreadCount": 0,
+      "lastMessageTime": "2025-04-21T03:40:01.501Z"
     }
   ],
   "contacts": [
