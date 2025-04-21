@@ -311,7 +311,7 @@
       ],
       "unreadCount": 0,
       "lastMessageTime": "2025-04-09T09:56:27.717Z",
-      "tag": "3",
+      "tag": "1742368321057",
       "isPinned": false,
       "isNotificationOff": true,
       "isFlagged": false
@@ -464,7 +464,7 @@
       ],
       "unreadCount": 0,
       "lastMessageTime": "2025-03-19T08:25:18.972Z",
-      "tag": "1742368321057",
+      "tag": "1742294528630",
       "isFlagged": false
     },
     {
@@ -717,7 +717,7 @@
       "unreadCount": 0,
       "lastMessageTime": "2025-04-04T08:58:10.001Z",
       "isFlagged": false,
-      "tag": null,
+      "tag": "1745229832094",
       "isNotificationOff": false
     },
     {
@@ -1401,7 +1401,7 @@
       "id": "1",
       "name": "Khách hàng1",
       "color": "#C359A1",
-      "order": 6
+      "order": 7
     },
     {
       "id": "2",
@@ -1425,13 +1425,13 @@
       "id": "5",
       "name": "Bạn bè",
       "color": "#FFFF00",
-      "order": 2
+      "order": 3
     },
     {
       "id": "6",
       "name": "Trả lời sau",
       "color": "#800080",
-      "order": 7
+      "order": 8
     },
     {
       "id": "1742294528630",
@@ -1443,7 +1443,13 @@
       "id": "1742368321057",
       "name": "Grab",
       "color": "#00FF00",
-      "order": 3
+      "order": 6
+    },
+    {
+      "id": "1745229832094",
+      "name": "21/4",
+      "color": "#C359A1",
+      "order": 2
     }
   ]
 }

@@ -7,15 +7,17 @@ import {
 } from "@/components/features/chats/components/Utils/ChatUtils";
 import Image from "next/image";
 
+// Component hiển thị kết quả tìm kiếm
 const SearchResults = ({
-  onSelectChat,
-  currentUser,
-  contacts,
-  setIsSearchOpen,
-  chats,
-  searchQuery,
-  onCloseSearch,
+  onSelectChat, // Hàm xử lý khi chọn một cuộc trò chuyện
+  currentUser, // Người dùng hiện tại
+  contacts, // Danh sách liên hệ
+  setIsSearchOpen, // Hàm đóng giao diện tìm kiếm
+  chats, // Danh sách các cuộc trò chuyện
+  searchQuery, // Từ khóa tìm kiếm
+  onCloseSearch, // Hàm xử lý khi đóng tìm kiếm
 }) => {
+  // Lọc danh sách liên hệ dựa trên từ khóa tìm kiếm
   const filteredContacts = useMemo(() => {
     if (!contacts || !searchQuery.trim()) return [];
     return contacts.filter((contact) =>
@@ -23,6 +25,7 @@ const SearchResults = ({
     );
   }, [contacts, searchQuery]);
 
+  // Lọc danh sách tin nhắn dựa trên từ khóa tìm kiếm
   const filteredMessages = useMemo(() => {
     if (!chats || !searchQuery.trim()) return [];
     const result = [];
@@ -37,8 +40,11 @@ const SearchResults = ({
     return result;
   }, [chats, searchQuery]);
 
+  // Hàm hiển thị avatar của cuộc trò chuyện
   const renderChatAvatar = (chat) => {
     const avatars = getChatAvatar(chat, currentUser);
+
+    // Nếu là nhóm, hiển thị avatar của các thành viên
     if (chat.type === "group" && Array.isArray(avatars)) {
       if (avatars.length === 2) {
         return (
@@ -94,6 +100,8 @@ const SearchResults = ({
         </div>
       );
     }
+
+    // Nếu là chat trực tiếp, hiển thị avatar của người tham gia
     return (
       <Image
         src={avatars}
@@ -105,6 +113,7 @@ const SearchResults = ({
     );
   };
 
+  // Hàm đóng giao diện tìm kiếm
   const handleCloseSearch = () => {
     setIsSearchOpen(false);
     onCloseSearch();
@@ -112,6 +121,7 @@ const SearchResults = ({
 
   return (
     <div className="absolute bg-white z-20 p-4 overflow-y-auto">
+      {/* Hiển thị thông báo nếu không có từ khóa tìm kiếm */}
       {!searchQuery.trim() ? (
         <div className="text-center text-gray-500 mt-4">
           <p className="text-sm">Nhập để tìm kiếm liên hệ hoặc tin nhắn</p>
@@ -119,12 +129,14 @@ const SearchResults = ({
         </div>
       ) : (
         <>
+          {/* Hiển thị danh sách liên hệ phù hợp */}
           {filteredContacts.length > 0 && (
             <>
               <h3 className="text-sm font-semibold text-gray-700 mb-2">
                 Liên hệ
               </h3>
               {filteredContacts.slice(0, 2).map((contact) => {
+                // Tìm cuộc trò chuyện hiện có với liên hệ
                 const matchingChats = chats.filter(
                   (c) =>
                     c.type === "direct" &&
@@ -141,6 +153,8 @@ const SearchResults = ({
                           : current
                       )
                     : null;
+
+                // Nếu không có cuộc trò chuyện, tạo một cuộc trò chuyện mới
                 const chat = existingChat || {
                   id: Date.now().toString(),
                   type: "direct",
@@ -157,6 +171,7 @@ const SearchResults = ({
                   unreadCount: 0,
                   lastMessageTime: new Date().toISOString(),
                 };
+
                 return (
                   <div
                     key={contact.id}
@@ -185,6 +200,7 @@ const SearchResults = ({
             </>
           )}
 
+          {/* Hiển thị danh sách tin nhắn phù hợp */}
           {filteredMessages.length > 0 && (
             <>
               <h3 className="text-sm font-semibold text-gray-700 mt-4 mb-2">
@@ -215,6 +231,7 @@ const SearchResults = ({
             </>
           )}
 
+          {/* Hiển thị thông báo nếu không tìm thấy kết quả */}
           {filteredContacts.length === 0 &&
             filteredMessages.length === 0 &&
             searchQuery.trim() && (

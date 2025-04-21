@@ -2,11 +2,13 @@
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 
+// Component More: Dropdown hiển thị các tùy chọn lọc
 const More = ({ onFilterByFlag, onResetFilters }) => {
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
-  const [selectedFilter, setSelectedFilter] = useState(null); // null, "flagged", hoặc "mentioned"
-  const moreRef = useRef(null);
+  const [isMoreOpen, setIsMoreOpen] = useState(false); // Trạng thái mở/đóng dropdown
+  const [selectedFilter, setSelectedFilter] = useState(null); // Bộ lọc được chọn (null, "flagged", hoặc "mentioned")
+  const moreRef = useRef(null); // Ref để kiểm tra click ngoài dropdown
 
+  // Đóng dropdown khi click ra ngoài
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -14,7 +16,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
         moreRef.current &&
         !moreRef.current.contains(event.target)
       ) {
-        setIsMoreOpen(false);
+        setIsMoreOpen(false); // Đóng dropdown
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -23,13 +25,13 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
     };
   }, [isMoreOpen]);
 
-  // Toggle dropdown
+  // Toggle trạng thái mở/đóng dropdown
   const handleMoreOpen = (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); // Ngăn sự kiện lan truyền
     setIsMoreOpen(!isMoreOpen);
   };
 
-  // // Chọn "Đã gắn cờ"
+  //   // Chọn "Đã gắn cờ"
   // const handleFilterFlagged = () => {
   //   setSelectedFilter("flagged");
   //   onFilterByFlag(true); // Kích hoạt lọc flagged
@@ -38,21 +40,22 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
 
   // Chọn "Nhắc đến bạn"
   const handleFilterMentioned = () => {
-    setSelectedFilter("mentioned");
-    onFilterByFlag(false); // Reset flagged vì chỉ được chọn 1
-    setIsMoreOpen(false);
+    setSelectedFilter("mentioned"); // Đặt bộ lọc là "mentioned"
+    onFilterByFlag(false); // Reset lọc flagged (chỉ chọn 1 bộ lọc tại 1 thời điểm)
+    setIsMoreOpen(false); // Đóng dropdown
   };
 
-  // Reset bộ lọc
+  // Reset tất cả bộ lọc
   const handleReset = (e) => {
-    e.stopPropagation();
-    setSelectedFilter(null);
-    onResetFilters(); // Reset tất cả bộ lọc trong ChatList
-    setIsMoreOpen(false);
+    e.stopPropagation(); // Ngăn sự kiện lan truyền
+    setSelectedFilter(null); // Xóa bộ lọc đã chọn
+    onResetFilters(); // Gọi hàm reset bộ lọc từ props
+    setIsMoreOpen(false); // Đóng dropdown
   };
 
   return (
     <div ref={moreRef} className="relative">
+      {/* Nút mở dropdown */}
       <button
         onClick={handleMoreOpen}
         className={`flex items-center cursor-pointer gap-1 py-1 px-2 ${
@@ -91,6 +94,7 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
             alt="More"
           />
         )}
+        {/* Nút reset bộ lọc */}
         {selectedFilter && (
           <span className="ml-1 cursor-pointer" onClick={handleReset}>
             <Image
@@ -103,6 +107,8 @@ const More = ({ onFilterByFlag, onResetFilters }) => {
           </span>
         )}
       </button>
+
+      {/* Dropdown hiển thị các tùy chọn */}
       {isMoreOpen && (
         <div className="absolute top-8 right-0 w-[150px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50">
           {/* Item 1: Đã gắn cờ

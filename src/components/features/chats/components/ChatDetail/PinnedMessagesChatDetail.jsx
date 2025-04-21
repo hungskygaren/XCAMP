@@ -19,8 +19,6 @@ const PinnedMessagesChatDetail = ({
     }
     return dropdownRefs.current[messageId];
   };
-  console.log(dropdownRefs);
-  console.log(dropdownRefs.current);
 
   const handleToggleDropdown = (messageId, event) => {
     event.stopPropagation(); // Ngăn lan truyền để tránh gọi onMessageClick

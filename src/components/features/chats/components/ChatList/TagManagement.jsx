@@ -1,22 +1,26 @@
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 
+// Component quản lý thẻ (tags)
 const TagManagement = ({
-  onClose,
-  onSaveTag,
-  onUpdateTag,
-  onDeleteTag,
-  onUpdateTags,
+  onClose, // Hàm đóng modal
+  onSaveTag, // Hàm lưu thẻ mới
+  onUpdateTag, // Hàm cập nhật thẻ
+  onDeleteTag, // Hàm xóa thẻ
+  onUpdateTags, // Hàm cập nhật danh sách thẻ
 }) => {
-  const [tags, setTags] = useState([]);
-  const [isAddingTag, setIsAddingTag] = useState(false);
-  const [editingTag, setEditingTag] = useState(null);
-  const [newTagName, setNewTagName] = useState("");
-  const [selectedColor, setSelectedColor] = useState("#4A30B1");
-  const [draggingIndex, setDraggingIndex] = useState(null);
-  const [dragOverIndex, setDragOverIndex] = useState(null);
-  const dragRef = useRef(null);
+  // Trạng thái quản lý danh sách thẻ và các hành động
+  const [tags, setTags] = useState([]); // Danh sách thẻ
+  const [isAddingTag, setIsAddingTag] = useState(false); // Trạng thái thêm thẻ
+  const [editingTag, setEditingTag] = useState(null); // Thẻ đang chỉnh sửa
+  const [newTagName, setNewTagName] = useState(""); // Tên thẻ mới
+  const [selectedColor, setSelectedColor] = useState("#4A30B1"); // Màu sắc được chọn
+  const [draggingIndex, setDraggingIndex] = useState(null); // Vị trí thẻ đang kéo
+  const [dragOverIndex, setDragOverIndex] = useState(null); // Vị trí thẻ đang được kéo qua
+  const dragRef = useRef(null); // Ref để quản lý trạng thái kéo thả
   const modalRef = useRef(null); // Ref để kiểm tra nhấp ngoài modal
+
+  // Danh sách màu sắc có sẵn
   const colors = [
     "#00B6FF",
     "#4B6DF0",
@@ -34,18 +38,19 @@ const TagManagement = ({
     "#00C1B1",
   ];
 
+  // Fetch danh sách thẻ từ API khi component mount
   useEffect(() => {
-    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
       .then((res) => res.json())
       .then((data) => setTags(data))
       .catch((err) => console.error("Error fetching tags:", err));
   }, []);
 
-  // Xử lý nhấp ra ngoài lớp opacity để đóng modal
+  // Đóng modal khi nhấp ra ngoài
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
-        onClose(); // Đóng modal khi nhấp ra ngoài
+        onClose(); // Đóng modal
         setIsAddingTag(false); // Reset trạng thái thêm/sửa thẻ
         setEditingTag(null);
         setNewTagName("");
@@ -58,25 +63,30 @@ const TagManagement = ({
     };
   }, [onClose]);
 
+  // Xử lý bắt đầu kéo thẻ
   const handleDragStart = (e, index) => {
     setDraggingIndex(index);
     dragRef.current = e.target;
-    e.target.style.opacity = "0.5";
+    e.target.style.opacity = "0.5"; // Giảm độ mờ khi kéo
   };
 
+  // Xử lý khi kéo qua thẻ khác
   const handleDragOver = (e, index) => {
     e.preventDefault();
     setDragOverIndex(index);
   };
 
+  // Xử lý khi thả thẻ
   const handleDrop = (e, dropIndex) => {
     e.preventDefault();
     if (draggingIndex === null || draggingIndex === dropIndex) return;
 
+    // Sắp xếp lại danh sách thẻ
     const reorderedTags = [...tags];
     const [movedTag] = reorderedTags.splice(draggingIndex, 1);
     reorderedTags.splice(dropIndex, 0, movedTag);
 
+    // Cập nhật thứ tự thẻ
     const updatedTags = reorderedTags.map((tag, index) => ({
       ...tag,
       order: index,
@@ -86,9 +96,10 @@ const TagManagement = ({
     setDraggingIndex(null);
     setDragOverIndex(null);
 
+    // Gửi yêu cầu cập nhật thứ tự thẻ lên server
     Promise.all(
       updatedTags.map((tag) =>
-        fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags/${tag.id}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags/${tag.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(tag),
@@ -96,26 +107,28 @@ const TagManagement = ({
       )
     )
       .then(() => {
-        fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
           .then((res) => res.json())
           .then((data) => setTags(data));
-        onUpdateTags();
+        onUpdateTags(); // Gọi hàm cập nhật danh sách thẻ
       })
       .catch((err) => console.error("Error updating tag order:", err));
 
     if (dragRef.current) {
-      dragRef.current.style.opacity = "1";
+      dragRef.current.style.opacity = "1"; // Khôi phục độ mờ
     }
   };
 
+  // Xử lý khi kết thúc kéo
   const handleDragEnd = () => {
     setDraggingIndex(null);
     setDragOverIndex(null);
     if (dragRef.current) {
-      dragRef.current.style.opacity = "1";
+      dragRef.current.style.opacity = "1"; // Khôi phục độ mờ
     }
   };
 
+  // Lưu thẻ mới
   const handleSave = () => {
     if (!newTagName.trim() || !selectedColor) return;
 
@@ -126,7 +139,7 @@ const TagManagement = ({
       order: tags.length,
     };
 
-    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTag),
@@ -137,7 +150,7 @@ const TagManagement = ({
         setNewTagName("");
         setSelectedColor("#4A30B1");
         setIsAddingTag(false);
-        fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
           .then((res) => res.json())
           .then((data) => setTags(data));
         onUpdateTags();
@@ -145,6 +158,7 @@ const TagManagement = ({
       .catch((err) => console.error("Error saving tag:", err));
   };
 
+  // Chỉnh sửa thẻ
   const handleEdit = (tag) => {
     setEditingTag(tag);
     setNewTagName(tag.name);
@@ -152,6 +166,7 @@ const TagManagement = ({
     setIsAddingTag(true);
   };
 
+  // Cập nhật thẻ
   const handleUpdate = () => {
     if (!editingTag || !newTagName.trim() || !selectedColor) return;
 
@@ -160,7 +175,7 @@ const TagManagement = ({
       name: newTagName.trim(),
       color: selectedColor,
     };
-    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags/${editingTag.id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags/${editingTag.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedTag),
@@ -181,8 +196,9 @@ const TagManagement = ({
       .catch((err) => console.error("Error updating tag:", err));
   };
 
+  // Xóa thẻ
   const handleDelete = (tagId) => {
-    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags/${tagId}`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags/${tagId}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -194,6 +210,7 @@ const TagManagement = ({
       .catch((err) => console.error("Error deleting tag:", err));
   };
 
+  // Component hiển thị icon thẻ
   const TagIcon = ({ color }) => (
     <svg
       width="18"
@@ -212,12 +229,12 @@ const TagManagement = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div ref={modalRef} className="bg-white  rounded-lg w-[570px]  ">
+      <div ref={modalRef} className="bg-white rounded-lg w-[570px]">
         {!isAddingTag ? (
-          <div className="px-[29px] pt-[23px] pb-[46px] ">
+          <div className="px-[29px] pt-[23px] pb-[46px]">
             <h2 className="text-lg font-semibold mb-4">Quản lý thẻ</h2>
             <div className="overflow-y-auto scrollbar-thin">
-              <div className="mb-4 p-2 max-h-[284px]  cursor-pointer ">
+              <div className="mb-4 p-2 max-h-[284px] cursor-pointer">
                 {tags.map((tag, index) => (
                   <div
                     key={tag.id}
@@ -245,7 +262,7 @@ const TagManagement = ({
                     </div>
                     <div className="flex items-center gap-5">
                       <button
-                        className=" text-blue-500"
+                        className="text-blue-500"
                         onClick={() => handleEdit(tag)}
                       >
                         <Image
@@ -272,7 +289,7 @@ const TagManagement = ({
                   </div>
                 ))}
                 <button
-                  className="w-full bg-gray-200 text-gray-700 py-2 rounded-lg mb-4 flex items-center justify-center "
+                  className="w-full bg-gray-200 text-gray-700 py-2 rounded-lg mb-4 flex items-center justify-center"
                   onClick={() => setIsAddingTag(true)}
                 >
                   <span className="mr-2">+</span> Thêm thẻ
@@ -302,12 +319,11 @@ const TagManagement = ({
                 Màu sắc
               </label>
               <div className="flex items-center gap-4 mt-3">
-                {/* <TagIcon color={selectedColor} /> */}
                 <div className="flex flex-wrap gap-2">
                   {colors.map((color) => (
                     <div
                       key={color}
-                      className="w-[50px] h-[50px] rounded-full cursor-pointer border-2 flex items-center justify-center" // Thêm flex để căn giữa
+                      className="w-[50px] h-[50px] rounded-full cursor-pointer border-2 flex items-center justify-center"
                       style={{
                         backgroundColor: color,
                         borderColor:

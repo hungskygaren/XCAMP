@@ -1,4 +1,12 @@
-// src/components/features/chats/components/ChatList/ChatItem.js
+/**
+ * Component ChatItem
+ * Hiển thị một mục chat trong danh sách với các tính năng:
+ * - Hiển thị thông tin cơ bản (avatar, tên, tin nhắn cuối)
+ * - Menu ngữ cảnh (right-click/long-press)
+ * - Quản lý thẻ và các trạng thái (ghim, thông báo, v.v.)
+ */
+
+// Import các dependencies cần thiết
 import React, { useState, useEffect, useRef } from "react";
 import TagManagement from "./TagManagement";
 import {
@@ -9,6 +17,14 @@ import {
 } from "@/components/features/chats/components/Utils/ChatUtils"; // Import từ chatUtils
 import Image from "next/image";
 
+// Props:
+// - chat: Thông tin cuộc trò chuyện
+// - activeChat: Cuộc trò chuyện đang được chọn
+// - onSelectChat: Callback khi chọn chat
+// - currentUser: Thông tin người dùng hiện tại
+// - onUpdateChat: Callback cập nhật thông tin chat
+// - tags: Danh sách các thẻ
+// - onUpdateTags: Callback cập nhật danh sách thẻ
 const ChatItem = ({
   chat,
   activeChat,

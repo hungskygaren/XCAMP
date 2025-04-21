@@ -4,20 +4,20 @@ import TagManagement from "./TagManagement";
 import Image from "next/image";
 
 const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
-  const [tags, setTags] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]); // Danh sách tag được chọn
-  const [isTagManagementOpen, setIsTagManagementOpen] = useState(false);
+  const [tags, setTags] = useState([]); // Danh sách thẻ
+  const [selectedTags, setSelectedTags] = useState([]); // Danh sách thẻ được chọn
+  const [isTagManagementOpen, setIsTagManagementOpen] = useState(false); // Trạng thái mở/đóng modal quản lý thẻ
   const containerRef = useRef(null); // Ref để tham chiếu đến toàn bộ component
 
-  // Lấy danh sách tag từ API
+  // Fetch danh sách thẻ từ API khi component mount
   useEffect(() => {
-    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
       .then((res) => res.json())
       .then((data) => setTags(data))
       .catch((err) => console.error("Error fetching tags:", err));
   }, []);
 
-  // Xử lý nhấp ra ngoài để đóng dropdown
+  // Đóng dropdown khi nhấp ra ngoài
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -35,31 +35,31 @@ const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
     };
   }, [isSortOpen, setIsSortOpen]);
 
-  // Cập nhật danh sách tag sau khi thay đổi từ TagManagement
+  // Cập nhật danh sách thẻ sau khi thay đổi từ TagManagement
   const handleUpdateTags = () => {
-    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
       .then((res) => res.json())
       .then((data) => setTags(data))
       .catch((err) => console.error("Error fetching tags:", err));
   };
 
-  // Xử lý chọn/hủy chọn tag
+  // Xử lý chọn/hủy chọn thẻ
   const handleTagToggle = (tagId) => {
     const newSelectedTags = selectedTags.includes(tagId)
-      ? selectedTags.filter((id) => id !== tagId)
-      : [...selectedTags, tagId];
+      ? selectedTags.filter((id) => id !== tagId) // Bỏ thẻ nếu đã được chọn
+      : [...selectedTags, tagId]; // Thêm thẻ nếu chưa được chọn
     setSelectedTags(newSelectedTags);
-    onFilterByTag(newSelectedTags); // Gửi danh sách tag được chọn để lọc
+    onFilterByTag(newSelectedTags); // Gửi danh sách thẻ được chọn để lọc
   };
 
-  // Reset tất cả tag được chọn
+  // Reset tất cả thẻ được chọn
   const handleResetTags = () => {
     setSelectedTags([]);
-    onFilterByTag([]); //reset lọc
+    onFilterByTag([]); // Reset bộ lọc
     setIsSortOpen(false); // Đóng dropdown
   };
 
-  // Component TagIcon
+  // Component TagIcon: Hiển thị biểu tượng màu sắc của thẻ
   const TagIcon = ({ color }) => (
     <svg
       width="18"
@@ -102,23 +102,26 @@ const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
       />
     );
   };
-  // Hàm mới để xử lý toggle dropdown
+
+  // Hàm xử lý toggle dropdown
   const handleToggleDropdown = (e) => {
     e.stopPropagation(); // Ngăn sự kiện lan truyền lên document
     setIsSortOpen(!isSortOpen);
   };
+
   return (
     <div
       ref={containerRef}
       className="relative items-center flex justify-between"
     >
+      {/* Nút mở dropdown */}
       <button
         className={`flex cursor-pointer items-center justify-center  rounded-full  px-[13px] gap-0.5 my-[10px] py-[4px] text-sm font-semibold text-gray-900 ${
           selectedTags.length > 0 || isSortOpen
             ? "bg-[#00B6FF26] "
             : "bg-[#F4F5F6]"
         }`}
-        onClick={handleToggleDropdown} // Sử dụng hàm mới để xử lý toggle dropdown
+        onClick={handleToggleDropdown}
       >
         {getButtonIcon()}
         <p className="text-xs pl-1.5  font-semibold">{getButtonLabel()}</p>
@@ -157,9 +160,10 @@ const SortDropdown = ({ isSortOpen, setIsSortOpen, onFilterByTag, chats }) => {
         )}
       </button>
 
+      {/* Dropdown hiển thị danh sách thẻ */}
       {isSortOpen && (
         <div className="absolute  top-9.5 left-0 w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-50">
-          {/* Danh sách các tag với checkbox */}
+          {/* Danh sách các thẻ với checkbox */}
           {tags.map((tag) => (
             <label
               key={tag.id}
