@@ -69,9 +69,6 @@ const ChatItem = ({
       case "toggleNotification":
         onUpdateChat(chat.id, { isNotificationOff: !chat.isNotificationOff });
         break;
-      // case "toggleFlag":
-      //   onUpdateChat(chat.id, { isFlagged: !chat.isFlagged });
-      //   break;
       case "setTag":
         onUpdateChat(chat.id, { tag: value === chat.tag ? null : value });
         break;
@@ -353,19 +350,6 @@ const ChatItem = ({
                   }}
                 />
               )}
-              {/* {chat.isFlagged && (
-                <Image
-                  width={18}
-                  height={18}
-                  src="/Chats/iconlist/flag.png"
-                  alt="Flagged"
-                  className="w-[18px] h-[18px] cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleToggle("isFlagged");
-                  }}
-                />
-              )} */}
             </div>
           </div>
         </div>
@@ -425,23 +409,6 @@ const ChatItem = ({
             />
             {chat.isNotificationOff ? "Bật thông báo" : "Tắt thông báo"}
           </button>
-          {/* <button
-            className="flex items-center gap-2 w-full text-left text-black text-xs px-2 py-2 hover:bg-[#F4F5F6]"
-            onClick={() => handleMenuAction("toggleFlag")}
-          >
-            <Image
-              width={18}
-              height={18}
-              src={
-                chat.isFlagged
-                  ? "/Chats/iconlist/flag.png"
-                  : "/Chats/iconlist/flag.png"
-              }
-              alt=""
-              className="w-[18px] h-[18px]"
-            />
-            {chat.isFlagged ? "Bỏ đánh dấu" : "Đánh dấu"}
-          </button> */}
 
           <div className="relative group">
             <button

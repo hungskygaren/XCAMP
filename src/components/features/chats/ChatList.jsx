@@ -22,6 +22,7 @@ const ChatList = ({
   onSelectChat, // Hàm xử lý khi chọn một cuộc trò chuyện
   contacts, // Danh sách liên hệ
   currentUser, // Người dùng hiện tại
+  onUpdateChat, // Hàm cập nhật thông tin chat
 }) => {
   // Trạng thái dữ liệu chat
   const [chatData, setChatData] = useState(chats || []);
@@ -251,7 +252,7 @@ const ChatList = ({
                     activeChat={activeChat}
                     onSelectChat={onSelectChat}
                     currentUser={currentUser}
-                    onUpdateChat={handleUpdateChat}
+                    onUpdateChat={onUpdateChat} // Truyền prop này xuống
                     tags={tags}
                     onUpdateTags={handleUpdateTags}
                   />

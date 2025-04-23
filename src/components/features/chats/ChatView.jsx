@@ -116,6 +116,7 @@ const ChatViewContent = ({
         onSelectChat={(chatId, chat) => onSelectChat(chatId, chat)}
         contacts={contacts}
         currentUser={currentUser}
+        onUpdateChat={onUpdateChat} // Truyền prop này xuống
       />
       <div className="flex transition-all duration-300 gap-4 w-full h-full relative">
         {/* Hiển thị chi tiết cuộc trò chuyện nếu có */}

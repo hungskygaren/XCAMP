@@ -208,18 +208,20 @@ const Chat = () => {
    * @param {object} updates - Object chứa các trường cần cập nhật (ví dụ: { tag: 'newTagId', isPinned: true }).
    */
   const handleUpdateChat = (chatId, updates) => {
-    // Cập nhật state `chats` ở client
-    const updatedChats = chats.map((chat) =>
-      chat.id === chatId ? { ...chat, ...updates } : chat
+    // Cập nhật state chats
+    setChats((prevChats) =>
+      prevChats.map((chat) =>
+        chat.id === chatId ? { ...chat, ...updates } : chat
+      )
     );
-    setChats(updatedChats);
 
-    // Nếu chat đang được cập nhật là activeChat, cập nhật luôn state activeChat
+    // Cập nhật activeChat nếu đang là chat được update
     if (activeChat && activeChat.id === chatId) {
-      setActiveChat({ ...activeChat, ...updates });
+      setActiveChat((prev) => ({ ...prev, ...updates }));
     }
 
-    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/chats/${chatId}`, {
+    // Gọi API cập nhật
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/chats/${chatId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updates),

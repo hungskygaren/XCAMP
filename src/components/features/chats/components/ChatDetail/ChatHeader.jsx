@@ -80,6 +80,11 @@ const ChatHeader = ({
       .catch((err) => console.error("Error fetching tags:", err));
   };
 
+  // Xử lý cập nhật tag
+  const handleUpdateTag = (tagId) => {
+    onUpdateChat(chat.id, { tag: tagId });
+  };
+
   // Icon biểu tượng tag
   const TagIcon = ({ color }) => (
     <svg
