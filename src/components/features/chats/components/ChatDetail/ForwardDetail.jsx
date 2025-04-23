@@ -4,9 +4,16 @@ import React, { useRef, useEffect } from "react";
 import Button from "@/components/ui/buttons/Button";
 import TextInput from "@/components/ui/inputs/TextInput";
 
+/**
+ * Modal chuyển tiếp tin nhắn:
+ * - Chọn người/nhóm nhận
+ * - Thêm nội dung kèm theo
+ * @param {Function} onClose - Callback đóng modal
+ */
 const ForwardDetail = ({ onClose }) => {
   const modalRef = useRef(null);
 
+  // Click outside handler để đóng modal
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {

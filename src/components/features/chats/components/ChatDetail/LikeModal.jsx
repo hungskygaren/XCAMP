@@ -2,9 +2,14 @@
 import Image from "next/image";
 import React, { useRef, useEffect } from "react";
 
+/**
+ * Modal hiển thị danh sách người đã thả cảm xúc
+ * @param {Function} onClose - Callback đóng modal
+ */
 const LikeModal = ({ onClose }) => {
   const modalRef = useRef(null);
 
+  // Click outside handler để đóng modal
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {

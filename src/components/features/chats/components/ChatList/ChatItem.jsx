@@ -1,9 +1,10 @@
 /**
- * Component ChatItem
- * Hiển thị một mục chat trong danh sách với các tính năng:
+ * @fileoverview ChatItem Component
+ * Component này hiển thị một mục chat trong danh sách với các tính năng:
  * - Hiển thị thông tin cơ bản (avatar, tên, tin nhắn cuối)
  * - Menu ngữ cảnh (right-click/long-press)
  * - Quản lý thẻ và các trạng thái (ghim, thông báo, v.v.)
+ * - Xử lý tương tác người dùng (click, touch, hover)
  */
 
 // Import các dependencies cần thiết
@@ -17,14 +18,17 @@ import {
 } from "@/components/features/chats/components/Utils/ChatUtils"; // Import từ chatUtils
 import Image from "next/image";
 
-// Props:
-// - chat: Thông tin cuộc trò chuyện
-// - activeChat: Cuộc trò chuyện đang được chọn
-// - onSelectChat: Callback khi chọn chat
-// - currentUser: Thông tin người dùng hiện tại
-// - onUpdateChat: Callback cập nhật thông tin chat
-// - tags: Danh sách các thẻ
-// - onUpdateTags: Callback cập nhật danh sách thẻ
+/**
+ * ChatItem Component
+ * @param {Object} props - Props của component
+ * @param {Object} props.chat - Thông tin cuộc trò chuyện
+ * @param {Object} props.activeChat - Cuộc trò chuyện đang được chọn
+ * @param {Function} props.onSelectChat - Callback khi chọn chat
+ * @param {Object} props.currentUser - Thông tin người dùng hiện tại
+ * @param {Function} props.onUpdateChat - Callback cập nhật thông tin chat
+ * @param {Array} props.tags - Danh sách các thẻ
+ * @param {Function} props.onUpdateTags - Callback cập nhật danh sách thẻ
+ */
 const ChatItem = ({
   chat,
   activeChat,
@@ -34,18 +38,26 @@ const ChatItem = ({
   tags,
   onUpdateTags,
 }) => {
-  const avatars = getChatAvatar(chat, currentUser);
-  const [contextMenu, setContextMenu] = useState(null);
-  const [isTagSubmenuOpen, setIsTagSubmenuOpen] = useState(false);
-  const [isTagManagementOpen, setIsTagManagementOpen] = useState(false);
-  const menuRef = useRef(null);
-  const tagButtonRef = useRef(null);
-
+  // Khởi tạo các state và ref
+  const avatars = getChatAvatar(chat, currentUser); // Lấy avatar của cuộc trò chuyện
+  const [contextMenu, setContextMenu] = useState(null); // Vị trí menu ngữ cảnh (x, y)
+  const [isTagSubmenuOpen, setIsTagSubmenuOpen] = useState(false); // Trạng thái submenu thẻ
+  const [isTagManagementOpen, setIsTagManagementOpen] = useState(false); // Trạng thái modal quản lý thẻ
+  const menuRef = useRef(null); // Ref cho menu ngữ cảnh
+  const tagButtonRef = useRef(null); // Ref cho nút thẻ
+  /**
+   * Toggle trạng thái của một trường trong chat
+   * @param {string} field - Tên trường cần toggle (isPinned, isNotificationOff, ...)
+   */
   const handleToggle = (field) => {
     const newValue = !chat[field];
     onUpdateChat(chat.id, { [field]: newValue });
   };
-
+  /**
+   * Xử lý các hành động từ menu ngữ cảnh
+   * @param {string} action - Loại hành động (togglePin, clearUnread, ...)
+   * @param {any} value - Giá trị kèm theo (nếu có)
+   */
   const handleMenuAction = (action, value) => {
     switch (action) {
       case "togglePin":
@@ -72,7 +84,10 @@ const ChatItem = ({
     setContextMenu(null);
     setIsTagSubmenuOpen(false);
   };
-
+  /**
+   * Hiển thị menu ngữ cảnh khi right-click hoặc long-press
+   * Tự động điều chỉnh vị trí để không bị tràn màn hình
+   */
   const handleContextMenu = (e) => {
     e.preventDefault();
     const menuWidth = 250;
@@ -91,7 +106,10 @@ const ChatItem = ({
     setContextMenu({ x, y });
     setIsTagSubmenuOpen(false);
   };
-
+  /**
+   * Xử lý sự kiện touch trên thiết bị di động
+   * Hiển thị menu ngữ cảnh khi giữ lâu (500ms)
+   */
   const handleTouchStart = (e) => {
     const timer = setTimeout(() => {
       handleContextMenu(e);
@@ -102,7 +120,9 @@ const ChatItem = ({
   const handleTouchEnd = (e) => {
     clearTimeout(e.target.dataset.timer);
   };
-
+  /**
+   * Theo dõi và đóng menu ngữ cảnh khi click ra ngoài
+   */
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (contextMenu && !e.target.closest(".context-menu")) {
@@ -140,7 +160,10 @@ const ChatItem = ({
   const handleUpdateTags = () => {
     onUpdateTags();
   };
-
+  /**
+   * Component TagIcon - Hiển thị biểu tượng thẻ với màu tùy chỉnh
+   * @param {string} color - Mã màu của thẻ
+   */
   const TagIcon = ({ color }) => (
     <svg
       width="18"
@@ -156,7 +179,10 @@ const ChatItem = ({
       />
     </svg>
   );
-
+  /**
+   * Kiểm tra vị trí hiển thị của submenu thẻ
+   * @returns {boolean} True nếu submenu nên hiển thị phía trên
+   */
   const shouldSubmenuPopUp = () => {
     if (!contextMenu || !tagButtonRef.current) return false;
     const tagButtonRect = tagButtonRef.current.getBoundingClientRect();
@@ -167,6 +193,7 @@ const ChatItem = ({
 
   return (
     <>
+      {/* Container chính của chat item */}
       <div
         className={`relative flex items-start hover:bg-violet-50 w-full min-h-[70px] h-[70px] pl-[13px] pr-[17px] pt-[13px] rounded-[8px] border-[#E6E8EC] border-[1px] cursor-pointer transition-colors ${
           activeChat && activeChat.id === chat.id ? "bg-[#E8E3FF]" : ""
@@ -176,12 +203,14 @@ const ChatItem = ({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
+        {/* Avatar và trạng thái online */}
         <div className="relative flex-shrink-0">
           {chat.unreadCount > 0 && (
             <div className="absolute z-20 right-0 top-0 translate-x-1.5 -translate-y-1/3 bg-[#EE316B] text-white text-xs font-semibold rounded-[200px] min-w-[29px] h-[20px] flex items-center justify-center">
               {chat.unreadCount}
             </div>
           )}
+          {/* Hiển thị avatar (group hoặc cá nhân) */}
           {chat.type === "group" ? (
             typeof avatars === "string" ? (
               <Image
@@ -250,12 +279,14 @@ const ChatItem = ({
               className="w-11 h-11 rounded-full object-cover"
             />
           )}
+          {/* Chỉ báo trạng thái online */}
           {chat.type === "direct" &&
             chat.participants.find((p) => p.id !== currentUser.id)
               ?.isOnline && (
               <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
             )}
         </div>
+        {/* Thông tin chat (tên, tin nhắn cuối, thời gian) */}
         <div className="ml-3 flex-1 min-w-0">
           <div className="flex justify-between items-center">
             <h3 className="font-semibold text-twdark text-sm text-nowrap truncate">
@@ -279,6 +310,7 @@ const ChatItem = ({
               {chat.messages?.[chat.messages.length - 1]?.attachments?.length >
                 0 && <span className="text-sm ml-1">[file]</span>}
             </p>
+            {/* Các biểu tượng (ghim, thẻ, thông báo) */}
             <div className="flex gap-2 ml-[7px]">
               {chat.isPinned && (
                 <Image
@@ -338,7 +370,7 @@ const ChatItem = ({
           </div>
         </div>
       </div>
-
+      {/* Menu ngữ cảnh */}
       {contextMenu && (
         <div
           ref={menuRef}
@@ -498,7 +530,7 @@ const ChatItem = ({
           </button>
         </div>
       )}
-
+      {/* Modal quản lý thẻ */}
       {isTagManagementOpen && (
         <TagManagement
           onClose={() => setIsTagManagementOpen(false)}

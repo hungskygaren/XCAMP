@@ -120,7 +120,7 @@ const SearchResults = ({
   };
 
   return (
-    <div className="absolute bg-white z-20 p-4 overflow-y-auto">
+    <div className="absolute bg-white z-20 p-4 overflow-y-auto  h-[calc(100vh-168px)]">
       {/* Hiển thị thông báo nếu không có từ khóa tìm kiếm */}
       {!searchQuery.trim() ? (
         <div className="text-center text-gray-500 mt-4">

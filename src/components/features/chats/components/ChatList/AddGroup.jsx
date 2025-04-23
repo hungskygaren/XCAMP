@@ -1,15 +1,30 @@
+/**
+ * Component AddGroup
+ * Modal cho phép tạo nhóm chat mới với các tính năng:
+ * - Tạo tên nhóm
+ * - Tìm kiếm và chọn thành viên
+ * - Hiển thị danh sách trò chuyện gần đây
+ * - Hiển thị danh sách liên hệ theo bảng chữ cái
+ * - Quản lý thành viên đã chọn
+ */
 import Button from "@/components/ui/buttons/Button";
 import TextInput from "@/components/ui/inputs/TextInput";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-
+/**
+ * @param {Object} props - Props của component
+ * @param {Function} props.onClose - Hàm đóng modal
+ * @param {Array} props.chats - Danh sách các cuộc trò chuyện
+ * @param {Array} props.contacts - Danh sách liên hệ
+ * @param {Object} props.currentUser - Thông tin người dùng hiện tại
+ */
 export default function AddGroup({ onClose, chats, contacts, currentUser }) {
-  const modalRef = useRef(null);
-  const [groupName, setGroupName] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedContacts, setSelectedContacts] = useState([]);
-  const [allContacts, setAllContacts] = useState([]);
-  //ya sssssssssss
+  const modalRef = useRef(null); // Ref để kiểm tra click ngoài modal
+  const [groupName, setGroupName] = useState(""); // Tên nhóm
+  const [searchQuery, setSearchQuery] = useState(""); // Từ khóa tìm kiếm
+  const [selectedContacts, setSelectedContacts] = useState([]); // Danh sách thành viên đã chọn
+  const [allContacts, setAllContacts] = useState([]); // Danh sách tất cả liên hệ
+
   // Đóng modal khi click ngoài
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -23,7 +38,6 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
     };
   }, [onClose]);
 
-  // Fetch danh sách liên hệ từ JSON-server
   useEffect(() => {
     fetch(` ${process.env.NEXT_PUBLIC_API_URL}/contacts`)
       .then((res) => res.json())
@@ -31,7 +45,10 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
       .catch((err) => console.error("Error fetching contacts:", err));
   }, []);
 
-  // Xử lý checkbox
+  /**
+   * Xử lý chọn/bỏ chọn thành viên
+   * @param {Object} contact - Thông tin liên hệ được chọn/bỏ chọn
+   */
   const handleCheckboxChange = (contact) => {
     setSelectedContacts((prev) =>
       prev.some((c) => c.id === contact.id)
@@ -39,7 +56,10 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
         : [...prev, contact]
     );
   };
-
+  /**
+   * Xóa thành viên khỏi danh sách đã chọn
+   * @param {string} contactId - ID của liên hệ cần xóa
+   */
   const handleRemoveSelected = (contactId) => {
     setSelectedContacts((prev) => prev.filter((c) => c.id !== contactId));
   };
@@ -49,7 +69,10 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
     setSearchQuery("");
   };
 
-  // Trò chuyện gần đây
+  /**
+   * Lọc và sắp xếp 5 cuộc trò chuyện gần đây nhất
+   * Chỉ lấy các cuộc trò chuyện trực tiếp có tin nhắn
+   */
   const recentChats = (chats && Array.isArray(chats) ? chats : [])
     .filter((chat) => chat.type === "direct" && chat.messages.length > 0)
     .map((chat) => {
@@ -63,9 +86,10 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
     })
     .sort((a, b) => new Date(b.lastMessageTime) - new Date(a.lastMessageTime))
     .slice(0, 5);
-
-  // Lọc liên hệ theo tên hoặc số điện thoại
-  // Loại bỏ currentUser khỏi danh sách lọc
+  /**
+   * Lọc danh sách liên hệ theo từ khóa tìm kiếm
+ 
+   */
   const filteredContacts = allContacts.filter(
     (contact) =>
       contact.id !== currentUser.id && // Không bao gồm currentUser
@@ -75,7 +99,10 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
         : true)
   );
 
-  // Nhóm theo bảng chữ cái khi không tìm kiếm
+  /**
+   * Nhóm danh sách liên hệ theo chữ cái đầu tiên
+   * Chỉ áp dụng khi không có từ khóa tìm kiếm
+   */
   const groupedContacts = searchQuery
     ? {}
     : filteredContacts.reduce((acc, contact) => {
@@ -84,10 +111,12 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
         acc[firstLetter].push(contact);
         return acc;
       }, {});
-
+  // Sắp xếp các nhóm theo bảng chữ cái
   const sortedGroups = Object.keys(groupedContacts).sort();
-
-  // Tạo nhóm
+  /**
+   * Xử lý tạo nhóm mới
+   * Tạo object nhóm với thông tin cơ bản và gửi request tạo nhóm
+   */
   const handleCreateGroup = () => {
     const newGroup = {
       id: Date.now().toString(),
@@ -115,7 +144,7 @@ export default function AddGroup({ onClose, chats, contacts, currentUser }) {
       .then(() => onClose())
       .catch((err) => console.error("Error creating group:", err));
   };
-  // Logic chọn rightIcon
+
   const rightIcon = searchQuery
     ? "/Chats/iconlist/close.png"
     : "/Chats/iconlist/Search.png";

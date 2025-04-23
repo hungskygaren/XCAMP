@@ -2,12 +2,23 @@
 import Image from "next/image";
 import React, { useState, useRef, useEffect } from "react";
 
+/**
+ * Hiển thị menu actions cho mỗi tin nhắn:
+ * - Like, Reply, Forward
+ * - Menu more options (copy, pin, delete)
+ * @param {Object} message - Thông tin tin nhắn
+ * @param {Function} onForward - Callback khi forward
+ * @param {Boolean} isCurrentUser - Có phải tin nhắn của user hiện tại
+ */
 const MessageActions = ({ message, onForward, isCurrentUser }) => {
+  // States quản lý hover và dropdown
   const [isMoreOpen, setIsMoreOpen] = useState(false);
-  const [hoveredButton, setHoveredButton] = useState(null); // Thêm trạng thái hover
+  const [hoveredButton, setHoveredButton] = useState(null);
+
   const moreRef = useRef(null);
   const moreButtonRef = useRef(null);
 
+  // Danh sách actions chính
   const actions = [
     { icon: "/Chats/iconchatdetail/like.png", label: "Thích", key: "like" },
     { icon: "/Chats/iconchatdetail/reply.png", label: "Trả lời", key: "reply" },
@@ -19,6 +30,7 @@ const MessageActions = ({ message, onForward, isCurrentUser }) => {
     { icon: "/Chats/iconlist/3Dot.png", label: "Thêm", key: "more" },
   ];
 
+  // Danh sách actions trong menu more
   const moreActions = [
     {
       icon: "/Chats/iconchatdetail/copy.png",
@@ -60,7 +72,10 @@ const MessageActions = ({ message, onForward, isCurrentUser }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMoreOpen]);
 
-  // Tính toán vị trí dropdown
+  /**
+   * Tính toán vị trí hiển thị dropdown more
+   * Tránh bị che khuất khi không đủ không gian
+   */
   const getDropdownPosition = () => {
     if (!moreButtonRef.current) return { top: "40px", bottom: "auto" };
     const buttonRect = moreButtonRef.current.getBoundingClientRect();

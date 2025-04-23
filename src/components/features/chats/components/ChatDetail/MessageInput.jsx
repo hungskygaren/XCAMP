@@ -1,12 +1,24 @@
 import Image from "next/image";
 import React, { useState, useRef } from "react";
 
+/**
+ * Component nhập và gửi tin nhắn:
+ * - Nhập text
+ * - Upload files/images
+ * - Preview files đính kèm
+ * @param {Function} onSendMessage - Callback khi gửi tin nhắn
+ */
 const MessageInput = ({ onSendMessage }) => {
   const [messageInput, setMessageInput] = useState("");
   const [attachments, setAttachments] = useState([]);
   const fileInputRef = useRef(null);
   const imageInputRef = useRef(null);
 
+  /**
+   * Xử lý gửi tin nhắn:
+   * - Gửi text nếu có
+   * - Gửi từng file đính kèm riêng
+   */
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (!messageInput.trim() && attachments.length === 0) return;
@@ -30,6 +42,13 @@ const MessageInput = ({ onSendMessage }) => {
     setMessageInput("");
     setAttachments([]);
   };
+
+  /**
+   * Xử lý upload files:
+   * - Generate ID
+   * - Tạo preview URL
+   * - Thêm vào danh sách attachments
+   */
   const handleFileUpload = (e) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -60,7 +79,10 @@ const MessageInput = ({ onSendMessage }) => {
     setAttachments([]);
   };
 
-  // Tính toán số lượng file theo loại
+  /**
+   * Tính toán thống kê files theo loại
+   * VD: "2 ảnh, 1 video, 3 files"
+   */
   const getAttachmentSummary = () => {
     const imageCount = attachments.filter((att) => att.type === "image").length;
     const videoCount = attachments.filter((att) => att.type === "video").length;
