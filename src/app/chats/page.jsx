@@ -208,14 +208,14 @@ const Chat = () => {
    * @param {object} updates - Object chứa các trường cần cập nhật (ví dụ: { tag: 'newTagId', isPinned: true }).
    */
   const handleUpdateChat = (chatId, updates) => {
-    // Cập nhật state chats
+    // Cập nhật cả 2 state cùng lúc
     setChats((prevChats) =>
       prevChats.map((chat) =>
         chat.id === chatId ? { ...chat, ...updates } : chat
       )
     );
 
-    // Cập nhật activeChat nếu đang là chat được update
+    // Thêm mới: Cập nhật activeChat nếu đang là chat được update
     if (activeChat && activeChat.id === chatId) {
       setActiveChat((prev) => ({ ...prev, ...updates }));
     }

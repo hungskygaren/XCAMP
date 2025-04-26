@@ -3,6 +3,7 @@ import { useChat } from "../../../contexts/ChatContext";
 import Image from "next/image";
 import TextInput from "@/components/ui/inputs/TextInput";
 // Mock data
+//Đây là test tài khoản git
 const mockMessages = [
   {
     avatar: "/Chats/avatar1.png",

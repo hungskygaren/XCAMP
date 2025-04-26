@@ -15,7 +15,7 @@ import {
   getChatAvatar,
   getLastMessage,
   formatTime,
-} from "@/components/features/chats/components/Utils/ChatUtils"; // Import từ chatUtils
+} from "../Utils/ChatUtils"; // Import từ chatUtils
 import Image from "next/image";
 
 /**
@@ -37,14 +37,14 @@ const ChatItem = ({
   onUpdateChat,
   tags,
   onUpdateTags,
+  contextMenu,
+  setContextMenu,
 }) => {
-  // Khởi tạo các state và ref
-  const avatars = getChatAvatar(chat, currentUser); // Lấy avatar của cuộc trò chuyện
-  const [contextMenu, setContextMenu] = useState(null); // Vị trí menu ngữ cảnh (x, y)
-  const [isTagSubmenuOpen, setIsTagSubmenuOpen] = useState(false); // Trạng thái submenu thẻ
-  const [isTagManagementOpen, setIsTagManagementOpen] = useState(false); // Trạng thái modal quản lý thẻ
-  const menuRef = useRef(null); // Ref cho menu ngữ cảnh
-  const tagButtonRef = useRef(null); // Ref cho nút thẻ
+  const avatars = getChatAvatar(chat, currentUser);
+  const [isTagSubmenuOpen, setIsTagSubmenuOpen] = useState(false);
+  const [isTagManagementOpen, setIsTagManagementOpen] = useState(false);
+  const menuRef = useRef(null);
+  const tagButtonRef = useRef(null);
   /**
    * Toggle trạng thái của một trường trong chat
    * @param {string} field - Tên trường cần toggle (isPinned, isNotificationOff, ...)
@@ -86,7 +86,9 @@ const ChatItem = ({
    * Tự động điều chỉnh vị trí để không bị tràn màn hình
    */
   const handleContextMenu = (e) => {
+    e.stopPropagation();
     e.preventDefault();
+
     const menuWidth = 250;
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
@@ -100,9 +102,10 @@ const ChatItem = ({
       if (y < 0) y = 0;
     }
 
-    setContextMenu({ x, y });
+    setContextMenu({ chatId: chat.id, x, y });
     setIsTagSubmenuOpen(false);
   };
+
   /**
    * Xử lý sự kiện touch trên thiết bị di động
    * Hiển thị menu ngữ cảnh khi giữ lâu (500ms)
@@ -201,9 +204,9 @@ const ChatItem = ({
         onTouchEnd={handleTouchEnd}
       >
         {/* Avatar và trạng thái online */}
-        <div className="relative flex-shrink-0">
+        <div className="relative flex shrink-0">
           {chat.unreadCount > 0 && (
-            <div className="absolute z-20 right-0 top-0 translate-x-1.5 -translate-y-1/3 bg-[#EE316B] text-white text-xs font-semibold rounded-[200px] min-w-[29px] h-[20px] flex items-center justify-center">
+            <div className="absolute z-20  right-0 top-0 translate-x-1.5 -translate-y-1/3 bg-[#EE316B] text-white text-xs font-semibold rounded-[200px] min-w-[29px] h-[20px] flex items-center justify-center">
               {chat.unreadCount}
             </div>
           )}
@@ -286,7 +289,7 @@ const ChatItem = ({
         {/* Thông tin chat (tên, tin nhắn cuối, thời gian) */}
         <div className="ml-3 flex-1 min-w-0">
           <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-twdark text-sm text-nowrap truncate">
+            <h3 className="font-semibold text-twdark text-sm text-nowrap truncate mb-0">
               {getChatName(chat, currentUser)}
             </h3>
             <span className="text-xs text-gray-500 text-nowrap">
@@ -295,7 +298,7 @@ const ChatItem = ({
           </div>
           <div className="flex w-full justify-between items-center">
             <p
-              className={`text-sm truncate ${
+              className={`text-sm mb-0 truncate ${
                 chat.unreadCount > 0
                   ? "text-black"
                   : activeChat && activeChat.id === chat.id
@@ -313,7 +316,7 @@ const ChatItem = ({
                 <Image
                   width={18}
                   height={18}
-                  src="/Chats/iconlist/pin.png"
+                  src="/chatsimg/Chats/iconlist/pin.png"
                   alt="Pinned"
                   className="w-[18px] h-[18px] cursor-pointer"
                   onClick={(e) => {
@@ -341,7 +344,7 @@ const ChatItem = ({
                 <Image
                   width={18}
                   height={18}
-                  src="/Chats/iconlist/notificationoff.png"
+                  src="/chatsimg/Chats/iconlist/notificationoff.png"
                   alt="Notification Off"
                   className="w-[18px] h-[18px] cursor-pointer"
                   onClick={(e) => {
@@ -354,8 +357,8 @@ const ChatItem = ({
           </div>
         </div>
       </div>
-      {/* Menu ngữ cảnh */}
-      {contextMenu && (
+
+      {contextMenu && contextMenu.chatId === chat.id && (
         <div
           ref={menuRef}
           className="fixed w-[250px] bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-2 pointer-events-auto context-menu"
@@ -369,8 +372,8 @@ const ChatItem = ({
             <Image
               src={
                 chat.isPinned
-                  ? "/Chats/iconlist/unpin.png"
-                  : "/Chats/iconlist/verticalpin.png"
+                  ? "/chatsimg/Chats/iconlist/unpin.png"
+                  : "/chatsimg/Chats/iconlist/verticalpin.png"
               }
               alt=""
               className="w-[18px] h-[18px]"
@@ -386,7 +389,7 @@ const ChatItem = ({
             <Image
               width={18}
               height={18}
-              src="/Chats/iconlist/clean.png"
+              src="/chatsimg/Chats/iconlist/clean.png"
               alt=""
               className="w-[18px] h-[18px]"
             />
@@ -399,8 +402,8 @@ const ChatItem = ({
             <Image
               src={
                 chat.isNotificationOff
-                  ? "/Chats/iconlist/notificationon.png"
-                  : "/Chats/iconlist/notificationoff.png"
+                  ? "/chatsimg/Chats/iconlist/notificationon.png"
+                  : "/chatsimg/Chats/iconlist/notificationoff.png"
               }
               alt=""
               className="w-[18px] h-[18px]"
@@ -429,7 +432,7 @@ const ChatItem = ({
               <Image
                 width={18}
                 height={18}
-                src="/Chats/iconlist/Line.png"
+                src="/chatsimg/Chats/iconlist/Line.png"
                 alt=""
                 className="w-[18px] h-[18px] rotate-270"
               />
@@ -461,7 +464,7 @@ const ChatItem = ({
                       <Image
                         width={18}
                         height={18}
-                        src="/Chats/iconlist/check.png"
+                        src="/chatsimg/Chats/iconlist/check.png"
                         className="w-[18px] h-[18px]"
                         alt=""
                       />
@@ -475,7 +478,7 @@ const ChatItem = ({
                   <Image
                     width={18}
                     height={18}
-                    src="/Chats/iconlist/setting.png"
+                    src="/chatsimg/Chats/iconlist/setting.png"
                     className="w-[18px] h-[18px]"
                     alt=""
                   />
@@ -489,7 +492,7 @@ const ChatItem = ({
             <Image
               width={18}
               height={18}
-              src="/Chats/iconlist/delete.png"
+              src="/chatsimg/Chats/iconlist/delete.png"
               alt=""
               className="w-[18px] h-[18px]"
             />

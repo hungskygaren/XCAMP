@@ -5,14 +5,14 @@ import FilterTabs from "./components/ChatList/FilterTabs";
 import SortDropdown from "./components/ChatList/SortDropdown";
 import ChatItem from "./components/ChatList/ChatItem";
 import SearchResults from "./components/ChatList/SearchResults";
-import TextInput from "@/components/ui/inputs/TextInput";
+import TextInput from "../common/ui/inputs/TextInput";
 import AddGroup from "./components/ChatList/AddGroup";
 import Setting from "./components/ChatList/Setting";
-import Button from "@/components/ui/buttons/Button";
+import Button from "../common/ui/buttons/Button";
 import More from "./components/ChatList/More";
-import search from "#/Chats/iconlist/Search.png";
-import addgroup from "#/Chats/iconlist/addGroup.png";
-import setting from "#/Chats/iconlist/setting.png";
+import search from "../../../public/chatsimg/Chats/iconlist/search.png";
+import addgroup from "../../../public/chatsimg/Chats/iconlist/addGroup.png";
+import setting from "../../../public/chatsimg/Chats/iconlist/setting.png";
 import Image from "next/image";
 
 // Component hiển thị danh sách các cuộc trò chuyện
@@ -26,19 +26,32 @@ const ChatList = ({
 }) => {
   // Trạng thái dữ liệu chat
   const [chatData, setChatData] = useState(chats || []);
-  const [isSearchOpen, setIsSearchOpen] = useState(false); // Trạng thái mở/đóng tìm kiếm
-  const [filter, setFilter] = useState("all"); // Bộ lọc hiện tại
-  const [isSortOpen, setIsSortOpen] = useState(false); // Trạng thái mở/đóng sắp xếp
-  const [tags, setTags] = useState([]); // Danh sách tag
-  const [selectedTags, setSelectedTags] = useState([]); // Danh sách tag được chọn
-  const [isAddGroupOpen, setIsAddGroupOpen] = useState(false); // Trạng thái mở/đóng modal thêm nhóm
-  const [isAddSettingOpen, setIsAddSettingOpen] = useState(false); // Trạng thái mở/đóng cài đặt
-  const [searchQuery, setSearchQuery] = useState(""); // Từ khóa tìm kiếm
-  const settingRef = useRef(null); // Tham chiếu đến phần tử cài đặt
-  const settingButtonRef = useRef(null); // Tham chiếu đến nút cài đặt
-  const [filterFlagged, setFilterFlagged] = useState(false); // Trạng thái lọc flagged
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [filter, setFilter] = useState("all");
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [isAddGroupOpen, setIsAddGroupOpen] = useState(false);
+  const [isAddSettingOpen, setIsAddSettingOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const settingRef = useRef(null);
+  const settingButtonRef = useRef(null);
+  const [filterFlagged, setFilterFlagged] = useState(false);
+  const [contextMenu, setContextMenu] = useState(null);
 
-  // Fetch danh sách tag khi component mount
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (contextMenu && !e.target.closest(".context-menu")) {
+        setContextMenu(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("contextmenu", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("contextmenu", handleClickOutside);
+    };
+  }, [contextMenu]);
   useEffect(() => {
     fetchTags();
   }, []);
@@ -69,7 +82,9 @@ const ChatList = ({
 
   // Fetch danh sách tag từ API
   const fetchTags = () => {
-    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/tags?_sort=order&_order=asc`)
+    fetch(
+      ` ${process.env.NEXT_PUBLIC_API_URL_TEST}/tags?_sort=order&_order=asc`
+    )
       .then((res) => res.json())
       .then((data) => setTags(data))
       .catch((err) => console.error("Error fetching tags:", err));
@@ -98,7 +113,7 @@ const ChatList = ({
     setChatData(updatedChats);
 
     // Gửi yêu cầu cập nhật lên server
-    fetch(` ${process.env.NEXT_PUBLIC_API_URL}/chats/${chatId}`, {
+    fetch(` ${process.env.NEXT_PUBLIC_API_URL_TEST}/chats/${chatId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updates),
@@ -159,7 +174,7 @@ const ChatList = ({
     <>
       <div className=" w-[18rem] mid-lg:w-[20rem] lg:w-[25rem] bg-white rounded-[.625rem] px-[.9375rem] border-gray-200 relative h-full">
         <div className="w-full">
-          <div className="flex w-full mt-4 gap-[1.375rem] justify-center items-center h-10">
+          <div className="flex w-full mt-[16px] gap-[1.375rem] justify-center items-center h-10">
             <div className="relative flex-1">
               {/* Ô tìm kiếm */}
               <TextInput
@@ -241,7 +256,7 @@ const ChatList = ({
             {/* Danh sách chat */}
             <div className="flex flex-col items-center pr-2 gap-[15px] overflow-y-auto  h-[calc(100vh-268px)] w-full">
               {chatsToDisplay.length === 0 ? (
-                <p className="p-4 text-gray-500">
+                <p className="p-4 mb-0 text-gray-500">
                   Không tìm thấy cuộc trò chuyện nào
                 </p>
               ) : (
@@ -255,6 +270,8 @@ const ChatList = ({
                     onUpdateChat={onUpdateChat} // Truyền prop này xuống
                     tags={tags}
                     onUpdateTags={handleUpdateTags}
+                    contextMenu={contextMenu}
+                    setContextMenu={setContextMenu}
                   />
                 ))
               )}
